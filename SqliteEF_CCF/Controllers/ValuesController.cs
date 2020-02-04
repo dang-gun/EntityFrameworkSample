@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CoreCodeFirst.Global;
-using CoreCodeFirst.ModelDB;
+
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoreCodeFirst.Controllers
+using CoreCodeFirst.ModelDB;
+using CoreCodeFirst.Global;
+
+namespace SqliteEF_CCF.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-
         /// <summary>
         /// 모든 리스트를 반환 한다.
         /// GET api/values

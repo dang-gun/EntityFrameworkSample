@@ -1,0 +1,54 @@
+﻿<!doctype html>
+
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- jquery 3.4.1 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <h3>CoreCodeFirst</h3><br />
+    코드 퍼스트 테스트 공통 코드<br />
+    <br />
+    <br />
+    <div id="divOutput">
+
+    </div>
+
+    <script>
+        var sApiUrl = "/api/Values/";
+        var divOutput = $("#divOutput");
+
+        function GetList()
+        {
+            //로그인을 시도하여 토큰을 받아온다.
+            $.ajax({
+                type: "GET"
+                , url: sApiUrl + ""
+                , data: {}
+                , dataType: "json"
+                , success: function (jsonResult) {
+                    console.log(jsonResult);
+
+                    var sOutput = "";
+                    for (var i = 0; i < jsonResult.length; ++i)
+                    {
+                        sOutput += JSON.stringify(jsonResult[i]) + "<br />";
+                    }
+
+                    divOutput.html(sOutput);
+            
+                }
+                , error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

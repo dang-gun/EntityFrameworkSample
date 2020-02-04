@@ -3,27 +3,25 @@ using System;
 using CoreCodeFirst.ModelDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CoreCodeFirst.Migrations
+namespace SqliteEF_CCF.Migrations
 {
     [DbContext(typeof(CoreCodeFirstContext))]
-    partial class EFCoreCodeFirstSampleContextModelSnapshot : ModelSnapshot
+    [Migration("20200204115418_Initialize")]
+    partial class Initialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUser", b =>
                 {
                     b.Property<long>("idTestUser")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
@@ -63,8 +61,7 @@ namespace CoreCodeFirst.Migrations
             modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUserInfo", b =>
                 {
                     b.Property<long>("idTestUserInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Lv");
 

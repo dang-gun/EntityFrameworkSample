@@ -3,37 +3,31 @@ using System;
 using CoreCodeFirst.ModelDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoreCodeFirst.Migrations
 {
     [DbContext(typeof(CoreCodeFirstContext))]
-    [Migration("20191202215350_FK_Test")]
-    partial class FK_Test
+    [Migration("20200204105320_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.ModelDB.TestUser", b =>
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUser", b =>
                 {
                     b.Property<long>("idTestUser")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
                     b.Property<DateTime>("JoinDate");
 
                     b.Property<int>("JoinType");
-
-                    b.Property<string>("Message");
 
                     b.Property<double>("Money");
 
@@ -64,11 +58,17 @@ namespace CoreCodeFirst.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.ModelDB.TestUserInfo", b =>
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUserInfo", b =>
                 {
                     b.Property<long>("idTestUserInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Lv");
+
+                    b.Property<double>("Money");
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(10);
 
                     b.Property<long?>("idTestUserForeignKey");
 
@@ -79,9 +79,9 @@ namespace CoreCodeFirst.Migrations
                     b.ToTable("TestUserInfo");
                 });
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.ModelDB.TestUserInfo", b =>
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUserInfo", b =>
                 {
-                    b.HasOne("EFCoreCodeFirstSample.ModelDB.TestUser", "idTestUser")
+                    b.HasOne("CoreCodeFirst.ModelDB.TestUser", "idTestUser")
                         .WithMany()
                         .HasForeignKey("idTestUserForeignKey");
                 });

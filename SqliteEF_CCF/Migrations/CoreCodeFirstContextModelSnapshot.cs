@@ -3,37 +3,29 @@ using System;
 using CoreCodeFirst.ModelDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CoreCodeFirst.Migrations
+namespace SqliteEF_CCF.Migrations
 {
     [DbContext(typeof(CoreCodeFirstContext))]
-    [Migration("20191202214355_TestUser_에_Message_추가")]
-    partial class TestUser_에_Message_추가
+    partial class CoreCodeFirstContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.ModelDB.TestUser", b =>
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUser", b =>
                 {
                     b.Property<long>("idTestUser")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
                     b.Property<DateTime>("JoinDate");
 
                     b.Property<int>("JoinType");
-
-                    b.Property<string>("Message");
 
                     b.Property<double>("Money");
 
@@ -62,6 +54,34 @@ namespace CoreCodeFirst.Migrations
                             Money = 1000.22,
                             Password = "1111"
                         });
+                });
+
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUserInfo", b =>
+                {
+                    b.Property<long>("idTestUserInfo")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Lv");
+
+                    b.Property<double>("Money");
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(10);
+
+                    b.Property<long?>("idTestUserForeignKey");
+
+                    b.HasKey("idTestUserInfo");
+
+                    b.HasIndex("idTestUserForeignKey");
+
+                    b.ToTable("TestUserInfo");
+                });
+
+            modelBuilder.Entity("CoreCodeFirst.ModelDB.TestUserInfo", b =>
+                {
+                    b.HasOne("CoreCodeFirst.ModelDB.TestUser", "idTestUser")
+                        .WithMany()
+                        .HasForeignKey("idTestUserForeignKey");
                 });
 #pragma warning restore 612, 618
         }
