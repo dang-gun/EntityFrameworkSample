@@ -1,0 +1,12 @@
+﻿
+
+컨택스트와 모델 생성을 위한 명령어
+scaffold-dbcontext "[커낵션 스트링]" [연결된 프로바인더] -OutputDir [출력 폴더]
+
+--- sqlite 예제 ---
+cd "F:\work\Project_VS\vs2019\EntityFrameworkSample\DBFirst"
+scaffold-dbcontext "Data Source=DBFile\\CcfTest.sqlite" Microsoft.EntityFrameworkCore.Sqlite -OutputDir ModelDB
+
+
+--- 생성후 작업 ---
+OnConfiguring 제거

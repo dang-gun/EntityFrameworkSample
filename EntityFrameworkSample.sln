@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29519.161
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreCodeFirst", "CoreCodeFirst\CoreCodeFirst.csproj", "{ABB0DF61-7DEA-4E66-8CF8-0BEA60D2F5F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqliteEF_CCF", "SqliteEF_CCF\SqliteEF_CCF.csproj", "{72674CA6-F1C0-46CA-ADC9-BAB6570E4437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqliteEF_CCF", "SqliteEF_CCF\SqliteEF_CCF.csproj", "{72674CA6-F1C0-46CA-ADC9-BAB6570E4437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFirst", "DBFirst\DBFirst.csproj", "{5986B922-62B5-4FE7-8218-58E368145DF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{72674CA6-F1C0-46CA-ADC9-BAB6570E4437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72674CA6-F1C0-46CA-ADC9-BAB6570E4437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72674CA6-F1C0-46CA-ADC9-BAB6570E4437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5986B922-62B5-4FE7-8218-58E368145DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5986B922-62B5-4FE7-8218-58E368145DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5986B922-62B5-4FE7-8218-58E368145DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5986B922-62B5-4FE7-8218-58E368145DF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
