@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SqliteEF_CCF.Migrations
+namespace CCF_Sqlite.Migrations
 {
     public partial class Initialize : Migration
     {

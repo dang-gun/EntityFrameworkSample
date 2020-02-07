@@ -1,5 +1,5 @@
-﻿using CoreCodeFirst.Global;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using CCF_Sqlite.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +15,8 @@ namespace ModelDB
         /// <param name="options"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            switch (GlobalStatic.DBType)
-            {
-                case "sqlite":
-                    options.UseSqlite(GlobalStatic.DBString);
-                    break;
-                case "mysql":
-                    //options.UseSqlite(GlobalStatic.DBString);
-                    break;
-
-                case "mssql":
-                default:
-                    options.UseSqlServer(GlobalStatic.DBString);
-                    break;
-            }
+            //"sqlite"
+            options.UseSqlite(GlobalStatic.DBString);
         }
 
         public DbSet<TestUser> TestUser { get; set; }

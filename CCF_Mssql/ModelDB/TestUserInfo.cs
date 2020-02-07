@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreCodeFirst.ModelDB
+namespace ModelDB
 {
     /// <summary>
     /// 유저 상세 정보

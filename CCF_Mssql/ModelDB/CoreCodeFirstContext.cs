@@ -1,11 +1,11 @@
-﻿using CoreCodeFirst.Global;
+﻿using CCF_Mssql.Global;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreCodeFirst.ModelDB
+namespace ModelDB
 {
     public class CoreCodeFirstContext : DbContext
     {
@@ -15,7 +15,8 @@ namespace CoreCodeFirst.ModelDB
         /// <param name="options"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite(GlobalStatic.DBString);
+            //mssql
+            options.UseSqlServer(GlobalStatic.DBString);
         }
 
         public DbSet<TestUser> TestUser { get; set; }

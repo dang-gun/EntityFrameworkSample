@@ -4,7 +4,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:2596",
+      "applicationUrl": "http://localhost:9283",
       "sslPort": 0
     }
   },
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SqliteEF_CCF": {
+    "CCF_Sqlite": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

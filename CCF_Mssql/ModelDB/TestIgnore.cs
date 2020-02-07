@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CoreCodeFirst.ModelDB
+namespace ModelDB
 {
     /// <summary>
     /// 제외 테스트용 모델

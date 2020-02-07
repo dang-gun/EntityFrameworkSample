@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CoreCodeFirst.Global;
+using CCF_Mssql.Global;
 using ModelDB;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoreCodeFirst.Controllers
+namespace CCF_Mssql.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

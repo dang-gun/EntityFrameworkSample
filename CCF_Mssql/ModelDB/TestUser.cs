@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace CoreCodeFirst.ModelDB
+namespace ModelDB
 {
     /// <summary>
     /// 유저 가입 타입

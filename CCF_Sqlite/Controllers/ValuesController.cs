@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
-using CoreCodeFirst.ModelDB;
-using CoreCodeFirst.Global;
+using ModelDB;
+using CCF_Sqlite.Global;
 
-namespace SqliteEF_CCF.Controllers
+namespace CCF_Sqlite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using CCF_Mssql.Global;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ModelDB;
 
-using CoreCodeFirst.Global;
-using CoreCodeFirst.ModelDB;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.Sqlite;
-
-namespace SqliteEF_CCF
+namespace CCF_Mssql
 {
     public class Startup
     {
@@ -24,8 +20,10 @@ namespace SqliteEF_CCF
         {
             Configuration = configuration;
 
-            //커낵션 스트링
-            GlobalStatic.DBString = Configuration["CoreCodeFirst:ConnectionString"];
+            //사용할 DB 정보
+            string sConnectStringSelect = "CoreCodeFirst";
+            GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
+            GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
         }
 
         public IConfiguration Configuration { get; }

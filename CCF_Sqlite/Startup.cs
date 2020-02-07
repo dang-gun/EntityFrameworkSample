@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CoreCodeFirst.Global;
-using ModelDB;
+using CCF_Sqlite.Global;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ModelDB;
 
-namespace CoreCodeFirst
+namespace CCF_Sqlite
 {
     public class Startup
     {
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
 
-        //사용할 DB 정보
-        string sConnectStringSelect = "CoreCodeFirst";
-        GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
-        GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
-    }
+            //사용할 DB 정보
+            string sConnectStringSelect = "CoreCodeFirst";
+            GlobalStatic.DBType = Configuration[sConnectStringSelect + ":DBType"];
+            GlobalStatic.DBString = Configuration[sConnectStringSelect + ":ConnectionString"];
+        }
 
         public IConfiguration Configuration { get; }
 
@@ -45,11 +44,6 @@ namespace CoreCodeFirst
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //웹사이트 기본파일 읽기 설정
-            app.UseDefaultFiles();
-            //wwwroot 파일읽기
-            app.UseStaticFiles();
 
             app.UseMvc();
         }
