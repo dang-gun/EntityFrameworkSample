@@ -346,6 +346,6 @@ Logs/
 # 샘플에 사용할 데이터중 서버에 올리면 안되는 세팅 정보를 가지고 있는 파일
 # 모두 동일한 파일명을 사용하자
 SettingInfo_gitignore.json
-/EfDynamicOrderBy/Test.db
-/EfDynamicOrderBy/Test.db-shm
-/EfDynamicOrderBy/Test.db-wal
+/DynamicOrderBy/Test.db
+/DynamicOrderBy/Test.db-shm
+/DynamicOrderBy/Test.db-wal
