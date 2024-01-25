@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCF_Sqlite", "CCF_Sqlite\CC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicOrderBy", "DynamicOrderBy\DynamicOrderBy.csproj", "{29409569-10A7-4D3A-B66F-D9F5D4A2FCBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfAnalyze", "EfAnalyze\EfAnalyze.csproj", "{5B96244D-9B8F-4BE2-8227-1D1B746F5E77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{29409569-10A7-4D3A-B66F-D9F5D4A2FCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29409569-10A7-4D3A-B66F-D9F5D4A2FCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29409569-10A7-4D3A-B66F-D9F5D4A2FCBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B96244D-9B8F-4BE2-8227-1D1B746F5E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B96244D-9B8F-4BE2-8227-1D1B746F5E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B96244D-9B8F-4BE2-8227-1D1B746F5E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B96244D-9B8F-4BE2-8227-1D1B746F5E77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
