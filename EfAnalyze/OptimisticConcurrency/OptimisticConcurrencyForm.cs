@@ -1,5 +1,5 @@
 ﻿using EfAnalyze.Global;
-using EfAnalyze.Globals;
+using EfAnalyze.OptimisticConcurrency;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ModelsDB;

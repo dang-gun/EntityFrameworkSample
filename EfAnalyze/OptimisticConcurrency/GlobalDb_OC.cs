@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace EfAnalyze.Globals;
+namespace EfAnalyze.OptimisticConcurrency;
 
 
 /// <summary>
@@ -112,7 +112,7 @@ public static class GlobalDb_OC
 
 
             //에러난 개체를 찾는다.
-            
+
             StringBuilder sb = new StringBuilder();
             sb.Append($"SaveChanges_UpdateConcurrencyCheck Exception : \n");
             TestOC2 tempItem = dataFail.Entity as TestOC2;
@@ -141,7 +141,7 @@ public static class GlobalDb_OC
         , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem
         , int nDelay)
     {
-        
+
         for (int i = 0; i < listLeft.Count; ++i)
         {
             T item = listLeft[i];
@@ -151,7 +151,7 @@ public static class GlobalDb_OC
             //비동기 처리
             //Task.Run(() => 
             //{
-                
+
             //});
 
             using (ModelsDbContext db1 = new ModelsDbContext())
@@ -159,7 +159,7 @@ public static class GlobalDb_OC
                 db1.Update(item!);
 
                 bool bSaveSTemp
-                    = SaveChanges_UpdateConcurrency<T>(
+                    = SaveChanges_UpdateConcurrency(
                         db1
                         , nMaxLoop
                         , callbackItem
@@ -397,5 +397,5 @@ public static class GlobalDb_OC
 
     #endregion
 
-    
+
 }
