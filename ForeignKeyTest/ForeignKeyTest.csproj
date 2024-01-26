@@ -27,4 +27,10 @@
 	    <HintPath>..\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="SettingInfo_gitignore.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

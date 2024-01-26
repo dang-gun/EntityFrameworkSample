@@ -70,7 +70,7 @@ internal class Program
 
 
         //선택된 DB 표시
-        Console.WriteLine($"Use Database '${GlobalDb.DBType.ToString()}'");
+        Console.WriteLine($"Use Database '{GlobalDb.DBType.ToString()}'");
         Console.WriteLine("");
         Console.WriteLine("DB Setting....");
 
@@ -78,15 +78,53 @@ internal class Program
         switch (GlobalDb.DBType)
         {
             case UseDbType.Sqlite:
-                using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
                 {
-                    db1.Database.Migrate();
+                    GlobalDb.DBString = "Data Source=Test.db";
+                    using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
+                    {
+                        db1.Database.Migrate();
+                    }
                 }
                 break;
             case UseDbType.Mssql:
-                using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
                 {
-                    db1.Database.Migrate();
+                    List<Tuple<int, string>> listSettingInfoTitle 
+                        = new List<Tuple<int, string>>();
+                    listSettingInfoTitle.Add(new Tuple<int, string>(1, "\"ConnectionString_Mssql\""));
+
+                    string[] sSettingInfo = File.ReadAllLines("SettingInfo_gitignore.json");
+                    //불러온 데이터 공백제거
+                    sSettingInfo = sSettingInfo.Select(s => s.Trim()).ToArray();
+
+                    for (int i = 0; i < listSettingInfoTitle.Count; ++i)
+                    {
+                        Tuple<int, string> item = listSettingInfoTitle[i];
+                        
+                        //설정 검색
+                        string? findSI
+                            = sSettingInfo
+                                .Where(w => w.Length >= item.Item2.Length
+                                            && w.Substring(0, item.Item2.Length) == item.Item2)
+                                .FirstOrDefault();
+                            
+                        if (null != findSI)
+                        {//검색 성공
+
+                            if(1 == item.Item1)
+                            {
+                                //콘론으로 자르고
+                                string[] sCut = findSI.Split(":");
+                                //앞뒤 큰따옴표 제거
+                                GlobalDb.DBString = sCut[1].Substring(2, sCut[1].Length - 4);
+                                break;
+                            }
+                        }
+                    }//end for i
+
+                    using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
+                    {
+                        db1.Database.Migrate();
+                    }
                 }
                 break;
             case UseDbType.InMemory:
