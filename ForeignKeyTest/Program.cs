@@ -274,6 +274,27 @@ internal class Program
                 }
 
                 Console.WriteLine("");
+
+                using (ModelsDbContext db3 = new ModelsDbContext())
+                {
+
+                    dtNow = DateTime.Now;
+                    ForeignKeyTest1_Blog iq1Blog1 = db3.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
+                    List<ForeignKeyTest1_Post> list1Post1 = iq1Blog1.Posts.ToList();
+                    Console.WriteLine($"Include 반복1 : delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+
+                    dtNow = DateTime.Now;
+                    ForeignKeyTest1_Blog iq1Blog2 = db3.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
+                    List<ForeignKeyTest1_Post> list1Post2 = iq1Blog2.Posts.ToList();
+                    Console.WriteLine($"Include 반복2 : delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+
+                    dtNow = DateTime.Now;
+                    ForeignKeyTest1_Blog iq1Blog3 = db3.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
+                    List<ForeignKeyTest1_Post> list1Post3 = iq1Blog3.Posts.ToList();
+                    Console.WriteLine($"Include 반복3 : delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+                }
+
+                Console.WriteLine("");
                 return true;
             }
         });
