@@ -13,9 +13,9 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest1_Blog",
                 columns: table => new
                 {
-                    idTest1Blog = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    idTest1Blog = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,9 +26,9 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest2_Blog",
                 columns: table => new
                 {
-                    idTest2Blog = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    idTest2Blog = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,9 +39,9 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest3_Blog",
                 columns: table => new
                 {
-                    idTest3Blog = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    idTest3Blog = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,12 +52,12 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest1_Post",
                 columns: table => new
                 {
-                    idTest1Post = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Int = table.Column<int>(type: "INTEGER", nullable: false),
-                    Str = table.Column<string>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    idTest1Blog = table.Column<long>(type: "INTEGER", nullable: false)
+                    idTest1Post = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Int = table.Column<int>(type: "int", nullable: false),
+                    Str = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    idTest1Blog = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,13 +74,13 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest2_Post",
                 columns: table => new
                 {
-                    idTest2Post = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Int = table.Column<int>(type: "INTEGER", nullable: false),
-                    Str = table.Column<string>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    idTest2Blog = table.Column<long>(type: "INTEGER", nullable: false),
-                    ForeignKeyTest2_BlogidTest2Blog = table.Column<long>(type: "INTEGER", nullable: true)
+                    idTest2Post = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Int = table.Column<int>(type: "int", nullable: false),
+                    Str = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    idTest2Blog = table.Column<long>(type: "bigint", nullable: false),
+                    ForeignKeyTest2_BlogidTest2Blog = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,12 +96,12 @@ namespace ForeignKeyTest.Migrations.Mssql
                 name: "ForeignKeyTest3_Post",
                 columns: table => new
                 {
-                    idTest3Post = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Int = table.Column<int>(type: "INTEGER", nullable: false),
-                    Str = table.Column<string>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    idTest3Blog = table.Column<long>(type: "INTEGER", nullable: false)
+                    idTest3Post = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Int = table.Column<int>(type: "int", nullable: false),
+                    Str = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    idTest3Blog = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

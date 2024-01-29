@@ -13,17 +13,23 @@ namespace ModelsDB;
 /// Remove-Migration -Context ModelsDbContext_Mssql
 /// Update-Database -Context ModelsDbContext_Mssql
 /// Update-Database -Context ModelsDbContext_Mssql -Migration 0
-/// Update-Database -Context ModelsDbContext_Mssql -Target:0
 ///</remarks>
 public class ModelsDbContext_Mssql : ModelsDbContext
 {
 	/// <summary>
-	/// 
+	/// ef 명령을 직접 사용하면 여기로 들어와 진다.
 	/// </summary>
 	/// <param name="options"></param>
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
+		GlobalDb.DBType = UseDbType.Mssql;
+
+        //GlobalDb.DBString가 없는경우
+        if (string.Empty == GlobalDb.DBString)
+		{
+			GlobalDb.DBString = GlobalDb.DBString_Mssql;
+        }
     }
 
 	/// <summary>

@@ -16,7 +16,7 @@ public class ForeignKeyTest1_Blog
     /// <summary>
     /// 고유키
     /// </summary>
-    [Key]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long idTest1Blog { get; set; }
 
     /// <summary>
@@ -28,7 +28,8 @@ public class ForeignKeyTest1_Blog
     /// 외래키에 연결된 리스트
     /// </summary>
     [ForeignKey("idTest1Blog")]
-    public ICollection<ForeignKeyTest1_Post> Posts { get; set; } = new List<ForeignKeyTest1_Post>();
+    public ICollection<ForeignKeyTest1_Post> Posts { get; set; } 
+        = new List<ForeignKeyTest1_Post>();
 
 
     //[ForeignKey("idTest3Blog")]

@@ -16,7 +16,7 @@ public class ForeignKeyTest3_Post
     /// <summary>
     /// 고유키
     /// </summary>
-    [Key]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long idTest3Post { get; set; }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class ForeignKeyTest3_Post
     /// 연결된 외래키
     /// </summary>
     [ForeignKey("idTest3Blog")]
-    public long idTest3Blog { get; set; } = 0;
+    public long idTest3Blog { get; set; }
     /// <summary>
     /// 외래키에 연결된 대상
     /// </summary>

@@ -8,10 +8,10 @@ using ModelsDB;
 
 #nullable disable
 
-namespace ForeignKeyTest.Migrations.Mssql
+namespace ForeignKeyTest.Migrations.Sqlite
 {
-    [DbContext(typeof(ModelsDbContext_Mssql))]
-    [Migration("20240129062820_InitialCreate")]
+    [DbContext(typeof(ModelsDbContext_Sqlite))]
+    [Migration("20240129081825_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -163,6 +163,38 @@ internal class Program
         //메뉴 넘버링용
         int nMenuCount = 0;
 
+        #region 메뉴 - 기본 검색
+        newCA.MenuList.Add(new MenuModel()
+        {
+            Index = ++nMenuCount,
+            TextFormat = "{0}. 기본 검색",
+            Action = (MenuModel menuThis) =>
+            {
+                using (ModelsDbContext db1 = new ModelsDbContext())
+                {
+                    //부모 1개 추출
+                    ForeignKeyTest1_Blog iq1Blog = db1.ForeignKeyTest1_Blog.First();
+                    //소속된 자식 추출
+                    List<ForeignKeyTest1_Post> list1Post = iq1Blog.Posts.ToList();
+
+                    Console.WriteLine($"Include 없는 기본 검색 : 부모({iq1Blog.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post.Count})");
+
+                    //부모 1개 추출
+                    ForeignKeyTest1_Blog iq1Blog2 = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
+                    //소속된 자식 추출
+                    List<ForeignKeyTest1_Post> list1Post2 = iq1Blog2.Posts.ToList();
+                    
+                    Console.WriteLine($"Include 있는 기본 검색 : 부모({iq1Blog2.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post2.Count})");
+
+                }
+
+                Console.WriteLine("");
+                return true;
+            }
+        });
+        #endregion
+
+
         #region 메뉴 - FK에 연결된 검색 테스트
         newCA.MenuList.Add(new MenuModel()
         {
@@ -649,7 +681,7 @@ internal class Program
 
                     db1.SaveChanges();
 
-                    Db_DataAdd_Temp2(new Random(), db1);
+                    Db_DataAdd_One(new Random(), db1);
                     db1.SaveChanges();
 
                     Console.WriteLine($"DB Data complete. Total Count: {db1.ForeignKeyTest1_Blog.Count()}(Test1Blog), {db1.ForeignKeyTest2_Blog.Count()}(Test2Blog)");
@@ -711,10 +743,13 @@ internal class Program
 
         using (ModelsDbContext db2 = new ModelsDbContext())
         {
+            Console.WriteLine("DB data add start1-1 : FK child");
+            Db_DataAdd_FK1_10(rand);
+
             Console.WriteLine("DB data add start2");
             for (int i = 1; i <= 1; ++i)
             {
-                Db_DataAdd_Temp1(i, rand);
+                Db_DataAdd_100000(i, rand);
             }
 
             Console.WriteLine("DB data add End");
@@ -723,11 +758,47 @@ internal class Program
     }
 
     /// <summary>
+    /// index1번에 연결된 자식 10개를 추가한다.
+    /// </summary>
+    static void Db_DataAdd_FK1_10(Random rand)
+    {
+        using (ModelsDbContext db1 = new ModelsDbContext())
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                int Int = rand.Next(0, 100000);
+                string Str = Guid.NewGuid().ToString();
+                DateTime Date = new DateTime(rand.Next(0, 1000000));
+
+                long idFK = 1;
+
+                ForeignKeyTest1_Post newT1P = new ForeignKeyTest1_Post();
+                newT1P.Int = Int;
+                newT1P.Str = Str;
+                newT1P.Date = Date;
+                //외래키 연결 랜덤하게 
+                newT1P.idTest1Blog = idFK;
+                db1.ForeignKeyTest1_Post.Add(newT1P);
+
+                ForeignKeyTest2_Post newT2P = new ForeignKeyTest2_Post();
+                newT2P.Int = Int;
+                newT2P.Str = Str;
+                newT2P.Date = Date;
+                //외래키 연결 랜덤하게 
+                newT2P.idTest2Blog = idFK;
+                db1.ForeignKeyTest2_Post.Add(newT2P);
+            }
+
+            db1.SaveChanges();
+        }
+    }
+
+    /// <summary>
     /// 10만번씩 끊어서 실행
     /// </summary>
     /// <param name="nCount"></param>
     /// <param name="rand"></param>
-    static void Db_DataAdd_Temp1(
+    static void Db_DataAdd_100000(
         int nCount
         , Random rand)
     {
@@ -736,7 +807,7 @@ internal class Program
             Console.WriteLine("DB data add start2-" + nCount);
             for (int i = 1; i < 100000; ++i)
             {
-                Db_DataAdd_Temp2(rand, db1);
+                Db_DataAdd_One(rand, db1);
             }
 
             db1.SaveChanges();
@@ -748,7 +819,7 @@ internal class Program
     /// </summary>
     /// <param name="rand"></param>
     /// <param name="db1"></param>
-    static void Db_DataAdd_Temp2(
+    static void Db_DataAdd_One(
         Random rand
         , ModelsDbContext db1)
     {

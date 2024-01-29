@@ -35,6 +35,7 @@ public class ModelsDbContext : DbContext
 	/// <param name="options"></param>
 	protected override void OnConfiguring(DbContextOptionsBuilder options)
 	{
+		//Console.WriteLine($"OnConfiguring DbType : {GlobalDb.DBType}");
 
         switch (GlobalDb.DBType)
 		{

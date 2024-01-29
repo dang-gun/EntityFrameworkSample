@@ -16,7 +16,7 @@ public class ForeignKeyTest2_Post
     /// <summary>
     /// 고유키
     /// </summary>
-    [Key]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long idTest2Post { get; set; }
 
     /// <summary>
