@@ -29,8 +29,8 @@ internal class MigrationConsole
         DateTime dtNow = DateTime.Now;
 
 
-        //GlobalDb.DBType = UseDbType.Sqlite;
-        GlobalDb.DBType = UseDbType.Mssql;
+        GlobalDb.DBType = UseDbType.Sqlite;
+        //GlobalDb.DBType = UseDbType.Mssql;
 
 
         //db 마이그레이션 적용

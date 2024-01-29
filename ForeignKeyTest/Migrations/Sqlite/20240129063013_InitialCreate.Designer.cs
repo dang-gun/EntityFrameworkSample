@@ -11,7 +11,7 @@ using ModelsDB;
 namespace ForeignKeyTest.Migrations.Sqlite
 {
     [DbContext(typeof(ModelsDbContext_Sqlite))]
-    [Migration("20240129023036_InitialCreate")]
+    [Migration("20240129063013_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

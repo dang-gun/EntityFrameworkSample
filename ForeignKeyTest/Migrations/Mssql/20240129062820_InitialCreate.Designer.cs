@@ -11,7 +11,7 @@ using ModelsDB;
 namespace ForeignKeyTest.Migrations.Mssql
 {
     [DbContext(typeof(ModelsDbContext_Mssql))]
-    [Migration("20240129023725_InitialCreate")]
+    [Migration("20240129062820_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -37,7 +37,7 @@ public class ForeignKeyTest1_Post
     /// <summary>
     /// 연결된 외래키
     /// </summary>
-    [ForeignKey("Test1Blog")]
+    [ForeignKey("idTest1Blog")]
     public long idTest1Blog { get; set; } = 0;
     /// <summary>
     /// 외래키에 연결된 대상
