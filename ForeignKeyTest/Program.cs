@@ -163,11 +163,11 @@ internal class Program
         //메뉴 넘버링용
         int nMenuCount = 0;
 
-        #region 메뉴 - 데이터 생성 딜레이 체크
+        #region 메뉴 - FK에 연결된 검색 테스트
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}. 검색 테스트",
+            TextFormat = "{0}. FK에 연결된 검색 테스트",
             Action = (MenuModel menuThis) =>
             {
                 using (ModelsDbContext db1 = new ModelsDbContext())
@@ -197,11 +197,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - Select List Speed Test
+        #region 메뉴 - elect List Speed Test(리스트 검색 속도 테스트)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}. Select List Speed Test",
+            TextFormat = "{0}. Select List Speed Test(리스트 검색 속도 테스트)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("");
@@ -279,11 +279,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - select take child Test
+        #region 메뉴 - select take child Test(1개 추출 검색 속도 테스트)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  select take child Test",
+            TextFormat = "{0}. select take child Test(1개 추출 검색 속도 테스트)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** select take child ******");
@@ -337,11 +337,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - select where child
+        #region 메뉴 - select where child(조건 검색 속도 테스트)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  select where child",
+            TextFormat = "{0}. select where child(조건 검색 속도 테스트)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** select where child ******");
@@ -395,11 +395,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - select where child 30
+        #region 메뉴 - select where child 30(조건 검색 30개 속도 테스트)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  select where child 30",
+            TextFormat = "{0}. select where child 30(조건 검색 30개 속도 테스트)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** select where child 30 ******");
@@ -453,11 +453,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - select child list
+        #region 메뉴 - select child list(검색 후 자식 리스트 속도 테스트)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  select child list",
+            TextFormat = "{0}. select child list(검색 후 자식 리스트 속도 테스트)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** select child list ******");
@@ -522,11 +522,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - item to parent list
+        #region 메뉴 - item to parent list(아이템의 부모 리스트 조회)
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  item to parent list",
+            TextFormat = "{0}.  item to parent list(아이템의 부모 리스트 조회)",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** item to parent list ******");
@@ -570,11 +570,11 @@ internal class Program
         });
         #endregion
 
-        #region 메뉴 - item to parent list (non Include)
+        #region 메뉴 - item to parent list (non Include)(아이템의 부모 리스트 조회(인클루드 없이))
         newCA.MenuList.Add(new MenuModel()
         {
             Index = ++nMenuCount,
-            TextFormat = "{0}.  item to parent list (non Include)",
+            TextFormat = "{0}.  item to parent list (non Include)(아이템의 부모 리스트 조회(인클루드 없이))",
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine("****** item to parent list ******");
