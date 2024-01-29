@@ -172,20 +172,105 @@ internal class Program
             {
                 using (ModelsDbContext db1 = new ModelsDbContext())
                 {
+                    dtNow = DateTime.Now;
+
                     //부모 1개 추출
                     ForeignKeyTest1_Blog iq1Blog = db1.ForeignKeyTest1_Blog.First();
                     //소속된 자식 추출
                     List<ForeignKeyTest1_Post> list1Post = iq1Blog.Posts.ToList();
 
                     Console.WriteLine($"Include 없는 기본 검색 : 부모({iq1Blog.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post.Count})");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
 
+                    dtNow = DateTime.Now;
                     //(Include)부모 1개 추출
                     ForeignKeyTest1_Blog iq1Blog2 = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
                     //소속된 자식 추출
                     List<ForeignKeyTest1_Post> list1Post2 = iq1Blog2.Posts.ToList();
                     
-                    Console.WriteLine($"Include 있는 기본 검색 : 부모({iq1Blog2.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post2.Count})");
+                    Console.WriteLine($"Include 있는 기본 검색 : 부모({iq1Blog2.idTest1Blog}, {iq1Blog2.Name}), 자식({list1Post2.Count})");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+
+                    
+
+                }
+
+                using (ModelsDbContext db2 = new ModelsDbContext())
+                {
+                    Console.WriteLine("");
+
+                    dtNow = DateTime.Now;
+
+                    //자식 1개 추출
+                    ForeignKeyTest1_Post iq1Post_child1
+                    = db2.ForeignKeyTest1_Post
+                        .Where(w => w.idTest1Blog == 1)
+                        .Include(inc => inc.Blog)
+                        .First();
+
+                    //부모 찾기
+                    ForeignKeyTest1_Blog iq1Blog_child1 = iq1Post_child1.Blog!;
+
+                    Console.WriteLine($"자식이 부모 찾기 : 자식({iq1Post_child1.Str}), 부모({iq1Blog_child1.idTest1Blog}, {iq1Blog_child1.Name}) ");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+
+                    dtNow = DateTime.Now;
+                    Console.WriteLine($"자식이 찾은 부모의 자식들 : {iq1Blog_child1.Posts.Count} ");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+                }
+
+                Console.WriteLine("");
+                return true;
+            }
+        });
+        #endregion
+
+        #region 메뉴 - 인쿨루드 생략 가능한 경우
+        newCA.MenuList.Add(new MenuModel()
+        {
+            Index = ++nMenuCount,
+            TextFormat = "{0}. 인쿨루드 생략 가능한 경우",
+            Action = (MenuModel menuThis) =>
+            {
+                using (ModelsDbContext db1 = new ModelsDbContext())
+                {
+    
+                    dtNow = DateTime.Now;
+                    //(Include)부모 1개 추출
+                    ForeignKeyTest1_Blog iq1Blog2 = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
+                    //소속된 자식 추출
+                    List<ForeignKeyTest1_Post> list1Post2 = iq1Blog2.Posts.ToList();
+
+                    Console.WriteLine($"Include 있는 기본 검색 : 부모({iq1Blog2.idTest1Blog}, {iq1Blog2.Name}), 자식({list1Post2.Count})");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+
+
+                    //부모 1개 추출
+                    ForeignKeyTest1_Blog iq1Blog = db1.ForeignKeyTest1_Blog.First();
+                    //소속된 자식 추출
+                    List<ForeignKeyTest1_Post> list1Post = iq1Blog.Posts.ToList();
+
+                    Console.WriteLine($"Include 없는 기본 검색 : 부모({iq1Blog.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post.Count})");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
+                }
+
+                Console.WriteLine("");
+
+                using (ModelsDbContext db2 = new ModelsDbContext())
+                {
+                    ForeignKeyTest1_Post find1Post
+                        = db2.ForeignKeyTest1_Post
+                            .Where(w => w.idTest1Blog == 1)
+                            .First();
+
+                    //부모 1개 추출
+                    ForeignKeyTest1_Blog iq1Blog = db2.ForeignKeyTest1_Blog.First();
+                    //소속된 자식 추출
+                    List<ForeignKeyTest1_Post> list1Post = iq1Blog.Posts.ToList();
+
+                    Console.WriteLine($"자식이 먼저 조회된 경우 : 부모({iq1Blog.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post.Count})");
+                    Console.WriteLine($"delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
                 }
 
                 Console.WriteLine("");
