@@ -9,8 +9,8 @@ namespace ModelsDB;
 /// Sqlite전용 컨텍스트
 /// </summary>
 /// <remarks>
-/// Add-Migration InitialCreate -Context ModelsDB.ModelsDbContext_Sqlite -OutputDir Migrations/Sqlite
-/// Remove-Migration -Context ModelsDB.ModelsDbContext_Sqlite
+/// Add-Migration InitialCreate -Context ModelsDbContext_Sqlite -OutputDir Migrations/Sqlite
+/// Remove-Migration -Context ModelsDbContext_Sqlite
 /// Update-Database -Context ModelsDbContext_Sqlite -Migration 0
 /// Update-Database -Context ModelsDbContext_Sqlite
 /// </remarks>

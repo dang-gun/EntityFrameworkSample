@@ -11,13 +11,12 @@ namespace ModelsDB;
 /// <summary>
 /// 테스트용 테이블
 /// </summary>
-public class Test1Blog
+public class ForeignKeyTest2_Select
 {
     /// <summary>
     /// 고유키
     /// </summary>
-    [Key]
-    public long idTest1Blog { get; set; }
+    public long idTest2Blog { get; set; }
 
     /// <summary>
     /// 블로그 이름
@@ -27,12 +26,5 @@ public class Test1Blog
     /// <summary>
     /// 외래키에 연결된 리스트
     /// </summary>
-    [ForeignKey("idTest1Blog")]
-    public ICollection<Test1Post> Posts { get; set; } = new List<Test1Post>();
-
-
-    //[ForeignKey("idTest3Blog")]
-    //public ICollection<Test3Post> Posts3 { get; set; } = new List<Test3Post>();
-
-
+    public List<ForeignKeyTest2_Post>? Posts { get; set; }
 }

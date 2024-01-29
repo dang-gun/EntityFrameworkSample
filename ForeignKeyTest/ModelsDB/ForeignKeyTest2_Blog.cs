@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModelsDB.Test3Blog;
+namespace ModelsDB;
 
 /// <summary>
-/// 테스트용 테이블
+/// 블로그에는 외래키 리스트 연결안함
 /// </summary>
-public class Test3Blog
+public class ForeignKeyTest2_Blog
 {
     /// <summary>
     /// 고유키
     /// </summary>
     [Key]
-    public long idTest3Blog { get; set; }
+    public long idTest2Blog { get; set; }
 
     /// <summary>
     /// 블로그 이름
@@ -25,7 +25,7 @@ public class Test3Blog
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// 매장의 자주쓰는 정보
+    /// 외래키에 연결된 리스트
     /// </summary>
-    public ICollection<Test3Post> Test3Post { get; set; } = new List<Test3Post>();
+    public ICollection<ForeignKeyTest2_Post> Posts { get; } = new List<ForeignKeyTest2_Post>();
 }

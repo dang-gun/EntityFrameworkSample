@@ -57,29 +57,29 @@ public class ModelsDbContext : DbContext
 	/// <summary>
 	/// 테스트1 블로그
 	/// </summary>
-    public DbSet<Test1Blog> Test1Blog { get; set; }
+    public DbSet<ForeignKeyTest1_Blog> ForeignKeyTest1_Blog { get; set; }
     /// <summary>
     /// 테스트1 포스트
     /// </summary>
-    public DbSet<Test1Post> Test1Post { get; set; }
+    public DbSet<ForeignKeyTest1_Post> ForeignKeyTest1_Post { get; set; }
 
     /// <summary>
     /// 테스트2 블로그 - 외래키 리스트 연결안함
     /// </summary>
-    public DbSet<Test2Blog> Test2Blog { get; set; }
+    public DbSet<ForeignKeyTest2_Blog> ForeignKeyTest2_Blog { get; set; }
     /// <summary>
     /// 테스트2 포스트
     /// </summary>
-    public DbSet<Test2Post> Test2Post { get; set; }
+    public DbSet<ForeignKeyTest2_Post> ForeignKeyTest2_Post { get; set; }
 
 	/// <summary>
 	/// 테스트3 블로그 - 다른 네임스페이스 지정
 	/// </summary>
-	public DbSet<Test3Blog.Test3Blog> Test3Blog { get; set; }
+	public DbSet<ForeignKeyTest3_Blog> ForeignKeyTest3_Blog { get; set; }
 	/// <summary>
 	/// 테스트3 포스트
 	/// </summary>
-	public DbSet<Test3Post> Test3Post { get; set; }
+	public DbSet<ForeignKeyTest3_Post> ForeignKeyTest3_Post { get; set; }
 
 
 	/// <summary>

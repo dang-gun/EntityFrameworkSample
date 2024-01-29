@@ -9,10 +9,11 @@ namespace ModelsDB;
 /// mssql전용 컨텍스트
 /// </summary>
 ///<remarks>
-/// Add-Migration InitialCreate -Context ModelsDB.ModelsDbContext_Mssql -OutputDir Migrations/Mssql 
-/// Remove-Migration -Context ModelsDB.ModelsDbContext_Mssql
+/// Add-Migration InitialCreate -Context ModelsDbContext_Mssql -OutputDir Migrations/Mssql 
+/// Remove-Migration -Context ModelsDbContext_Mssql
 /// Update-Database -Context ModelsDbContext_Mssql
 /// Update-Database -Context ModelsDbContext_Mssql -Migration 0
+/// Update-Database -Context ModelsDbContext_Mssql -Target:0
 ///</remarks>
 public class ModelsDbContext_Mssql : ModelsDbContext
 {

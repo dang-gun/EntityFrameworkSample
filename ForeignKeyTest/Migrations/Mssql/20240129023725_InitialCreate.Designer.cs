@@ -11,15 +11,15 @@ using ModelsDB;
 namespace ForeignKeyTest.Migrations.Mssql
 {
     [DbContext(typeof(ModelsDbContext_Mssql))]
-    [Migration("20231012072023_Test3Blog_Add2")]
-    partial class Test3Blog_Add2
+    [Migration("20240129023725_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.20");
 
-            modelBuilder.Entity("ModelsDB.Test1Blog", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest1_Blog", b =>
                 {
                     b.Property<long>("idTest1Blog")
                         .ValueGeneratedOnAdd()
@@ -31,10 +31,10 @@ namespace ForeignKeyTest.Migrations.Mssql
 
                     b.HasKey("idTest1Blog");
 
-                    b.ToTable("Test1Blog");
+                    b.ToTable("ForeignKeyTest1_Blog");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test1Post", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest1_Post", b =>
                 {
                     b.Property<long>("idTest1Post")
                         .ValueGeneratedOnAdd()
@@ -57,10 +57,10 @@ namespace ForeignKeyTest.Migrations.Mssql
 
                     b.HasIndex("idTest1Blog");
 
-                    b.ToTable("Test1Post");
+                    b.ToTable("ForeignKeyTest1_Post");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test2Blog", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest2_Blog", b =>
                 {
                     b.Property<long>("idTest2Blog")
                         .ValueGeneratedOnAdd()
@@ -72,12 +72,56 @@ namespace ForeignKeyTest.Migrations.Mssql
 
                     b.HasKey("idTest2Blog");
 
-                    b.ToTable("Test2Blog");
+                    b.ToTable("ForeignKeyTest2_Blog");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test2Post", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest2_Post", b =>
                 {
                     b.Property<long>("idTest2Post")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long?>("ForeignKeyTest2_BlogidTest2Blog")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Int")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Str")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("idTest2Blog")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("idTest2Post");
+
+                    b.HasIndex("ForeignKeyTest2_BlogidTest2Blog");
+
+                    b.ToTable("ForeignKeyTest2_Post");
+                });
+
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest3_Blog", b =>
+                {
+                    b.Property<long>("idTest3Blog")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("idTest3Blog");
+
+                    b.ToTable("ForeignKeyTest3_Blog");
+                });
+
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest3_Post", b =>
+                {
+                    b.Property<long>("idTest3Post")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -91,22 +135,19 @@ namespace ForeignKeyTest.Migrations.Mssql
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long?>("Test2BlogidTest2Blog")
+                    b.Property<long>("idTest3Blog")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("idTest2Blog")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("idTest3Post");
 
-                    b.HasKey("idTest2Post");
+                    b.HasIndex("idTest3Blog");
 
-                    b.HasIndex("Test2BlogidTest2Blog");
-
-                    b.ToTable("Test2Post");
+                    b.ToTable("ForeignKeyTest3_Post");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test1Post", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest1_Post", b =>
                 {
-                    b.HasOne("ModelsDB.Test1Blog", "Blog")
+                    b.HasOne("ModelsDB.ForeignKeyTest1_Blog", "Blog")
                         .WithMany("Posts")
                         .HasForeignKey("idTest1Blog")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -115,21 +156,37 @@ namespace ForeignKeyTest.Migrations.Mssql
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test2Post", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest2_Post", b =>
                 {
-                    b.HasOne("ModelsDB.Test2Blog", null)
+                    b.HasOne("ModelsDB.ForeignKeyTest2_Blog", null)
                         .WithMany("Posts")
-                        .HasForeignKey("Test2BlogidTest2Blog");
+                        .HasForeignKey("ForeignKeyTest2_BlogidTest2Blog");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test1Blog", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest3_Post", b =>
+                {
+                    b.HasOne("ModelsDB.ForeignKeyTest3_Blog", "Blog3")
+                        .WithMany("Test3Post")
+                        .HasForeignKey("idTest3Blog")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog3");
+                });
+
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest1_Blog", b =>
                 {
                     b.Navigation("Posts");
                 });
 
-            modelBuilder.Entity("ModelsDB.Test2Blog", b =>
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest2_Blog", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("ModelsDB.ForeignKeyTest3_Blog", b =>
+                {
+                    b.Navigation("Test3Post");
                 });
 #pragma warning restore 612, 618
         }

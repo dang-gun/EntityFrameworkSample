@@ -11,13 +11,13 @@ namespace ModelsDB;
 /// <summary>
 /// 테스트용 테이블 - 많은 데이터용
 /// </summary>
-public class Test2Post
+public class ForeignKeyTest1_Post
 {
     /// <summary>
     /// 고유키
     /// </summary>
     [Key]
-    public long idTest2Post { get; set; }
+    public long idTest1Post { get; set; }
 
     /// <summary>
     /// 숫자형
@@ -37,5 +37,10 @@ public class Test2Post
     /// <summary>
     /// 연결된 외래키
     /// </summary>
-    public long idTest2Blog { get; set; }
+    [ForeignKey("Test1Blog")]
+    public long idTest1Blog { get; set; } = 0;
+    /// <summary>
+    /// 외래키에 연결된 대상
+    /// </summary>
+    public ForeignKeyTest1_Blog? Blog { get; set; }
 }

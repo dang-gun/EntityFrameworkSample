@@ -340,6 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 
+# 테스트용 DB 파일
+Test.db
+
 # 로그 파일이 저장되는 폴더
 Logs/
 

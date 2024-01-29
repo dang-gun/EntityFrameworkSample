@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 using Global.DB;
 using ModelsDB;
-using ModelsDB.Test3Blog;
 using DGU_ConsoleAssist;
 
 namespace ForeignKeyTest;
@@ -173,12 +172,12 @@ internal class Program
             {
                 using (ModelsDbContext db1 = new ModelsDbContext())
                 {
-                    Test1Blog iqTO = db1.Test1Blog.Include(x => x.Posts).First();
+                    ForeignKeyTest1_Blog iqTO = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
 
-                    List<Test1Post> listTO = new List<Test1Post>();
+                    List<ForeignKeyTest1_Post> listTO = new List<ForeignKeyTest1_Post>();
 
-                    Test1Post t1pTemp = db1.Test1Post.First();
-                    Test1Blog? t1bTemp = t1pTemp.Blog;
+                    ForeignKeyTest1_Post t1pTemp = db1.ForeignKeyTest1_Post.First();
+                    ForeignKeyTest1_Blog? t1bTemp = t1pTemp.Blog;
 
                     Console.WriteLine($"iqTO : {iqTO.Name}, listTO count : {listTO.Count}");
                     if(null == t1bTemp)
@@ -214,8 +213,8 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test1Blog> iqTO = db1.Test1Blog;
-                    List<Test1Blog> listTO = iqTO.ToList();
+                    IQueryable<ForeignKeyTest1_Blog> iqTO = db1.ForeignKeyTest1_Blog;
+                    List<ForeignKeyTest1_Blog> listTO = iqTO.ToList();
 
                     Console.WriteLine($"count : {listTO.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
                 }
@@ -226,9 +225,9 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test2Blog> iqTO = db1.Test2Blog;
+                    IQueryable<ForeignKeyTest2_Blog> iqTO = db1.ForeignKeyTest2_Blog;
 
-                    List<Test2Blog> listTO = iqTO.ToList();
+                    List<ForeignKeyTest2_Blog> listTO = iqTO.ToList();
 
                     Console.WriteLine($"count : {listTO.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
                 }
@@ -242,9 +241,9 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    List<Test1Select> listTo
-                        = (from t1b in db1.Test1Blog.Take(1)
-                           select new Test1Select()
+                    List<ForeignKeyTest1_Select> listTo
+                        = (from t1b in db1.ForeignKeyTest1_Blog.Take(1)
+                           select new ForeignKeyTest1_Select()
                            {
                                idTest1Blog = t1b.idTest1Blog,
                                Name = t1b.Name,
@@ -261,13 +260,13 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    List<Test2Select> listTo
-                        = (from t2b in db1.Test2Blog.Take(1)
-                           select new Test2Select()
+                    List<ForeignKeyTest2_Select> listTo
+                        = (from t2b in db1.ForeignKeyTest2_Blog.Take(1)
+                           select new ForeignKeyTest2_Select()
                            {
                                idTest2Blog = t2b.idTest2Blog,
                                Name = t2b.Name,
-                               Posts = db1.Test2Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
+                               Posts = db1.ForeignKeyTest2_Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
                            })
                            .ToList();
 
@@ -294,16 +293,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test1Select> list
-                        = (from t1b in db1.Test1Blog.Take(1).Include(i => i.Posts)
-                           select new Test1Select()
+                    IQueryable<ForeignKeyTest1_Select> list
+                        = (from t1b in db1.ForeignKeyTest1_Blog.Take(1).Include(i => i.Posts)
+                           select new ForeignKeyTest1_Select()
                            {
                                idTest1Blog = t1b.idTest1Blog,
                                Name = t1b.Name,
                                Posts = t1b.Posts.ToList(),
                            });
 
-                    List<Test1Select> listTo = list.ToList();
+                    List<ForeignKeyTest1_Select> listTo = list.ToList();
 
                     Console.WriteLine($"count : {listTo.Count}, post:{listTo[0].Posts!.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
@@ -317,16 +316,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test2Select> list
-                        = (from t2b in db1.Test2Blog.Take(1)
-                           select new Test2Select()
+                    IQueryable<ForeignKeyTest2_Select> list
+                        = (from t2b in db1.ForeignKeyTest2_Blog.Take(1)
+                           select new ForeignKeyTest2_Select()
                            {
                                idTest2Blog = t2b.idTest2Blog,
                                Name = t2b.Name,
-                               Posts = db1.Test2Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
+                               Posts = db1.ForeignKeyTest2_Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
                            });
 
-                    List<Test2Select> listTo = list.ToList();
+                    List<ForeignKeyTest2_Select> listTo = list.ToList();
                     Console.WriteLine($"count : {listTo.Count}, post:{listTo[0].Posts!.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
                     //Console.WriteLine("query : ");
@@ -352,16 +351,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test1Select> list
-                        = (from t1b in db1.Test1Blog.Where(w => w.idTest1Blog == 1)
-                           select new Test1Select()
+                    IQueryable<ForeignKeyTest1_Select> list
+                        = (from t1b in db1.ForeignKeyTest1_Blog.Where(w => w.idTest1Blog == 1)
+                           select new ForeignKeyTest1_Select()
                            {
                                idTest1Blog = t1b.idTest1Blog,
                                Name = t1b.Name,
                                Posts = t1b.Posts.ToList(),
                            });
 
-                    List<Test1Select> listTo = list.ToList();
+                    List<ForeignKeyTest1_Select> listTo = list.ToList();
 
                     Console.WriteLine($"count : {listTo.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
@@ -375,16 +374,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test2Select> list
-                        = (from t2b in db1.Test2Blog.Where(w => w.idTest2Blog == 1)
-                           select new Test2Select()
+                    IQueryable<ForeignKeyTest2_Select> list
+                        = (from t2b in db1.ForeignKeyTest2_Blog.Where(w => w.idTest2Blog == 1)
+                           select new ForeignKeyTest2_Select()
                            {
                                idTest2Blog = t2b.idTest2Blog,
                                Name = t2b.Name,
-                               Posts = db1.Test2Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
+                               Posts = db1.ForeignKeyTest2_Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
                            });
 
-                    List<Test2Select> listTo = list.ToList();
+                    List<ForeignKeyTest2_Select> listTo = list.ToList();
                     Console.WriteLine($"count : {listTo.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
                     //Console.WriteLine("query : ");
@@ -410,16 +409,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test1Select> list
-                        = (from t1b in db1.Test1Blog.Where(w => 1 <= w.idTest1Blog && w.idTest1Blog <= 30)
-                           select new Test1Select()
+                    IQueryable<ForeignKeyTest1_Select> list
+                        = (from t1b in db1.ForeignKeyTest1_Blog.Where(w => 1 <= w.idTest1Blog && w.idTest1Blog <= 30)
+                           select new ForeignKeyTest1_Select()
                            {
                                idTest1Blog = t1b.idTest1Blog,
                                Name = t1b.Name,
                                Posts = t1b.Posts.ToList(),
                            });
 
-                    List<Test1Select> listTo = list.ToList();
+                    List<ForeignKeyTest1_Select> listTo = list.ToList();
 
                     Console.WriteLine($"count : {listTo.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
@@ -433,16 +432,16 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    IQueryable<Test2Select> list
-                        = (from t2b in db1.Test2Blog.Where(w => 1 <= w.idTest2Blog && w.idTest2Blog <= 30)
-                           select new Test2Select()
+                    IQueryable<ForeignKeyTest2_Select> list
+                        = (from t2b in db1.ForeignKeyTest2_Blog.Where(w => 1 <= w.idTest2Blog && w.idTest2Blog <= 30)
+                           select new ForeignKeyTest2_Select()
                            {
                                idTest2Blog = t2b.idTest2Blog,
                                Name = t2b.Name,
-                               Posts = db1.Test2Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
+                               Posts = db1.ForeignKeyTest2_Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
                            });
 
-                    List<Test2Select> listTo = list.ToList();
+                    List<ForeignKeyTest2_Select> listTo = list.ToList();
                     Console.WriteLine($"count : {listTo.Count}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
                     //Console.WriteLine("query : ");
@@ -468,9 +467,9 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    List<Test1Select> list
-                        = (from t1b in db1.Test1Blog.Where(w => 1 <= w.idTest1Blog && w.idTest1Blog <= 10)
-                           select new Test1Select()
+                    List<ForeignKeyTest1_Select> list
+                        = (from t1b in db1.ForeignKeyTest1_Blog.Where(w => 1 <= w.idTest1Blog && w.idTest1Blog <= 10)
+                           select new ForeignKeyTest1_Select()
                            {
                                idTest1Blog = t1b.idTest1Blog,
                                Name = t1b.Name,
@@ -479,7 +478,7 @@ internal class Program
                           .ToList();
 
                     int c = 0;
-                    foreach (Test1Select t in list)
+                    foreach (ForeignKeyTest1_Select t in list)
                     {
                         if (null != t.Posts)
                         {
@@ -496,18 +495,18 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    List<Test2Select> list
-                        = (from t2b in db1.Test2Blog.Where(w => 1 <= w.idTest2Blog && w.idTest2Blog <= 10)
-                           select new Test2Select()
+                    List<ForeignKeyTest2_Select> list
+                        = (from t2b in db1.ForeignKeyTest2_Blog.Where(w => 1 <= w.idTest2Blog && w.idTest2Blog <= 10)
+                           select new ForeignKeyTest2_Select()
                            {
                                idTest2Blog = t2b.idTest2Blog,
                                Name = t2b.Name,
-                               Posts = db1.Test2Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
+                               Posts = db1.ForeignKeyTest2_Post.Where(w => w.idTest2Blog == t2b.idTest2Blog).ToList(),
                            })
                           .ToList();
 
                     int c = 0;
-                    foreach (Test2Select t in list)
+                    foreach (ForeignKeyTest2_Select t in list)
                     {
                         if (null != t.Posts)
                         {
@@ -537,10 +536,10 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    Test1Post iqTO = db1.Test1Post.Include(i => i.Blog).First();
+                    ForeignKeyTest1_Post iqTO = db1.ForeignKeyTest1_Post.Include(i => i.Blog).First();
                     Console.WriteLine($"item select, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
-                    Test1Blog? t1b = iqTO.Blog;
+                    ForeignKeyTest1_Blog? t1b = iqTO.Blog;
                     string sName = string.Empty;
                     if (null != t1b)
                     {
@@ -555,12 +554,12 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    Test2Post iqTO = db1.Test2Post.First();
+                    ForeignKeyTest2_Post iqTO = db1.ForeignKeyTest2_Post.First();
                     Console.WriteLine($"item select, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
 
-                    Test2Blog t2b
-                        = db1.Test2Blog
+                    ForeignKeyTest2_Blog t2b
+                        = db1.ForeignKeyTest2_Blog
                             .Where(w => w.idTest2Blog == iqTO.idTest2Blog)
                             .First();
                     Console.WriteLine($"blog : {t2b.Name}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
@@ -585,10 +584,10 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    Test1Post iqTO = db1.Test1Post.Include(i => i.Blog).First();
+                    ForeignKeyTest1_Post iqTO = db1.ForeignKeyTest1_Post.Include(i => i.Blog).First();
                     Console.WriteLine($"item select, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
-                    Test1Blog? t1b = iqTO.Blog;
+                    ForeignKeyTest1_Blog? t1b = iqTO.Blog;
                     string sName = string.Empty;
                     if (null != t1b)
                     {
@@ -603,12 +602,12 @@ internal class Program
                     dtNow = DateTime.Now;
 
                     //리스트를 받고
-                    Test2Post iqTO = db1.Test2Post.First();
+                    ForeignKeyTest2_Post iqTO = db1.ForeignKeyTest2_Post.First();
                     Console.WriteLine($"item select, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
 
 
-                    Test2Blog t2b
-                        = db1.Test2Blog
+                    ForeignKeyTest2_Blog t2b
+                        = db1.ForeignKeyTest2_Blog
                             .Where(w => w.idTest2Blog == iqTO.idTest2Blog)
                             .First();
                     Console.WriteLine($"blog : {t2b.Name}, delay : {(DateTime.Now.Ticks - dtNow.Ticks)}");
@@ -639,13 +638,13 @@ internal class Program
                     //블로그는 순차 생성
                     for (int i = 1; i < 100; ++i)
                     {
-                        Test1Blog newT1B = new Test1Blog();
+                        ForeignKeyTest1_Blog newT1B = new ForeignKeyTest1_Blog();
                         newT1B.Name = $"Test1Blog {i}";
-                        db1.Test1Blog.Add(newT1B);
+                        db1.ForeignKeyTest1_Blog.Add(newT1B);
 
-                        Test2Blog newT2B = new Test2Blog();
+                        ForeignKeyTest2_Blog newT2B = new ForeignKeyTest2_Blog();
                         newT2B.Name = $"Test2Blog {i}";
-                        db1.Test2Blog.Add(newT2B);
+                        db1.ForeignKeyTest2_Blog.Add(newT2B);
                     }
 
                     db1.SaveChanges();
@@ -653,7 +652,7 @@ internal class Program
                     Db_DataAdd_Temp2(new Random(), db1);
                     db1.SaveChanges();
 
-                    Console.WriteLine($"DB Data complete. Total Count: {db1.Test1Blog.Count()}(Test1Blog), {db1.Test2Blog.Count()}(Test2Blog)");
+                    Console.WriteLine($"DB Data complete. Total Count: {db1.ForeignKeyTest1_Blog.Count()}(Test1Blog), {db1.ForeignKeyTest2_Blog.Count()}(Test2Blog)");
                 }
 
                 Console.WriteLine("");
@@ -698,13 +697,13 @@ internal class Program
             //블로그는 순차 생성
             for (int i = 1; i < 10000; ++i)
             {
-                Test1Blog newT1B = new Test1Blog();
+                ForeignKeyTest1_Blog newT1B = new ForeignKeyTest1_Blog();
                 newT1B.Name = $"Test1Blog {i}";
-                db1.Test1Blog.Add(newT1B);
+                db1.ForeignKeyTest1_Blog.Add(newT1B);
 
-                Test2Blog newT2B = new Test2Blog();
+                ForeignKeyTest2_Blog newT2B = new ForeignKeyTest2_Blog();
                 newT2B.Name = $"Test2Blog {i}";
-                db1.Test2Blog.Add(newT2B);
+                db1.ForeignKeyTest2_Blog.Add(newT2B);
             }
 
             db1.SaveChanges();
@@ -759,21 +758,21 @@ internal class Program
         long idFK = rand.Next(1, 10000);
         //long idFK = rand.Next(0, 100);
 
-        Test1Post newT1P = new Test1Post();
+        ForeignKeyTest1_Post newT1P = new ForeignKeyTest1_Post();
         newT1P.Int = Int;
         newT1P.Str = Str;
         newT1P.Date = Date;
         //외래키 연결 랜덤하게 
         newT1P.idTest1Blog = idFK;
-        db1.Test1Post.Add(newT1P);
+        db1.ForeignKeyTest1_Post.Add(newT1P);
 
 
-        Test2Post newT2P = new Test2Post();
+        ForeignKeyTest2_Post newT2P = new ForeignKeyTest2_Post();
         newT2P.Int = Int;
         newT2P.Str = Str;
         newT2P.Date = Date;
         //외래키 연결 랜덤하게 
         newT2P.idTest2Blog = idFK;
-        db1.Test2Post.Add(newT2P);
+        db1.ForeignKeyTest2_Post.Add(newT2P);
     }
 }
