@@ -179,13 +179,13 @@ internal class Program
 
                     Console.WriteLine($"Include 없는 기본 검색 : 부모({iq1Blog.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post.Count})");
 
-                    //부모 1개 추출
+
+                    //(Include)부모 1개 추출
                     ForeignKeyTest1_Blog iq1Blog2 = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
                     //소속된 자식 추출
                     List<ForeignKeyTest1_Post> list1Post2 = iq1Blog2.Posts.ToList();
                     
                     Console.WriteLine($"Include 있는 기본 검색 : 부모({iq1Blog2.idTest1Blog}, {iq1Blog.Name}), 자식({list1Post2.Count})");
-
                 }
 
                 Console.WriteLine("");
