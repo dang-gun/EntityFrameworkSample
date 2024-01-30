@@ -37,13 +37,13 @@ public class ModelsDbContext : DbContext
 	{
 		//Console.WriteLine($"OnConfiguring DbType : {GlobalDb.DBType}");
 
-        switch (GlobalDb.DBType)
+        switch (ModelDllGlobal.DBType)
 		{
 			case UseDbType.Sqlite:
-				options.UseSqlite(GlobalDb.DBString);
+				options.UseSqlite(ModelDllGlobal.DBString);
 				break;
 			case UseDbType.Mssql:
-				options.UseSqlServer(GlobalDb.DBString);
+				options.UseSqlServer(ModelDllGlobal.DBString);
 				break;
 
 			case UseDbType.InMemory:

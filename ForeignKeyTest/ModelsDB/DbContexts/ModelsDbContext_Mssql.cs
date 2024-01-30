@@ -23,12 +23,12 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.Mssql;
+		ModelDllGlobal.DBType = UseDbType.Mssql;
 
         //GlobalDb.DBString가 없는경우
-        if (string.Empty == GlobalDb.DBString)
+        if (string.Empty == ModelDllGlobal.DBString)
 		{
-			GlobalDb.DBString = GlobalDb.DBString_Mssql;
+			ModelDllGlobal.DBString = ModelDllGlobal.DBString_Mssql;
         }
     }
 

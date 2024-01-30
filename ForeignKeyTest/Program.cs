@@ -36,7 +36,7 @@ internal class Program
             TextFormat = "{0}. Sqlite",
             Action = (MenuModel menuThis) =>
             {
-                GlobalDb.DBType = UseDbType.Sqlite;
+                ModelDllGlobal.DBType = UseDbType.Sqlite;
                 return false;
             }
         });
@@ -46,7 +46,7 @@ internal class Program
             TextFormat = "{0}. MSSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
             Action = (MenuModel menuThis) =>
             {
-                GlobalDb.DBType = UseDbType.Mssql;
+                ModelDllGlobal.DBType = UseDbType.Mssql;
                 return false;
             }
         });
@@ -56,7 +56,7 @@ internal class Program
             TextFormat = "{0}. Memory DB",
             Action = (MenuModel menuThis) =>
             {
-                GlobalDb.DBType = UseDbType.InMemory;
+                ModelDllGlobal.DBType = UseDbType.InMemory;
                 Console.WriteLine($"Use Database '${UseDbType.Sqlite.ToString()}'");
                 return false;
             }
@@ -69,16 +69,16 @@ internal class Program
 
 
         //선택된 DB 표시
-        Console.WriteLine($"Use Database '{GlobalDb.DBType.ToString()}'");
+        Console.WriteLine($"Use Database '{ModelDllGlobal.DBType.ToString()}'");
         Console.WriteLine("");
         Console.WriteLine("DB Setting....");
 
         //db 마이그레이션 적용
-        switch (GlobalDb.DBType)
+        switch (ModelDllGlobal.DBType)
         {
             case UseDbType.Sqlite:
                 {
-                    GlobalDb.DBString = "Data Source=Test.db";
+                    ModelDllGlobal.DBString = "Data Source=Test.db";
                     using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
                     {
                         db1.Database.Migrate();
@@ -114,7 +114,7 @@ internal class Program
                                 //콘론으로 자르고
                                 string[] sCut = findSI.Split(":");
                                 //앞뒤 큰따옴표 제거
-                                GlobalDb.DBString = sCut[1].Substring(2, sCut[1].Length - 4);
+                                ModelDllGlobal.DBString = sCut[1].Substring(2, sCut[1].Length - 4);
                                 break;
                             }
                         }

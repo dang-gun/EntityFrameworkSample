@@ -23,11 +23,11 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 	public ModelsDbContext_Sqlite(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.Sqlite;
+		ModelDllGlobal.DBType = UseDbType.Sqlite;
 
-        if (string.Empty == GlobalDb.DBString)
+        if (string.Empty == ModelDllGlobal.DBString)
 		{
-            GlobalDb.DBString = GlobalDb.DBString_Sqlite;
+            ModelDllGlobal.DBString = ModelDllGlobal.DBString_Sqlite;
         }
             
     }

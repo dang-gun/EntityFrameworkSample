@@ -20,7 +20,7 @@ public class ModelsDbContext_InMomey : ModelsDbContext
 	public ModelsDbContext_InMomey(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.InMemory;
+		ModelDllGlobal.DBType = UseDbType.InMemory;
     }
 	/// <summary>
 	/// 

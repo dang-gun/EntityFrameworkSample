@@ -6,7 +6,7 @@ namespace Global.DB;
     /// <summary>
     /// Static으로 선언된 적역 변수들
     /// </summary>
-    public static class GlobalDb
+    public static class ModelDllGlobal
     {
 	/// <summary>
 	/// DB 타입
@@ -40,16 +40,16 @@ namespace Global.DB;
     /// </remarks>
     public static char DbArrayDiv = '▒';
 
-	static GlobalDb()
+	static ModelDllGlobal()
 	{
         //기본 Sqlite DB스트링 만들기 *************************
-        if (string.Empty == GlobalDb.DBString_Sqlite)
+        if (string.Empty == ModelDllGlobal.DBString_Sqlite)
         {
-            GlobalDb.DBString_Sqlite = "Data Source=Test.db";
+            ModelDllGlobal.DBString_Sqlite = "Data Source=Test.db";
         }
 
         //기본 MSSQL DB스트링 만들기 *************************
-        if (string.Empty == GlobalDb.DBString_Mssql)
+        if (string.Empty == ModelDllGlobal.DBString_Mssql)
         {
             //SettingInfo_gitignore.json 파일 찾기
             List<Tuple<int, string>> listSettingInfoTitle
@@ -79,7 +79,7 @@ namespace Global.DB;
                         //콘론으로 자르고
                         string[] sCut = findSI.Split(":");
                         //앞뒤 큰따옴표 제거
-                        GlobalDb.DBString_Mssql = sCut[1].Substring(2, sCut[1].Length - 4);
+                        ModelDllGlobal.DBString_Mssql = sCut[1].Substring(2, sCut[1].Length - 4);
                         break;
                     }
                 }
