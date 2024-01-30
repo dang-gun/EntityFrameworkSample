@@ -43,43 +43,48 @@ namespace Global.DB;
 	static GlobalDb()
 	{
         //기본 Sqlite DB스트링 만들기 *************************
-        GlobalDb.DBString_Sqlite = "Data Source=Test.db";
-
+        if (string.Empty == GlobalDb.DBString_Sqlite)
+        {
+            GlobalDb.DBString_Sqlite = "Data Source=Test.db";
+        }
 
         //기본 MSSQL DB스트링 만들기 *************************
-        //SettingInfo_gitignore.json 파일 찾기
-        List<Tuple<int, string>> listSettingInfoTitle
-                        = new List<Tuple<int, string>>();
-        listSettingInfoTitle.Add(new Tuple<int, string>(1, "\"ConnectionString_Mssql\""));
-
-        string[] sSettingInfo = File.ReadAllLines("SettingInfo_gitignore.json");
-        //불러온 데이터 공백제거
-        sSettingInfo = sSettingInfo.Select(s => s.Trim()).ToArray();
-
-        for (int i = 0; i < listSettingInfoTitle.Count; ++i)
+        if (string.Empty == GlobalDb.DBString_Mssql)
         {
-            Tuple<int, string> item = listSettingInfoTitle[i];
+            //SettingInfo_gitignore.json 파일 찾기
+            List<Tuple<int, string>> listSettingInfoTitle
+                            = new List<Tuple<int, string>>();
+            listSettingInfoTitle.Add(new Tuple<int, string>(1, "\"ConnectionString_Mssql\""));
 
-            //설정 검색
-            string? findSI
-                = sSettingInfo
-                    .Where(w => w.Length >= item.Item2.Length
-                                && w.Substring(0, item.Item2.Length) == item.Item2)
-                    .FirstOrDefault();
+            string[] sSettingInfo = File.ReadAllLines("SettingInfo_gitignore.json");
+            //불러온 데이터 공백제거
+            sSettingInfo = sSettingInfo.Select(s => s.Trim()).ToArray();
 
-            if (null != findSI)
-            {//검색 성공
+            for (int i = 0; i < listSettingInfoTitle.Count; ++i)
+            {
+                Tuple<int, string> item = listSettingInfoTitle[i];
 
-                if (1 == item.Item1)
-                {
-                    //콘론으로 자르고
-                    string[] sCut = findSI.Split(":");
-                    //앞뒤 큰따옴표 제거
-                    GlobalDb.DBString_Mssql = sCut[1].Substring(2, sCut[1].Length - 4);
-                    break;
+                //설정 검색
+                string? findSI
+                    = sSettingInfo
+                        .Where(w => w.Length >= item.Item2.Length
+                                    && w.Substring(0, item.Item2.Length) == item.Item2)
+                        .FirstOrDefault();
+
+                if (null != findSI)
+                {//검색 성공
+
+                    if (1 == item.Item1)
+                    {
+                        //콘론으로 자르고
+                        string[] sCut = findSI.Split(":");
+                        //앞뒤 큰따옴표 제거
+                        GlobalDb.DBString_Mssql = sCut[1].Substring(2, sCut[1].Length - 4);
+                        break;
+                    }
                 }
-            }
-        }//end for i
+            }//end for i
+        }
     }
 
 }
