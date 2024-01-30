@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MultiMigrations</name>
+    </assembly>
+    <members>
+        <member name="T:Global.DB.GlobalDb">
+            <summary>
+            Static으로 선언된 적역 변수들
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DBType">
+            <summary>
+            DB 타입
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DBString">
+            <summary>
+            DB 컨낵션 스트링 저장
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DbInfo_Select">
+            <summary>
+            사용할 DB 정보
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DbArrayDiv">
+            <summary>
+            문자열로 저장된 배열(혹은 리스트)의 데이터를 구분할때 사용하는 구분자
+            </summary>
+            <remarks>
+            이 값을 중간에 바꾸면 기존의 데이터를 재대로 못읽을 수 있다.
+            </remarks>
+        </member>
+        <member name="M:Global.DB.GlobalDb.DbStringLoad(System.String,System.String)">
+            <summary>
+            지정된 파일에서 지정된 이름의 DbString을 리턴한다.
+            </summary>
+            <param name="sPath"></param>
+            <param name="sFindName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Global.DB.UseDbType">
+            <summary>
+            사용하는 DB 타입
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.InMemory">
+            <summary>
+            In Memory
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.Sqlite">
+            <summary>
+            Sqlite
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.Mssql">
+            <summary>
+            MS Sql
+            </summary>
+        </member>
+        <member name="T:ModelsDB.MultiMigrations.DbContextInfoInterface">
+            <summary>
+            DbContextInfo 인터페이스
+            </summary>
+            <remarks>
+            마이그레이션에 사용될 기본DB정보를 생성하거나 
+            
+            </remarks>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfoInterface.DBType">
+            <summary>
+            DB 타입
+            </summary>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfoInterface.DBString">
+            <summary>
+            DB 연결 문자열
+            </summary>
+        </member>
+        <member name="T:ModelsDB.MultiMigrations.DbContextInfo_Mssql">
+            <summary>
+            Sqlite DB 정보
+            </summary>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DBType">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DBString">
+            <inheritdoc />
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.#ctor">
+            <summary>
+            루트에 있는 "SettingInfo_gitignore.json"파일을 읽어 DB를 초기화 한다.
+            </summary>
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.#ctor(System.String)">
+            <summary>
+            지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다. 
+            </summary>
+            <param name="sPath"></param>
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DbStringLoad(System.String)">
+            <summary>
+            지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다.
+            </summary>
+            <param name="sPath"></param>
+        </member>
+        <member name="T:ModelsDB.MultiMigrations.DbContextInfo_Sqlite">
+            <summary>
+            Sqlite DB 정보
+            </summary>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Sqlite.DBType">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Sqlite.DBString">
+            <inheritdoc />
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:ModelsDB.ModelsDbContext.Test1Model">
+            <summary>
+            테스트1 데이터
+            </summary>
+        </member>
+        <member name="P:ModelsDB.ModelsDbContext.Test2Model">
+            <summary>
+            테스트2 데이터
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            데이터 넣기 동작
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_InMomey">
+            <summary>
+            InMomey전용 컨텍스트
+            </summary>
+            <remarks>
+            InMomey는 마이그레이션 개념이 없다.
+            </remarks>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_InMomey.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_InMomey.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_InMomeyFactory">
+            <summary>
+            Sqlite전용 컨텍스트 팩토리
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_InMomeyFactory.CreateDbContext(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_Mssql">
+             <summary>
+             mssql전용 컨텍스트
+             </summary>
+            <remarks>
+             Add-Migration InitialCreate -Context ModelsDbContext_Mssql -OutputDir Migrations/Mssql 
+             Remove-Migration -Context ModelsDbContext_Mssql
+             Update-Database -Context ModelsDbContext_Mssql
+             Update-Database -Context ModelsDbContext_Mssql -Migration 0
+            </remarks>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Mssql.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+            <summary>
+            ef 명령을 직접 사용하면 여기로 들어와 진다.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Mssql.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_MssqlFactory">
+            <summary>
+             mssql전용 컨텍스트 팩토리
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_MssqlFactory.CreateDbContext(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_Sqlite">
+            <summary>
+            Sqlite전용 컨텍스트
+            </summary>
+            <remarks>
+            Add-Migration InitialCreate -Context ModelsDbContext_Sqlite -OutputDir Migrations/Sqlite
+            Remove-Migration -Context ModelsDbContext_Sqlite
+            Update-Database -Context ModelsDbContext_Sqlite -Migration 0
+            Update-Database -Context ModelsDbContext_Sqlite
+            </remarks>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Sqlite.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Sqlite.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_SqliteFactory">
+            <summary>
+            Sqlite전용 컨텍스트 팩토리
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_SqliteFactory.CreateDbContext(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ModelsDB.Test1Model">
+            <summary>
+            테스트용 모델
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test1Model.idTest1Model">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test1Model.Int">
+            <summary>
+            숫자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test1Model.Str">
+            <summary>
+            문자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test1Model.Date">
+            <summary>
+            날짜형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test1Model.Test2ModelList">
+            <summary>
+            외래키에 연결된 리스트
+            </summary>
+        </member>
+        <member name="T:ModelsDB.Test2Model">
+            <summary>
+            테스트용 모델
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test2Model.idTest2Model">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test2Model.idTest1Model">
+            <summary>
+            FK 부모
+            </summary>
+        </member>
+        <member name="P:ModelsDB.Test2Model.Test1Model">
+            <summary>
+            연결된 외래키
+            </summary>
+            <summary>
+            외래키에 연결된 대상
+            </summary>
+        </member>
+    </members>
+</doc>
