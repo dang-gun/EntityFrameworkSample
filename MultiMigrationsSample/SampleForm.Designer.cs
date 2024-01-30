@@ -267,6 +267,9 @@
             Controls.Add(groupBox2);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "SampleForm";
             Text = "Form1";
             groupBox1.ResumeLayout(false);

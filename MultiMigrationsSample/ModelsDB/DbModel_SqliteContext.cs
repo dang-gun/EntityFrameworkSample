@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Design;
 using MultiMigrationsSample;
 using MultiMigrationsSample.Models;
-using System.Text;
 
 namespace ModelsDB;
 
