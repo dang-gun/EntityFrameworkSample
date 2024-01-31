@@ -35,6 +35,7 @@ public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
     /// <param name="sPath"></param>
     public void DbStringLoad(string sPath)
     {
-        this.DBString = GlobalDb.DbStringLoad(sPath, "ConnectionString_Mssql");
+        //this.DBString = GlobalDb.DbStringLoad(sPath, "ConnectionString_Mssql");
+        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.Mssql);
     }
 }

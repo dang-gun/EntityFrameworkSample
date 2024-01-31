@@ -27,12 +27,12 @@
             이 값을 중간에 바꾸면 기존의 데이터를 재대로 못읽을 수 있다.
             </remarks>
         </member>
-        <member name="M:Global.DB.GlobalDb.DbStringLoad(System.String,System.String)">
+        <member name="M:Global.DB.GlobalDb.DbStringLoad(System.String,Global.DB.UseDbType)">
             <summary>
-            지정된 파일에서 지정된 이름의 DbString을 리턴한다.
+            지정된 파일(json)에서 지정된 이름의 DbString을 리턴한다.
             </summary>
             <param name="sPath"></param>
-            <param name="sFindName"></param>
+            <param name="typeUseDb"></param>
             <returns></returns>
         </member>
         <member name="T:Global.DB.UseDbType">
@@ -128,6 +128,25 @@
         <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Sqlite.DBString">
             <inheritdoc />
         </member>
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfo_Temp">
+            <summary>
+            역직열화에 사용할 모델
+            </summary>
+            <remarks>
+            인터페이스를 그대로 역직열화 하면 오류가 발생하므로 모델로 사용하기위한 개체이다.
+            </remarks>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Temp.DBType">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Temp.DBString">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Temp.DBTypeString">
+            <summary>
+            문자열로 DBType을 입력하는 경우
+            </summary>
+        </member>
         <member name="T:ModelsDB.ModelsDbContext">
             <summary>
             
@@ -216,8 +235,12 @@
         </member>
         <member name="M:ModelsDB.ModelsDbContext_Mssql.#ctor">
             <summary>
-            
+            GlobalDb.DBString에 설정된 정보로 컨택스트 생성
             </summary>
+            <remarks>
+            약간의 성능이라도 높이기 위해 GlobalDb.DBString의 무결성 검사를 하지 않는다.
+            <para>이 생성자를 호출하기 전에 GlobalDb.DBString에 정확한 연결문자를 넣어야 한다.</para>
+            </remarks>
         </member>
         <member name="T:ModelsDB.ModelsDbContext_MssqlFactory">
             <summary>
@@ -250,8 +273,12 @@
         </member>
         <member name="M:ModelsDB.ModelsDbContext_Sqlite.#ctor">
             <summary>
-            
+            GlobalDb.DBString에 설정된 정보로 컨택스트 생성
             </summary>
+            <remarks>
+            약간의 성능이라도 높이기 위해 GlobalDb.DBString의 무결성 검사를 하지 않는다.
+            <para>이 생성자를 호출하기 전에 GlobalDb.DBString에 정확한 연결문자를 넣어야 한다.</para>
+            </remarks>
         </member>
         <member name="T:ModelsDB.ModelsDbContext_SqliteFactory">
             <summary>

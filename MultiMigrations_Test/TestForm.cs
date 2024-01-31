@@ -82,7 +82,7 @@ namespace MultiMigrations_Test
                 GlobalDb.DBString
                     = GlobalDb.DbStringLoad(
                         "SettingInfo_gitignore.json"
-                        , "ConnectionString_Mssql");
+                        , UseDbType.Mssql);
 
                 using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
                 {

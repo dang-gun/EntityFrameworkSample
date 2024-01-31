@@ -34,10 +34,14 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 		}
 	}
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public ModelsDbContext_Mssql()
+    /// <summary>
+    /// GlobalDb.DBString에 설정된 정보로 컨택스트 생성
+    /// </summary>
+	/// <remarks>
+	/// 약간의 성능이라도 높이기 위해 GlobalDb.DBString의 무결성 검사를 하지 않는다.
+	/// <para>이 생성자를 호출하기 전에 GlobalDb.DBString에 정확한 연결문자를 넣어야 한다.</para>
+	/// </remarks>
+    public ModelsDbContext_Mssql()
 	{
 	}
 }

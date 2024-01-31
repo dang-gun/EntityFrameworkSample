@@ -1,5 +1,8 @@
-﻿
+﻿using System.Text.Json;
+using System.Text.RegularExpressions;
+using ModelsDB;
 using ModelsDB.MultiMigrations;
+
 
 namespace Global.DB;
 
@@ -30,46 +33,44 @@ public static class GlobalDb
 	{
     }
 
+
     /// <summary>
-    /// 지정된 파일에서 지정된 이름의 DbString을 리턴한다.
+    /// 지정된 파일(json)에서 지정된 이름의 DbString을 리턴한다.
     /// </summary>
     /// <param name="sPath"></param>
-    /// <param name="sFindName"></param>
+    /// <param name="typeUseDb"></param>
     /// <returns></returns>
-    public static string DbStringLoad(string sPath, string sFindName)
+    public static string DbStringLoad(
+        string sPath
+        , UseDbType typeUseDb)
     {
         string sReturn = string.Empty;
 
         if (true == File.Exists(sPath))
         {
             //파일에서 찾을 내용 넣기
+            string sJson = File.ReadAllText(sPath);
+            //주석 제거
+            string jsonWithoutComments = Regex.Replace(sJson, @"(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)", ""); 
 
-            //파일 읽기
-            string[] sSettingInfo = File.ReadAllLines(sPath);
-            //불러온 데이터 공백제거
-            sSettingInfo = sSettingInfo.Select(s => s.Trim()).ToArray();
+            List<DbContextDefaultInfo_Temp>? listDbInfo
+                = JsonSerializer.Deserialize<List<DbContextDefaultInfo_Temp>>(jsonWithoutComments);
 
-            //찾을 이름
-            string item = $"\"{sFindName}\"";
+            if (null != listDbInfo)
+            {//지정된 파일을 재대로 읽음
+                DbContextDefaultInfoInterface? findItem
+                    = listDbInfo
+                        .Where(w => w.DBType == typeUseDb)
+                        .FirstOrDefault();
 
-            //설정 검색
-            string? findSI
-                = sSettingInfo
-                    .Where(w => w.Length >= item.Length
-                                && w.Substring(0, item.Length) == item)
-                    .FirstOrDefault();
+                if (null != findItem)
+                {//지정된 DB 타입을 찾음
 
-            if (null != findSI)
-            {//검색 성공
-
-                //콘론으로 자르고
-                string[] sCut = findSI.Split(":");
-                //앞뒤 큰따옴표 제거
-                sReturn = sCut[1].Substring(2, sCut[1].Length - 4);
+                    sReturn = findItem.DBString;
+                }
             }
         }
 
         return sReturn;
     }
-
 }
