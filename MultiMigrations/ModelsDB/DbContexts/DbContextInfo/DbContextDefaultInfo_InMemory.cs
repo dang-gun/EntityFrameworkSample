@@ -3,9 +3,9 @@
 namespace ModelsDB.MultiMigrations;
 
 /// <summary>
-/// InMomey DB 정보
+/// InMomey DB 기본 정보
 /// </summary>
-public class DbContextInfo_InMomey : DbContextInfoInterface
+public class DbContextDefaultInfo_InMemory : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
     public UseDbType DBType { get; set; } = UseDbType.InMemory;

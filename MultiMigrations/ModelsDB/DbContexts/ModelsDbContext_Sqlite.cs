@@ -28,7 +28,7 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 
         if (string.Empty == GlobalDb.DBString)
 		{
-			DbContextInfo_Sqlite newDbInfo = new DbContextInfo_Sqlite();
+			DbContextDefaultInfo_Sqlite newDbInfo = new DbContextDefaultInfo_Sqlite();
 			GlobalDb.DBString = newDbInfo.DBString;
         }
             

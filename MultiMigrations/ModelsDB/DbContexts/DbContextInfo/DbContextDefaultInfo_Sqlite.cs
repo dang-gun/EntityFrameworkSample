@@ -3,9 +3,9 @@
 namespace ModelsDB.MultiMigrations;
 
 /// <summary>
-/// Sqlite DB 정보
+/// Sqlite DB 기본 정보
 /// </summary>
-public class DbContextInfo_Sqlite : DbContextInfoInterface
+public class DbContextDefaultInfo_Sqlite : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
     public UseDbType DBType { get; set; } = UseDbType.Sqlite;

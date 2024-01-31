@@ -13,27 +13,27 @@ namespace ModelsDB;
 /// <remarks>
 /// InMomey는 마이그레이션 개념이 없다.
 /// </remarks>
-public class ModelsDbContext_InMomey : ModelsDbContext
+public class ModelsDbContext_InMemory : ModelsDbContext
 {
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="options"></param>
-	public ModelsDbContext_InMomey(DbContextOptions<ModelsDbContext> options)
+	public ModelsDbContext_InMemory(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
 		GlobalDb.DBType = UseDbType.InMemory;
 
         if (string.Empty == GlobalDb.DBString)
         {
-            DbContextInfo_InMomey newDbInfo = new DbContextInfo_InMomey();
+            DbContextDefaultInfo_InMemory newDbInfo = new DbContextDefaultInfo_InMemory();
             GlobalDb.DBString = newDbInfo.DBString;
         }
     }
 	/// <summary>
 	/// 
 	/// </summary>
-	public ModelsDbContext_InMomey()
+	public ModelsDbContext_InMemory()
 	{
 	}
 }
@@ -42,18 +42,18 @@ public class ModelsDbContext_InMomey : ModelsDbContext
 /// Sqlite전용 컨텍스트 팩토리
 /// </summary>
 public class ModelsDbContext_InMomeyFactory
-    : IDesignTimeDbContextFactory<ModelsDbContext_InMomey>
+    : IDesignTimeDbContextFactory<ModelsDbContext_InMemory>
 {
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="args"></param>
 	/// <returns></returns>
-	public ModelsDbContext_InMomey CreateDbContext(string[] args)
+	public ModelsDbContext_InMemory CreateDbContext(string[] args)
 	{
 		DbContextOptionsBuilder<ModelsDbContext> optionsBuilder
 			= new DbContextOptionsBuilder<ModelsDbContext>();
 
-		return new ModelsDbContext_InMomey(optionsBuilder.Options);
+		return new ModelsDbContext_InMemory(optionsBuilder.Options);
 	}
 }

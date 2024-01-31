@@ -19,11 +19,6 @@
             DB 컨낵션 스트링 저장
             </summary>
         </member>
-        <member name="F:Global.DB.GlobalDb.DbInfo_Select">
-            <summary>
-            사용할 DB 정보
-            </summary>
-        </member>
         <member name="F:Global.DB.GlobalDb.DbArrayDiv">
             <summary>
             문자열로 저장된 배열(혹은 리스트)의 데이터를 구분할때 사용하는 구분자
@@ -65,62 +60,72 @@
             MS Sql
             </summary>
         </member>
-        <member name="T:ModelsDB.MultiMigrations.DbContextInfoInterface">
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfoInterface">
             <summary>
-            DbContextInfo 인터페이스
+            DbContext에 입력할 기본 정보 인터페이스
             </summary>
             <remarks>
-            마이그레이션에 사용될 기본DB정보를 생성하거나 
-            
+            마이그레이션에 사용될 기본DB정보를 생성하거나 전달하는 용도로 사용된다.
             </remarks>
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfoInterface.DBType">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfoInterface.DBType">
             <summary>
             DB 타입
             </summary>
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfoInterface.DBString">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfoInterface.DBString">
             <summary>
             DB 연결 문자열
             </summary>
         </member>
-        <member name="T:ModelsDB.MultiMigrations.DbContextInfo_Mssql">
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfo_InMemory">
             <summary>
-            Sqlite DB 정보
+            InMomey DB 기본 정보
             </summary>
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DBType">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_InMemory.DBType">
             <inheritdoc />
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DBString">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_InMemory.DBString">
             <inheritdoc />
         </member>
-        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.#ctor">
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql">
+            <summary>
+            MSSQL DB 기본 정보
+            </summary>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.DBType">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.DBString">
+            <inheritdoc />
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.#ctor">
             <summary>
             루트에 있는 "SettingInfo_gitignore.json"파일을 읽어 DB를 초기화 한다.
             </summary>
         </member>
-        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.#ctor(System.String)">
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.#ctor(System.String)">
             <summary>
             지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다. 
             </summary>
             <param name="sPath"></param>
         </member>
-        <member name="M:ModelsDB.MultiMigrations.DbContextInfo_Mssql.DbStringLoad(System.String)">
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.DbStringLoad(System.String)">
             <summary>
             지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다.
             </summary>
             <param name="sPath"></param>
         </member>
-        <member name="T:ModelsDB.MultiMigrations.DbContextInfo_Sqlite">
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfo_Sqlite">
             <summary>
-            Sqlite DB 정보
+            Sqlite DB 기본 정보
             </summary>
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Sqlite.DBType">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Sqlite.DBType">
             <inheritdoc />
         </member>
-        <member name="P:ModelsDB.MultiMigrations.DbContextInfo_Sqlite.DBString">
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Sqlite.DBString">
             <inheritdoc />
         </member>
         <member name="T:ModelsDB.ModelsDbContext">
@@ -161,7 +166,7 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
-        <member name="T:ModelsDB.ModelsDbContext_InMomey">
+        <member name="T:ModelsDB.ModelsDbContext_InMemory">
             <summary>
             InMomey전용 컨텍스트
             </summary>
@@ -169,13 +174,13 @@
             InMomey는 마이그레이션 개념이 없다.
             </remarks>
         </member>
-        <member name="M:ModelsDB.ModelsDbContext_InMomey.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+        <member name="M:ModelsDB.ModelsDbContext_InMemory.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
             <summary>
             
             </summary>
             <param name="options"></param>
         </member>
-        <member name="M:ModelsDB.ModelsDbContext_InMomey.#ctor">
+        <member name="M:ModelsDB.ModelsDbContext_InMemory.#ctor">
             <summary>
             
             </summary>

@@ -29,7 +29,7 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 		//GlobalDb.DBString가 없는경우
 		if (string.Empty == GlobalDb.DBString)
 		{
-			DbContextInfo_Mssql newDbInfo = new DbContextInfo_Mssql();
+			DbContextDefaultInfo_Mssql newDbInfo = new DbContextDefaultInfo_Mssql();
 			GlobalDb.DBString = newDbInfo.DBString;
 		}
 	}

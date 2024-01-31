@@ -3,9 +3,9 @@
 namespace ModelsDB.MultiMigrations;
 
 /// <summary>
-/// MSSQL DB 정보
+/// MSSQL DB 기본 정보
 /// </summary>
-public class DbContextInfo_Mssql : DbContextInfoInterface
+public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
     public UseDbType DBType { get; set; } = UseDbType.Mssql;
@@ -15,7 +15,7 @@ public class DbContextInfo_Mssql : DbContextInfoInterface
     /// <summary>
     /// 루트에 있는 "SettingInfo_gitignore.json"파일을 읽어 DB를 초기화 한다.
     /// </summary>
-    public DbContextInfo_Mssql()
+    public DbContextDefaultInfo_Mssql()
     {
         this.DbStringLoad("SettingInfo_gitignore.json");
     }
@@ -24,7 +24,7 @@ public class DbContextInfo_Mssql : DbContextInfoInterface
     /// 지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다. 
     /// </summary>
     /// <param name="sPath"></param>
-    public DbContextInfo_Mssql(string sPath)
+    public DbContextDefaultInfo_Mssql(string sPath)
     {
         this.DbStringLoad(sPath);
     }
