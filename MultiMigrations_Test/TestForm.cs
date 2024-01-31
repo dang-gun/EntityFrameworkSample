@@ -168,7 +168,7 @@ public partial class TestForm : Form
 
             newTest1.Int = rand.Next(0, 100000);
             newTest1.Str = Guid.NewGuid().ToString(); ;
-            newTest1.Date = new DateTime(rand.Next(0, 1000000));
+            newTest1.Date = new DateTime(rand.NextInt64(100000000, 10000000000000));
 
             db1.Test1Model.Add(newTest1);
             db1.SaveChanges();
