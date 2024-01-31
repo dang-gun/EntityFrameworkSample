@@ -46,8 +46,13 @@ public static class GlobalDb
     {
         string sReturn = string.Empty;
 
+
+        //Console.WriteLine($"DbStringLoad : {sPath}");
+
         if (true == File.Exists(sPath))
         {
+            
+
             //파일에서 찾을 내용 넣기
             string sJson = File.ReadAllText(sPath);
             //주석 제거

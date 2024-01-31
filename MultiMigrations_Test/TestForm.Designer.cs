@@ -41,6 +41,7 @@
             radioSqlite = new RadioButton();
             groupBox1 = new GroupBox();
             radioInMemory = new RadioButton();
+            radioPostgresql = new RadioButton();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -148,14 +149,15 @@
             radioSqlite.AutoSize = true;
             radioSqlite.Location = new Point(90, 18);
             radioSqlite.Name = "radioSqlite";
-            radioSqlite.Size = new Size(55, 19);
+            radioSqlite.Size = new Size(60, 19);
             radioSqlite.TabIndex = 0;
-            radioSqlite.Text = "Sqlite";
+            radioSqlite.Text = "SQLite";
             radioSqlite.UseVisualStyleBackColor = true;
             radioSqlite.CheckedChanged += radioSqlite_CheckedChanged;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(radioPostgresql);
             groupBox1.Controls.Add(radioInMemory);
             groupBox1.Controls.Add(radioMssql);
             groupBox1.Controls.Add(radioSqlite);
@@ -178,6 +180,17 @@
             radioInMemory.Text = "InMemory";
             radioInMemory.UseVisualStyleBackColor = true;
             radioInMemory.CheckedChanged += radioInMemory_CheckedChanged;
+            // 
+            // radioPostgresql
+            // 
+            radioPostgresql.AutoSize = true;
+            radioPostgresql.Location = new Point(222, 18);
+            radioPostgresql.Name = "radioPostgresql";
+            radioPostgresql.Size = new Size(87, 19);
+            radioPostgresql.TabIndex = 3;
+            radioPostgresql.Text = "PostgreSQL";
+            radioPostgresql.UseVisualStyleBackColor = true;
+            radioPostgresql.CheckedChanged += radioPostgresql_CheckedChanged;
             // 
             // TestForm
             // 
@@ -218,5 +231,6 @@
         private Button button1;
         private TextBox textBox1;
         private Button btnDbData2Model_Add;
+        private RadioButton radioPostgresql;
     }
 }

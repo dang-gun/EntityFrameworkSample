@@ -42,10 +42,13 @@ public class DbContextDefaultInfo_Temp : DbContextDefaultInfoInterface
                         this.DBType = UseDbType.InMemory;
                         break;
                     case "sqlite":
-                        this.DBType = UseDbType.Sqlite;
+                        this.DBType = UseDbType.SQLite;
                         break;
                     case "mssql":
-                        this.DBType = UseDbType.Mssql;
+                        this.DBType = UseDbType.MSSQL;
+                        break;
+                    case "postgresql":
+                        this.DBType = UseDbType.PostgreSQL;
                         break;
 
                     case "none":

@@ -24,7 +24,7 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 	public ModelsDbContext_Sqlite(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.Sqlite;
+		GlobalDb.DBType = UseDbType.SQLite;
 
         if (string.Empty == GlobalDb.DBString)
 		{

@@ -24,7 +24,7 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.Mssql;
+		GlobalDb.DBType = UseDbType.MSSQL;
 
 		//GlobalDb.DBString가 없는경우
 		if (string.Empty == GlobalDb.DBString)

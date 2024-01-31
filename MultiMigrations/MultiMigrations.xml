@@ -50,14 +50,19 @@
             In Memory
             </summary>
         </member>
-        <member name="F:Global.DB.UseDbType.Sqlite">
+        <member name="F:Global.DB.UseDbType.SQLite">
             <summary>
-            Sqlite
+            SQLite
             </summary>
         </member>
-        <member name="F:Global.DB.UseDbType.Mssql">
+        <member name="F:Global.DB.UseDbType.MSSQL">
             <summary>
-            MS Sql
+            MS SQL
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.PostgreSQL">
+            <summary>
+            Postgre SQL
             </summary>
         </member>
         <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfoInterface">
@@ -112,6 +117,34 @@
             <param name="sPath"></param>
         </member>
         <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Mssql.DbStringLoad(System.String)">
+            <summary>
+            지정된 경로의 파일에서 MSSQL의 연결 정보를 찾아 'DBString'을 넣어준다.
+            </summary>
+            <param name="sPath"></param>
+        </member>
+        <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql">
+            <summary>
+            MSSQL DB 기본 정보
+            </summary>
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql.DBType">
+            <inheritdoc />
+        </member>
+        <member name="P:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql.DBString">
+            <inheritdoc />
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql.#ctor">
+            <summary>
+            루트에 있는 "SettingInfo_gitignore.json"파일을 읽어 DB를 초기화 한다.
+            </summary>
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql.#ctor(System.String)">
+            <summary>
+            지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다. 
+            </summary>
+            <param name="sPath"></param>
+        </member>
+        <member name="M:ModelsDB.MultiMigrations.DbContextDefaultInfo_Postgresql.DbStringLoad(System.String)">
             <summary>
             지정된 경로의 파일에서 MSSQL의 연결 정보를 찾아 'DBString'을 넣어준다.
             </summary>
@@ -248,6 +281,44 @@
             </summary>
         </member>
         <member name="M:ModelsDB.ModelsDbContext_MssqlFactory.CreateDbContext(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_Postgresql">
+             <summary>
+             mssql전용 컨텍스트
+             </summary>
+            <remarks>
+             Add-Migration InitialCreate -Context ModelsDB.ModelsDbContext_Postgresql -OutputDir Migrations/Postgresql
+             Remove-Migration -Context ModelsDB.ModelsDbContext_Postgresql
+             Update-Database -Context ModelsDbContext_Postgresql
+             Update-Database -Context ModelsDbContext_Postgresql -Migration 0
+            </remarks>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Postgresql.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ModelsDB.ModelsDbContext})">
+            <summary>
+            ef 명령을 직접 사용하면 여기로 들어와 진다.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_Postgresql.#ctor">
+            <summary>
+            GlobalDb.DBString에 설정된 정보로 컨택스트 생성
+            </summary>
+            <remarks>
+            약간의 성능이라도 높이기 위해 GlobalDb.DBString의 무결성 검사를 하지 않는다.
+            <para>이 생성자를 호출하기 전에 GlobalDb.DBString에 정확한 연결문자를 넣어야 한다.</para>
+            </remarks>
+        </member>
+        <member name="T:ModelsDB.ModelsDbContext_PostgresqlFactory">
+            <summary>
+             Postgre sql전용 컨텍스트 팩토리
+            </summary>
+        </member>
+        <member name="M:ModelsDB.ModelsDbContext_PostgresqlFactory.CreateDbContext(System.String[])">
             <summary>
             
             </summary>

@@ -42,14 +42,17 @@ public class ModelsDbContext : DbContext
 
         switch (GlobalDb.DBType)
 		{
-			case UseDbType.Sqlite:
+			case UseDbType.SQLite:
 				options.UseSqlite(GlobalDb.DBString);
 				break;
-			case UseDbType.Mssql:
+			case UseDbType.MSSQL:
                 options.UseSqlServer(GlobalDb.DBString);
                 break;
+            case UseDbType.PostgreSQL:
+                options.UseNpgsql(GlobalDb.DBString);
+                break;
 
-			case UseDbType.InMemory:
+            case UseDbType.InMemory:
 				options.UseInMemoryDatabase(GlobalDb.DBString);
 				break;
 

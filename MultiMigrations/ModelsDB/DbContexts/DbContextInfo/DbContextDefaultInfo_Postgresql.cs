@@ -5,7 +5,7 @@ namespace ModelsDB.MultiMigrations;
 /// <summary>
 /// MSSQL DB 기본 정보
 /// </summary>
-public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
+public class DbContextDefaultInfo_Postgresql : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
     public UseDbType DBType { get; set; } = UseDbType.MSSQL;
@@ -15,7 +15,7 @@ public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
     /// <summary>
     /// 루트에 있는 "SettingInfo_gitignore.json"파일을 읽어 DB를 초기화 한다.
     /// </summary>
-    public DbContextDefaultInfo_Mssql()
+    public DbContextDefaultInfo_Postgresql()
     {
         this.DbStringLoad("SettingInfo_gitignore.json");
     }
@@ -24,7 +24,7 @@ public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
     /// 지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다. 
     /// </summary>
     /// <param name="sPath"></param>
-    public DbContextDefaultInfo_Mssql(string sPath)
+    public DbContextDefaultInfo_Postgresql(string sPath)
     {
         this.DbStringLoad(sPath);
     }
@@ -35,6 +35,6 @@ public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
     /// <param name="sPath"></param>
     public void DbStringLoad(string sPath)
     {
-        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.MSSQL);
+        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.PostgreSQL);
     }
 }

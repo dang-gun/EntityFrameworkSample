@@ -16,13 +16,18 @@ public enum UseDbType
 	/// </summary>
 	InMemory,
 
-	/// <summary>
-	/// Sqlite
-	/// </summary>
-	Sqlite,
+    /// <summary>
+    /// SQLite
+    /// </summary>
+    SQLite,
 
-	/// <summary>
-	/// MS Sql
-	/// </summary>
-	Mssql,
+    /// <summary>
+    /// MS SQL
+    /// </summary>
+    MSSQL,
+
+    /// <summary>
+    /// Postgre SQL
+    /// </summary>
+    PostgreSQL,
 }

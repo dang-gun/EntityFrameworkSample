@@ -8,7 +8,7 @@ namespace ModelsDB.MultiMigrations;
 public class DbContextDefaultInfo_Sqlite : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
-    public UseDbType DBType { get; set; } = UseDbType.Sqlite;
+    public UseDbType DBType { get; set; } = UseDbType.SQLite;
     /// <inheritdoc />
     public string DBString { get; set; } = "Data Source=Test.db";
 }
