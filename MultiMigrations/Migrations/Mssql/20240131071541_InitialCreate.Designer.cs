@@ -2,38 +2,45 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModelsDB;
 
 #nullable disable
 
-namespace MultiMigrations.Migrations.Sqlite
+namespace MultiMigrations.Migrations.Mssql
 {
-    [DbContext(typeof(ModelsDbContext_Sqlite))]
-    [Migration("20240130064340_InitialCreate")]
+    [DbContext(typeof(ModelsDbContext_Mssql))]
+    [Migration("20240131071541_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.20");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "6.0.20")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("ModelsDB.Test1Model", b =>
                 {
                     b.Property<long>("idTest1Model")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("idTest1Model"), 1L, 1);
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Int")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Str")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idTest1Model");
 
@@ -43,7 +50,7 @@ namespace MultiMigrations.Migrations.Sqlite
                         new
                         {
                             idTest1Model = 1L,
-                            Date = new DateTime(2024, 1, 30, 15, 43, 40, 214, DateTimeKind.Local).AddTicks(6285),
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Int = 1,
                             Str = "Test"
                         });
@@ -53,10 +60,12 @@ namespace MultiMigrations.Migrations.Sqlite
                 {
                     b.Property<long>("idTest2Model")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("idTest2Model"), 1L, 1);
 
                     b.Property<long>("idTest1Model")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.HasKey("idTest2Model");
 

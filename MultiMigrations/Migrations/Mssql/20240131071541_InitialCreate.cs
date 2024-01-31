@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MultiMigrations.Migrations.Sqlite
+namespace MultiMigrations.Migrations.Mssql
 {
     public partial class InitialCreate : Migration
     {
@@ -13,11 +13,11 @@ namespace MultiMigrations.Migrations.Sqlite
                 name: "Test1Model",
                 columns: table => new
                 {
-                    idTest1Model = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Int = table.Column<int>(type: "INTEGER", nullable: false),
-                    Str = table.Column<string>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    idTest1Model = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Int = table.Column<int>(type: "int", nullable: false),
+                    Str = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,9 +28,9 @@ namespace MultiMigrations.Migrations.Sqlite
                 name: "Test2Model",
                 columns: table => new
                 {
-                    idTest2Model = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    idTest1Model = table.Column<long>(type: "INTEGER", nullable: false)
+                    idTest2Model = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idTest1Model = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,7 +46,7 @@ namespace MultiMigrations.Migrations.Sqlite
             migrationBuilder.InsertData(
                 table: "Test1Model",
                 columns: new[] { "idTest1Model", "Date", "Int", "Str" },
-                values: new object[] { 1L, new DateTime(2024, 1, 30, 15, 43, 40, 214, DateTimeKind.Local).AddTicks(6285), 1, "Test" });
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Test" });
 
             migrationBuilder.InsertData(
                 table: "Test2Model",

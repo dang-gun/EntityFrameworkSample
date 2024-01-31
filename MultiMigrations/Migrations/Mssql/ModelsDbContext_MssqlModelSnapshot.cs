@@ -48,7 +48,7 @@ namespace MultiMigrations.Migrations.Mssql
                         new
                         {
                             idTest1Model = 1L,
-                            Date = new DateTime(2024, 1, 31, 10, 49, 1, 706, DateTimeKind.Local).AddTicks(7250),
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Int = 1,
                             Str = "Test"
                         });

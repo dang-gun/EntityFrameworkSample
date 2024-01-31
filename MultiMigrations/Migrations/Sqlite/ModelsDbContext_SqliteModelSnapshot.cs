@@ -41,7 +41,7 @@ namespace MultiMigrations.Migrations.Sqlite
                         new
                         {
                             idTest1Model = 1L,
-                            Date = new DateTime(2024, 1, 30, 15, 43, 40, 214, DateTimeKind.Local).AddTicks(6285),
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Int = 1,
                             Str = "Test"
                         });

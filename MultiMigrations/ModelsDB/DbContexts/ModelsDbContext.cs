@@ -82,7 +82,7 @@ public class ModelsDbContext : DbContext
 			idTest1Model = 1,
 			Int = 1,
 			Str = "Test",
-			Date = DateTime.Now,
+			Date = DateTime.MinValue,
 		});
 
         //테스트2 데이터 한개 삽입

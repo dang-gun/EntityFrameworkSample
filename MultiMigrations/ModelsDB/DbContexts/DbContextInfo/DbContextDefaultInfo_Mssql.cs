@@ -30,12 +30,11 @@ public class DbContextDefaultInfo_Mssql : DbContextDefaultInfoInterface
     }
 
     /// <summary>
-    /// 지정된 경로의 파일에서 'ConnectionString_Mssql'를 찾아 'DBString'을 넣어준다.
+    /// 지정된 경로의 파일에서 MSSQL의 연결 정보를 찾아 'DBString'을 넣어준다.
     /// </summary>
     /// <param name="sPath"></param>
     public void DbStringLoad(string sPath)
     {
-        //this.DBString = GlobalDb.DbStringLoad(sPath, "ConnectionString_Mssql");
         this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.Mssql);
     }
 }

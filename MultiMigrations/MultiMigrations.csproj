@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <None Update="SettingInfo_gitignore.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
