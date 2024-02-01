@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MultiMigrations\MultiMigrations.csproj" />
   </ItemGroup>
-
+	
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>

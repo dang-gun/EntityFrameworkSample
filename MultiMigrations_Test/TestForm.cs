@@ -63,9 +63,7 @@ public partial class TestForm : Form
                     //인메모리가 살아있는지 아닌지 확인이 안되서 이렇게 처리한다.
                     Debug.WriteLine(ex.ToString());
                 }
-
-
-            }
+            }//end using db1
         }
     }
 

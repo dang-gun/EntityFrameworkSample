@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListField", "ListField\List
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForeignKeyTest", "ForeignKeyTest\ForeignKeyTest.csproj", "{9579315A-B69B-4332-9687-7ECACA8DC681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiMigrations", "MultiMigrations\MultiMigrations.csproj", "{E7BF40D6-DC62-4E35-B1B2-99209B7EAAAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMigrations", "MultiMigrations\MultiMigrations.csproj", "{E7BF40D6-DC62-4E35-B1B2-99209B7EAAAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiMigrations_Test", "MultiMigrations_Test\MultiMigrations_Test.csproj", "{CF6F302B-FA59-45C8-A139-B51CECBD0C6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMigrations_Test", "MultiMigrations_Test\MultiMigrations_Test.csproj", "{CF6F302B-FA59-45C8-A139-B51CECBD0C6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiMigrationsSample", "MultiMigrationsSample\MultiMigrationsSample.csproj", "{02CF7CDB-3774-48B9-B1E3-D4D08019F180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMigrationsSample", "MultiMigrationsSample\MultiMigrationsSample.csproj", "{02CF7CDB-3774-48B9-B1E3-D4D08019F180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
