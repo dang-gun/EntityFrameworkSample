@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace ModelsDB;
 
 /// <summary>
-/// 
+/// 공통 컨택스트
 /// </summary>
 public class ModelsDbContext : DbContext
 {

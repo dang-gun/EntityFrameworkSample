@@ -40,9 +40,9 @@
             radioMssql = new RadioButton();
             radioSqlite = new RadioButton();
             groupBox1 = new GroupBox();
+            radioMariadb = new RadioButton();
             radioPostgresql = new RadioButton();
             radioInMemory = new RadioButton();
-            radioMariadb = new RadioButton();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -170,6 +170,17 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "DB Select";
             // 
+            // radioMariadb
+            // 
+            radioMariadb.AutoSize = true;
+            radioMariadb.Location = new Point(308, 18);
+            radioMariadb.Name = "radioMariadb";
+            radioMariadb.Size = new Size(71, 19);
+            radioMariadb.TabIndex = 4;
+            radioMariadb.Text = "MariaDB";
+            radioMariadb.UseVisualStyleBackColor = true;
+            radioMariadb.CheckedChanged += radioMariadb_CheckedChanged;
+            // 
             // radioPostgresql
             // 
             radioPostgresql.AutoSize = true;
@@ -194,17 +205,6 @@
             radioInMemory.UseVisualStyleBackColor = true;
             radioInMemory.CheckedChanged += radioInMemory_CheckedChanged;
             // 
-            // radioMariadb
-            // 
-            radioMariadb.AutoSize = true;
-            radioMariadb.Location = new Point(308, 18);
-            radioMariadb.Name = "radioMariadb";
-            radioMariadb.Size = new Size(71, 19);
-            radioMariadb.TabIndex = 4;
-            radioMariadb.Text = "MariaDB";
-            radioMariadb.UseVisualStyleBackColor = true;
-            radioMariadb.CheckedChanged += radioMariadb_CheckedChanged;
-            // 
             // TestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -213,6 +213,9 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(txtDbData1Model_Log);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "TestForm";
             Text = "Form1";
             groupBox2.ResumeLayout(false);

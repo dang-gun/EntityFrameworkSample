@@ -121,7 +121,7 @@ public class DbViewController : Controller
 
             sReturn = sbTemp.ToString();
 
-        }
+        }//end using db1
 
         return sReturn;
     }

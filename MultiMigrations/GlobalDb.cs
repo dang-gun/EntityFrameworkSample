@@ -51,7 +51,6 @@ public static class GlobalDb
 
         if (true == File.Exists(sPath))
         {
-            
 
             //파일에서 찾을 내용 넣기
             string sJson = File.ReadAllText(sPath);

@@ -215,7 +215,7 @@
         </member>
         <member name="T:ModelsDB.ModelsDbContext">
             <summary>
-            
+            공통 컨택스트
             </summary>
         </member>
         <member name="M:ModelsDB.ModelsDbContext.#ctor">

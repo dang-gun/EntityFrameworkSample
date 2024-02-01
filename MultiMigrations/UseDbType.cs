@@ -6,15 +6,15 @@ namespace Global.DB;
 /// </summary>
 public enum UseDbType
 {
-	/// <summary>
-	/// 없음
-	/// </summary>
-	None = 0,
+    /// <summary>
+    /// 없음
+    /// </summary>
+    None = 0,
 
-	/// <summary>
-	/// In Memory
-	/// </summary>
-	InMemory,
+    /// <summary>
+    /// In Memory
+    /// </summary>
+    InMemory,
 
     /// <summary>
     /// SQLite

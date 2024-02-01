@@ -26,8 +26,10 @@ public class ModelsDbContext_Postgresql : ModelsDbContext
 	{
 
 
-        if (UseDbType.PostgreSQL != GlobalDb.DBType)
+        if (UseDbType.PostgreSQL != GlobalDb.DBType 
+			|| string.Empty == GlobalDb.DBString)
         {//기존 DBType과 다르다.
+			//DB 연결 문자열 정보가 없다.
 
             //DB 연결정보를 다시 불러온다.
             DbContextDefaultInfo_Postgresql newDbInfo = new DbContextDefaultInfo_Postgresql();
