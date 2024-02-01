@@ -34,5 +34,5 @@ public enum UseDbType
     /// <summary>
     /// Maria DB
     /// </summary>
-    Mariadb,
+    MariaDB,
 }

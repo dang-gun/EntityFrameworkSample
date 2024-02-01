@@ -22,5 +22,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <None Update="SettingInfo_gitignore.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

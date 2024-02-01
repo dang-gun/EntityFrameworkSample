@@ -65,7 +65,7 @@
             Postgre SQL
             </summary>
         </member>
-        <member name="F:Global.DB.UseDbType.Mariadb">
+        <member name="F:Global.DB.UseDbType.MariaDB">
             <summary>
             Maria DB
             </summary>

@@ -24,14 +24,15 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 	public ModelsDbContext_Sqlite(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.SQLite;
+        if (UseDbType.SQLite != GlobalDb.DBType)
+        {//기존 DBType과 다르다.
 
-        if (string.Empty == GlobalDb.DBString)
-		{
-			DbContextDefaultInfo_Sqlite newDbInfo = new DbContextDefaultInfo_Sqlite();
+            //DB 연결정보를 다시 불러온다.
+            DbContextDefaultInfo_Sqlite newDbInfo = new DbContextDefaultInfo_Sqlite();
 			GlobalDb.DBString = newDbInfo.DBString;
         }
-            
+
+        GlobalDb.DBType = UseDbType.SQLite;
     }
 
     /// <summary>

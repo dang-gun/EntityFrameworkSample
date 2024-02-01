@@ -22,13 +22,14 @@ Entity framework 6
 - InMomey
 
 <br />
-<br />
 
 ### 자세한 설명
 [[Entity Framework 6] 여러 종류 DB대응하기](https://blog.danggun.net/10495)
 
+<br />
+<br />
 
-## DB의 연결정보 전달
+## DB의 연결정보 전달 - 마이그레이션
 
 마이그레이션하기전에 아래와 같은 방법으로 사용할 정보를 넣어두어야 합니다.
 
@@ -43,7 +44,7 @@ Entity framework 6
 	]
 	```
 	
-	- DB 이름(UseDbType 기준) : InMemory, Sqlite, Mssql
+	- DB 이름(UseDbType 기준) : InMemory, SQLite, MSSQL, PostgreSQL, MariaDB
 	
 2) 미리 GlobalDb.DBType, GlobalDb.DBString에 정보 넣기
 	직접 'GlobalDb'에 데이터를 수정하는 방법입니다.
@@ -55,3 +56,10 @@ Entity framework 6
     'DbContextInfo'파일은 'GlobalDb.DBString'가 없을때 사용하는 데이터 입니다.
 	여기에 사용할 데이터를 미리 넣습니다.
 	
+
+### DB별 마이그레이션 방법
+패키지 관리자 콘솔을 열고 '기본 프로젝트'를 'DbContexts'를 가지고 있는 프로젝트로 지정합니다.
+(예> MultiMigrations)
+
+'솔루션 탐색기'에서 DB정보를 가지고 있는 프로젝트를 시작 프로젝트로 설정합니다.
+('SettingInfo_gitignore.json'파일이 이 프로젝트에 있다면 이 프로젝트를 지정합니다.)

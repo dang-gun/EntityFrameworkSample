@@ -11,7 +11,7 @@ using ModelsDB;
 namespace MultiMigrations.Migrations.Sqlite
 {
     [DbContext(typeof(ModelsDbContext_Sqlite))]
-    [Migration("20240131071607_InitialCreate")]
+    [Migration("20240201060611_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

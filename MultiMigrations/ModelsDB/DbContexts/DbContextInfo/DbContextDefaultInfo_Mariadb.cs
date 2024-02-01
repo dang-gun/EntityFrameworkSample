@@ -8,7 +8,7 @@ namespace ModelsDB.MultiMigrations;
 public class DbContextDefaultInfo_Mariadb : DbContextDefaultInfoInterface
 {
     /// <inheritdoc />
-    public UseDbType DBType { get; set; } = UseDbType.Mariadb;
+    public UseDbType DBType { get; set; } = UseDbType.MariaDB;
     /// <inheritdoc />
     public string DBString { get; set; } = string.Empty;
 
@@ -35,6 +35,6 @@ public class DbContextDefaultInfo_Mariadb : DbContextDefaultInfoInterface
     /// <param name="sPath"></param>
     public void DbStringLoad(string sPath)
     {
-        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.Mariadb);
+        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.MariaDB);
     }
 }

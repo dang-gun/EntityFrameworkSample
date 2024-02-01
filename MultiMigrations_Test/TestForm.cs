@@ -122,7 +122,7 @@ public partial class TestForm : Form
     {
         if (true == this.radioMariadb.Checked)
         {
-            GlobalDb.DBType = UseDbType.Mariadb;
+            GlobalDb.DBType = UseDbType.MariaDB;
 
             GlobalDb.DBString
                 = GlobalDb.DbStringLoad(

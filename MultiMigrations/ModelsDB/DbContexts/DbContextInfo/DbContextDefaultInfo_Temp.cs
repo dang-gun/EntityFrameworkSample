@@ -51,7 +51,7 @@ public class DbContextDefaultInfo_Temp : DbContextDefaultInfoInterface
                         this.DBType = UseDbType.PostgreSQL;
                         break;
                     case "mariadb":
-                        this.DBType = UseDbType.Mariadb;
+                        this.DBType = UseDbType.MariaDB;
                         break;
 
 

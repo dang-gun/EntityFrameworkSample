@@ -26,6 +26,7 @@ public class ModelsDbContext : DbContext
 	public ModelsDbContext(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
+        //Console.WriteLine($"ModelsDbContext : {GlobalDb.DBString}");
     }
 #pragma warning restore CS8618 // 생성자를 종료할 때 null을 허용하지 않는 필드에 null이 아닌 값을 포함해야 합니다. null 허용으로 선언해 보세요.
 
@@ -51,7 +52,7 @@ public class ModelsDbContext : DbContext
             case UseDbType.PostgreSQL:
                 options.UseNpgsql(GlobalDb.DBString);
                 break;
-            case UseDbType.Mariadb:
+            case UseDbType.MariaDB:
                 options.UseMySql(
                     GlobalDb.DBString
                     , new MySqlServerVersion(new Version(11, 1, 2)));

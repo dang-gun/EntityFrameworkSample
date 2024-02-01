@@ -24,15 +24,16 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.MSSQL;
+        if (UseDbType.MSSQL != GlobalDb.DBType)
+        {//기존 DBType과 다르다.
 
-		//GlobalDb.DBString가 없는경우
-		if (string.Empty == GlobalDb.DBString)
-		{
-			DbContextDefaultInfo_Mssql newDbInfo = new DbContextDefaultInfo_Mssql();
+            //DB 연결정보를 다시 불러온다.
+            DbContextDefaultInfo_Mssql newDbInfo = new DbContextDefaultInfo_Mssql();
 			GlobalDb.DBString = newDbInfo.DBString;
 		}
-	}
+
+        GlobalDb.DBType = UseDbType.MSSQL;
+    }
 
     /// <summary>
     /// GlobalDb.DBString에 설정된 정보로 컨택스트 생성
