@@ -10,8 +10,8 @@ namespace ModelsDB;
 /// mssql전용 컨텍스트
 /// </summary>
 ///<remarks>
-/// Add-Migration InitialCreate -Context ModelsDB.ModelsDbContext_Postgresql -OutputDir Migrations/Postgresql
-/// Remove-Migration -Context ModelsDB.ModelsDbContext_Postgresql
+/// Add-Migration InitialCreate -Context ModelsDbContext_Postgresql -OutputDir Migrations/Postgresql
+/// Remove-Migration -Context ModelsDbContext_Postgresql
 /// Update-Database -Context ModelsDbContext_Postgresql
 /// Update-Database -Context ModelsDbContext_Postgresql -Migration 0
 ///</remarks>

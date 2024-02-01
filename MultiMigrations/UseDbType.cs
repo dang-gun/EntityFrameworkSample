@@ -30,4 +30,9 @@ public enum UseDbType
     /// Postgre SQL
     /// </summary>
     PostgreSQL,
+
+    /// <summary>
+    /// Maria DB
+    /// </summary>
+    Mariadb,
 }

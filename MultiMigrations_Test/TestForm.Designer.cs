@@ -40,8 +40,9 @@
             radioMssql = new RadioButton();
             radioSqlite = new RadioButton();
             groupBox1 = new GroupBox();
-            radioInMemory = new RadioButton();
             radioPostgresql = new RadioButton();
+            radioInMemory = new RadioButton();
+            radioMariadb = new RadioButton();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -157,6 +158,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(radioMariadb);
             groupBox1.Controls.Add(radioPostgresql);
             groupBox1.Controls.Add(radioInMemory);
             groupBox1.Controls.Add(radioMssql);
@@ -167,6 +169,17 @@
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "DB Select";
+            // 
+            // radioPostgresql
+            // 
+            radioPostgresql.AutoSize = true;
+            radioPostgresql.Location = new Point(222, 18);
+            radioPostgresql.Name = "radioPostgresql";
+            radioPostgresql.Size = new Size(87, 19);
+            radioPostgresql.TabIndex = 3;
+            radioPostgresql.Text = "PostgreSQL";
+            radioPostgresql.UseVisualStyleBackColor = true;
+            radioPostgresql.CheckedChanged += radioPostgresql_CheckedChanged;
             // 
             // radioInMemory
             // 
@@ -181,16 +194,16 @@
             radioInMemory.UseVisualStyleBackColor = true;
             radioInMemory.CheckedChanged += radioInMemory_CheckedChanged;
             // 
-            // radioPostgresql
+            // radioMariadb
             // 
-            radioPostgresql.AutoSize = true;
-            radioPostgresql.Location = new Point(222, 18);
-            radioPostgresql.Name = "radioPostgresql";
-            radioPostgresql.Size = new Size(87, 19);
-            radioPostgresql.TabIndex = 3;
-            radioPostgresql.Text = "PostgreSQL";
-            radioPostgresql.UseVisualStyleBackColor = true;
-            radioPostgresql.CheckedChanged += radioPostgresql_CheckedChanged;
+            radioMariadb.AutoSize = true;
+            radioMariadb.Location = new Point(308, 18);
+            radioMariadb.Name = "radioMariadb";
+            radioMariadb.Size = new Size(71, 19);
+            radioMariadb.TabIndex = 4;
+            radioMariadb.Text = "MariaDB";
+            radioMariadb.UseVisualStyleBackColor = true;
+            radioMariadb.CheckedChanged += radioMariadb_CheckedChanged;
             // 
             // TestForm
             // 
@@ -232,5 +245,6 @@
         private TextBox textBox1;
         private Button btnDbData2Model_Add;
         private RadioButton radioPostgresql;
+        private RadioButton radioMariadb;
     }
 }

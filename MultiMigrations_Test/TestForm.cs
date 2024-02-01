@@ -58,13 +58,13 @@ public partial class TestForm : Form
                         });
                     db1.SaveChanges();
                 }
-                catch (Exception ex) 
-                { 
+                catch (Exception ex)
+                {
                     //인메모리가 살아있는지 아닌지 확인이 안되서 이렇게 처리한다.
                     Debug.WriteLine(ex.ToString());
                 }
 
-                
+
             }
         }
     }
@@ -114,6 +114,24 @@ public partial class TestForm : Form
                     , GlobalDb.DBType);
 
             using (ModelsDbContext_Postgresql db1 = new ModelsDbContext_Postgresql())
+            {
+                db1.Database.Migrate();
+            }
+        }
+    }
+
+    private void radioMariadb_CheckedChanged(object sender, EventArgs e)
+    {
+        if (true == this.radioMariadb.Checked)
+        {
+            GlobalDb.DBType = UseDbType.Mariadb;
+
+            GlobalDb.DBString
+                = GlobalDb.DbStringLoad(
+                    "SettingInfo_gitignore.json"
+                    , GlobalDb.DBType);
+
+            using (ModelsDbContext_Mariadb db1 = new ModelsDbContext_Mariadb())
             {
                 db1.Database.Migrate();
             }

@@ -51,6 +51,11 @@ public class ModelsDbContext : DbContext
             case UseDbType.PostgreSQL:
                 options.UseNpgsql(GlobalDb.DBString);
                 break;
+            case UseDbType.Mariadb:
+                options.UseMySql(
+                    GlobalDb.DBString
+                    , new MySqlServerVersion(new Version(11, 1, 2)));
+                break;
 
             case UseDbType.InMemory:
 				options.UseInMemoryDatabase(GlobalDb.DBString);
