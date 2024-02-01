@@ -3,9 +3,9 @@
 using Global.DB;
 using ModelsDB;
 
-namespace MultiMigrations_Test_Asp;
+namespace MultiMigrations_Test_Aspnet;
 
-public class GlobalStatic
+public static class GlobalStatic
 {
     /// <summary>
     /// DB를 선택하고 마이그레이션을 시도한다.

@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:33027",
-      "sslPort": 44379
+      "applicationUrl": "http://localhost:53736",
+      "sslPort": 44375
     }
   },
   "profiles": {
-    "MultiMigrations_Test_Asp": {
+    "MultiMigrations_Test_Aspnet": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7271;http://localhost:5188",
+      "applicationUrl": "https://localhost:7163;http://localhost:5210",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

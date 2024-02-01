@@ -1,6 +1,6 @@
 using Global.DB;
 
-namespace MultiMigrations_Test_Asp;
+namespace MultiMigrations_Test_Aspnet;
 
 public class Program
 {
@@ -10,11 +10,6 @@ public class Program
 
         #region DB 정보 불러오기
         GlobalDb.DBType = UseDbType.InMemory;
-        GlobalDb.DBString
-            = GlobalDb.DbStringLoad("SettingInfo_gitignore.json"
-                                    , GlobalDb.DBType);
-
-
         //마이그레이션 적용
         GlobalStatic.DbSelectAndMigrate();
         #endregion
