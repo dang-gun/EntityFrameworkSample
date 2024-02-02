@@ -102,7 +102,7 @@
             btnDbData1Model_Add.Name = "btnDbData1Model_Add";
             btnDbData1Model_Add.Size = new Size(151, 23);
             btnDbData1Model_Add.TabIndex = 5;
-            btnDbData1Model_Add.Text = "DbData1Model Add";
+            btnDbData1Model_Add.Text = "Test1Model Add";
             btnDbData1Model_Add.UseVisualStyleBackColor = true;
             btnDbData1Model_Add.Click += btnDbData1Model_Add_Click;
             // 
