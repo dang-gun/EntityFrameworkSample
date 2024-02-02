@@ -62,6 +62,9 @@ Entity framework 6
 ### DB별 마이그레이션 방법
 1. '패키지 관리자 콘솔'을 열고 '기본 프로젝트'를 'DbContexts'를 가지고 있는 프로젝트로 지정합니다.
 (예> MultiMigrations)
+![패키지 관리자 콘솔 설정 방법](https://raw.githubusercontent.com/dang-gun/EntityFrameworkSample/master/MultiMigrations/ProjectFiles/EfMultiMigrations_001.png "패키지 관리자 콘솔 설정 방법")
+
+
 
 1. '솔루션 탐색기'에서 DB정보를 가지고 있는 프로젝트를 시작 프로젝트로 설정합니다.
 ('SettingInfo_gitignore.json'파일이 이 프로젝트에 있다면 이 프로젝트를 지정합니다.)
