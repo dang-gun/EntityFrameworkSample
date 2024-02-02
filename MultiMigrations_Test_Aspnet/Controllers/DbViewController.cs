@@ -34,7 +34,7 @@ public class DbViewController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpPost]
-    public ActionResult<InfoCodeInterface> DbData1Model_Add()
+    public ActionResult<InfoCodeInterface> Test1Model_Add()
     {
         InfoCodeModel resultInfoCode = new InfoCodeModel(this);
 
@@ -63,7 +63,7 @@ public class DbViewController : Controller
     /// <param name="nParentIndex">대상 부모 인덱스</param>
     /// <returns></returns>
     [HttpPost]
-    public ActionResult<InfoCodeInterface> DbData2Model_Add([FromForm] int nParentIndex)
+    public ActionResult<InfoCodeInterface> Test2Model_Add([FromForm] int nParentIndex)
     {
         InfoCodeModel resultInfoCode = new InfoCodeModel(this);
 
