@@ -29,7 +29,6 @@ Entity framework 6
 [[Entity Framework 6] 여러 종류 DB대응하기](https://blog.danggun.net/10495)
 
 <br />
-<br />
 
 ## DB의 연결정보 전달 - 마이그레이션
 
@@ -106,3 +105,11 @@ using (ModelsDbContext db1 = new ModelsDbContext())
 ```
 
 _참고 : 'DbContext'는 가능한 짧게 유지하는 것이 좋습니다._
+
+
+## 주의 사항
+여러 DB의 프로바인더를 참조하고 있어서 빌드 결과물의 용량이 큽니다.
+(약 12mb)
+
+이 프로젝트를 복사하여 자신의 프로젝트에 맞게 필요없는 프로바인더는 제거하여 사용하는 것이 좋습니다.
+

@@ -1,6 +1,7 @@
 # Entity framework Multi Migrations - Test ASP.NET Core 6
 
 'MultiMigrations'프로젝트를 테스트하기위한 프로젝입니다.
+(참고 : github - [Entity framework Multi Migrations](https://github.com/dang-gun/EntityFrameworkSample/tree/master/MultiMigrations))
 
 'ASP.NET Core 6'으로 개발되었습니다.
 
