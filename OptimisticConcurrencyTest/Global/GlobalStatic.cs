@@ -6,7 +6,7 @@ using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.MultiMigrations;
 
 
-namespace Global.DB;
+namespace OptimisticConcurrency.Global;
 
 /// <summary>
 /// Static으로 선언된 적역 변수들

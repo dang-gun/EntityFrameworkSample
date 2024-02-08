@@ -4,72 +4,6 @@
         <name>MultiMigrations</name>
     </assembly>
     <members>
-        <member name="T:Global.DB.GlobalDb">
-            <summary>
-            Static으로 선언된 적역 변수들
-            </summary>
-        </member>
-        <member name="F:Global.DB.GlobalDb.DBType">
-            <summary>
-            DB 타입
-            </summary>
-        </member>
-        <member name="F:Global.DB.GlobalDb.DBString">
-            <summary>
-            DB 컨낵션 스트링 저장
-            </summary>
-        </member>
-        <member name="F:Global.DB.GlobalDb.DbArrayDiv">
-            <summary>
-            문자열로 저장된 배열(혹은 리스트)의 데이터를 구분할때 사용하는 구분자
-            </summary>
-            <remarks>
-            이 값을 중간에 바꾸면 기존의 데이터를 재대로 못읽을 수 있다.
-            </remarks>
-        </member>
-        <member name="M:Global.DB.GlobalDb.DbStringLoad(System.String,Global.DB.UseDbType)">
-            <summary>
-            지정된 파일(json)에서 지정된 이름의 DbString을 리턴한다.
-            </summary>
-            <param name="sPath"></param>
-            <param name="typeUseDb"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Global.DB.UseDbType">
-            <summary>
-            사용하는 DB 타입
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.None">
-            <summary>
-            없음
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.InMemory">
-            <summary>
-            In Memory
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.SQLite">
-            <summary>
-            SQLite
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.MSSQL">
-            <summary>
-            MS SQL
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.PostgreSQL">
-            <summary>
-            Postgre SQL
-            </summary>
-        </member>
-        <member name="F:Global.DB.UseDbType.MariaDB">
-            <summary>
-            Maria DB
-            </summary>
-        </member>
         <member name="T:ModelsDB.MultiMigrations.DbContextDefaultInfoInterface">
             <summary>
             DbContext에 입력할 기본 정보 인터페이스
@@ -243,6 +177,21 @@
         <member name="P:ModelsDB.ModelsDbContext.Test2Model">
             <summary>
             테스트2 데이터
+            </summary>
+        </member>
+        <member name="P:ModelsDB.ModelsDbContext.TestOC1">
+            <summary>
+            테스트용 테이블 - 클라이언트 관리 토큰
+            </summary>
+        </member>
+        <member name="P:ModelsDB.ModelsDbContext.TestOC2">
+            <summary>
+            테스트용 테이블 - SQL 서버 관리 토큰
+            </summary>
+        </member>
+        <member name="P:ModelsDB.ModelsDbContext.TestOC3">
+            <summary>
+            테스트용 테이블 - 관리토큰 없음
             </summary>
         </member>
         <member name="M:ModelsDB.ModelsDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -486,6 +435,146 @@
             <summary>
             외래키에 연결된 대상
             </summary>
+        </member>
+        <member name="T:ModelsDB.TestOC1">
+            <summary>
+            테스트용 테이블 - 클라이언트 관리 토큰
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC1.idTestOC1">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC1.Int">
+            <summary>
+            숫자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC1.Str">
+            <summary>
+            문자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC1.Version">
+            <summary>
+            클라이언트 관리 토큰(GUID로 생성)
+            </summary>
+        </member>
+        <member name="T:ModelsDB.TestOC2">
+            <summary>
+            테스트용 테이블 - SQL 서버 관리 토큰
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC2.idTestOC2">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC2.Int">
+            <summary>
+            숫자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC2.Str">
+            <summary>
+            문자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC2.Version">
+            <summary>
+            SQL 서버 관리 토큰
+            </summary>
+            <remarks>
+            서버에서 관리하는 토큰은 SQL서버에 따라 지원하지 않는 경우가 있다.
+            (SQLite는 지원하지 않음)
+            </remarks>
+        </member>
+        <member name="T:ModelsDB.TestOC3">
+            <summary>
+            테스트용 테이블 - 관리토큰 없음
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC3.idTestOC3">
+            <summary>
+            고유키
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC3.Int">
+            <summary>
+            숫자형
+            </summary>
+        </member>
+        <member name="P:ModelsDB.TestOC3.Str">
+            <summary>
+            문자형
+            </summary>
+        </member>
+        <member name="T:Global.DB.UseDbType">
+            <summary>
+            사용하는 DB 타입
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.None">
+            <summary>
+            없음
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.InMemory">
+            <summary>
+            In Memory
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.SQLite">
+            <summary>
+            SQLite
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.MSSQL">
+            <summary>
+            MS SQL
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.PostgreSQL">
+            <summary>
+            Postgre SQL
+            </summary>
+        </member>
+        <member name="F:Global.DB.UseDbType.MariaDB">
+            <summary>
+            Maria DB
+            </summary>
+        </member>
+        <member name="T:Global.DB.GlobalDb">
+            <summary>
+            Static으로 선언된 적역 변수들
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DBType">
+            <summary>
+            DB 타입
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DBString">
+            <summary>
+            DB 컨낵션 스트링 저장
+            </summary>
+        </member>
+        <member name="F:Global.DB.GlobalDb.DbArrayDiv">
+            <summary>
+            문자열로 저장된 배열(혹은 리스트)의 데이터를 구분할때 사용하는 구분자
+            </summary>
+            <remarks>
+            이 값을 중간에 바꾸면 기존의 데이터를 재대로 못읽을 수 있다.
+            </remarks>
+        </member>
+        <member name="M:Global.DB.GlobalDb.DbStringLoad(System.String,Global.DB.UseDbType)">
+            <summary>
+            지정된 파일(json)에서 지정된 이름의 DbString을 리턴한다.
+            </summary>
+            <param name="sPath"></param>
+            <param name="typeUseDb"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

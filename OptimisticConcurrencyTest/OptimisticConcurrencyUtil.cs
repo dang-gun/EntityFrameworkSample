@@ -124,17 +124,23 @@ public class OptimisticConcurrencyUtil
 
     #endregion
 
-    #region 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(동기)
+    #region 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(순차 처리 동기)
 
     /// <summary>
-    /// 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(동기)
+    /// 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(순차 처리 동기)
     /// </summary>
+    /// <remarks>
+    /// 전달받은 리스트의 아이템마다 DbContext를 만들어 처리한다.
+    /// <para>낙관적 동시성이 실패했을대 롤백 기준이 트랙잭션 기준이라 
+    /// DbContext를 따로 만들지 않으면 기존 처리된 것까지 모두 초기화 되는 문제가 있다.</para>
+    /// <para>그래서 아이템 별로 DbContext를 생성하여 처리한다.</para>
+    /// </remarks>
     /// <typeparam name="T"></typeparam>
     /// <param name="nMaxLoop"></param>
     /// <param name="listLeft"></param>
     /// <param name="callbackItem"></param>
     /// <param name="nDelay"></param>
-    public void SaveChanges_MultiContext<T>(
+    public void SaveChanges_Update_MultiDbContext<T>(
         int nMaxLoop
         , ref List<T> listLeft
         , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem

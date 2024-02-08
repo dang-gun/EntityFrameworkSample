@@ -61,6 +61,11 @@
             btnMultUpdate = new Button();
             groupBox7 = new GroupBox();
             btnMultUpdateFunc = new Button();
+            groupBox8 = new GroupBox();
+            label9 = new Label();
+            txtDb_TestOC2_2_Str = new TextBox();
+            txtDb_TestOC2_2_Int = new TextBox();
+            label10 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -68,6 +73,7 @@
             groupBox5.SuspendLayout();
             groupBox6.SuspendLayout();
             groupBox7.SuspendLayout();
+            groupBox8.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -190,7 +196,7 @@
             groupBox3.Controls.Add(txtDb_TestOC1_Str);
             groupBox3.Controls.Add(txtDb_TestOC1_Int);
             groupBox3.Controls.Add(label3);
-            groupBox3.Location = new Point(12, 333);
+            groupBox3.Location = new Point(12, 432);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(123, 72);
             groupBox3.TabIndex = 2;
@@ -237,7 +243,7 @@
             groupBox4.Controls.Add(txtDb_TestOC2_Str);
             groupBox4.Controls.Add(txtDb_TestOC2_Int);
             groupBox4.Controls.Add(label6);
-            groupBox4.Location = new Point(141, 333);
+            groupBox4.Location = new Point(141, 432);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(123, 72);
             groupBox4.TabIndex = 2;
@@ -284,7 +290,7 @@
             groupBox5.Controls.Add(txtDb_TestOC3_Str);
             groupBox5.Controls.Add(txtDb_TestOC3_Int);
             groupBox5.Controls.Add(label8);
-            groupBox5.Location = new Point(270, 333);
+            groupBox5.Location = new Point(270, 432);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(123, 72);
             groupBox5.TabIndex = 2;
@@ -384,7 +390,7 @@
             groupBox7.Controls.Add(btnMultUpdate);
             groupBox7.Location = new Point(194, 188);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(202, 132);
+            groupBox7.Size = new Size(202, 214);
             groupBox7.TabIndex = 7;
             groupBox7.TabStop = false;
             groupBox7.Text = "여러개 업데이트";
@@ -393,24 +399,75 @@
             // 
             btnMultUpdateFunc.Location = new Point(7, 51);
             btnMultUpdateFunc.Name = "btnMultUpdateFunc";
-            btnMultUpdateFunc.Size = new Size(189, 23);
+            btnMultUpdateFunc.Size = new Size(189, 61);
             btnMultUpdateFunc.TabIndex = 7;
-            btnMultUpdateFunc.Text = "공통화 함수 - TestOC2";
+            btnMultUpdateFunc.Text = "공통화 함수 - TestOC2\r\n각자 컨택스트 생성하여 처리함\r\n(순차 처리 동기)";
             btnMultUpdateFunc.UseVisualStyleBackColor = true;
             btnMultUpdateFunc.Click += btnMultUpdateFunc_Click;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(label9);
+            groupBox8.Controls.Add(txtDb_TestOC2_2_Str);
+            groupBox8.Controls.Add(txtDb_TestOC2_2_Int);
+            groupBox8.Controls.Add(label10);
+            groupBox8.Location = new Point(141, 510);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(123, 72);
+            groupBox8.TabIndex = 2;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "DB - TestOC2 - 2";
+            // 
+            // label9
+            // 
+            label9.Location = new Point(6, 42);
+            label9.Name = "label9";
+            label9.Size = new Size(41, 23);
+            label9.TabIndex = 4;
+            label9.Text = "Str : ";
+            label9.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // txtDb_TestOC2_2_Str
+            // 
+            txtDb_TestOC2_2_Str.Location = new Point(53, 42);
+            txtDb_TestOC2_2_Str.Name = "txtDb_TestOC2_2_Str";
+            txtDb_TestOC2_2_Str.ReadOnly = true;
+            txtDb_TestOC2_2_Str.Size = new Size(64, 23);
+            txtDb_TestOC2_2_Str.TabIndex = 4;
+            // 
+            // txtDb_TestOC2_2_Int
+            // 
+            txtDb_TestOC2_2_Int.Location = new Point(53, 19);
+            txtDb_TestOC2_2_Int.Name = "txtDb_TestOC2_2_Int";
+            txtDb_TestOC2_2_Int.ReadOnly = true;
+            txtDb_TestOC2_2_Int.Size = new Size(64, 23);
+            txtDb_TestOC2_2_Int.TabIndex = 4;
+            // 
+            // label10
+            // 
+            label10.Location = new Point(6, 19);
+            label10.Name = "label10";
+            label10.Size = new Size(41, 23);
+            label10.TabIndex = 4;
+            label10.Text = "Int : ";
+            label10.TextAlign = ContentAlignment.MiddleRight;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(407, 412);
+            ClientSize = new Size(406, 590);
             Controls.Add(groupBox7);
             Controls.Add(groupBox6);
             Controls.Add(groupBox5);
+            Controls.Add(groupBox8);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Form1";
             Text = "Form1";
             groupBox1.ResumeLayout(false);
@@ -425,6 +482,8 @@
             groupBox5.PerformLayout();
             groupBox6.ResumeLayout(false);
             groupBox7.ResumeLayout(false);
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -463,5 +522,10 @@
         private Button btnMultUpdate;
         private GroupBox groupBox7;
         private Button btnMultUpdateFunc;
+        private GroupBox groupBox8;
+        private Label label9;
+        private TextBox txtDb_TestOC2_2_Str;
+        private TextBox txtDb_TestOC2_2_Int;
+        private Label label10;
     }
 }

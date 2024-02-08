@@ -109,6 +109,14 @@ public class ModelsDbContext : DbContext
                 Int = 2,
                 Str = "str 2",
             });
+        modelBuilder.Entity<TestOC2>().HasData(
+            new TestOC2
+            {
+                idTestOC2 = 2,
+                Int = 22,
+                Str = "str 22",
+            });
+
         modelBuilder.Entity<TestOC3>().HasData(
             new TestOC3
             {

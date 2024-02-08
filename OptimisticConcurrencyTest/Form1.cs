@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 using Microsoft.EntityFrameworkCore;
 
-using Global.DB;
+using OptimisticConcurrency.Global;
 
 using EntityFrameworkSample.DB.Models;
 using EntityFrameworkSample.DB;
@@ -30,7 +30,7 @@ public partial class Form1 : Form
 
 
         //sqlite를 기본으로 사용한다.
-        this.btnSqlite_Use_Click(null, null);
+        this.btnMssql_Use_Click(null, null);
     }
 
     #region MSSQL
@@ -39,10 +39,10 @@ public partial class Form1 : Form
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void btnMssql_Use_Click(object sender, EventArgs e)
+    private void btnMssql_Use_Click(object? sender, EventArgs? e)
     {
         GlobalDb.DBType = UseDbType.MSSQL;
-        GlobalDb.DBString = txtMssql_ConnectStriong.Text;
+        GlobalDb.DBString = this.txtMssql_ConnectStriong.Text;
 
         this.DbSetting();
 
@@ -112,6 +112,7 @@ public partial class Form1 : Form
     /// </summary>
     /// <remarks>
     /// 애플리케이션 관리 동시성 토큰
+    /// <para>애플리케이션이 직접 동시성 토큰을 갱신하여 처리한다.</para>
     /// https://learn.microsoft.com/ko-kr/ef/core/saving/concurrency?tabs=data-annotations#application-managed-concurrency-tokens
     /// </remarks>
     /// <param name="idTestOC1"></param>
@@ -186,6 +187,9 @@ public partial class Form1 : Form
     /// <summary>
     /// 동시성 서버
     /// </summary>
+    /// <remarks>
+    /// 동시성 토큰을 DB에서 관리한다.
+    /// </remarks>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void btnServerConcurrency_Click(object sender, EventArgs e)
@@ -269,12 +273,16 @@ public partial class Form1 : Form
     /// <summary>
     /// 동시성 서버
     /// </summary>
+    /// <remarks>
+    /// 동시성 토큰을 DB에서 관리한다.
+    /// <para>다른 곳에 이식이 편하도록 함수화 된 코드를 호출한다.</para>
+    /// </remarks>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void btnServerConcurrency2_Click(object sender, EventArgs e)
     {
-        this.DB_Update_ServerConcurrency2(1, 3000, "첫번째");
-        this.DB_Update_ServerConcurrency2(1, 0, "두번째");
+        this.DB_Update_ServerConcurrency_Func(1, 3000, "첫번째");
+        this.DB_Update_ServerConcurrency_Func(1, 0, "두번째");
     }
 
     /// <summary>
@@ -286,7 +294,7 @@ public partial class Form1 : Form
     /// <param name="idTestOC2"></param>
     /// <param name="nDelay"></param>
     /// <param name="sStr"></param>
-    private void DB_Update_ServerConcurrency2(
+    private void DB_Update_ServerConcurrency_Func(
         int idTestOC2
         , int nDelay
         , string sStr)
@@ -380,12 +388,16 @@ public partial class Form1 : Form
     #region 여러개 업데이트 : 구현 테스트 - TestOC2
     private void btnMultUpdate_Click(object sender, EventArgs e)
     {
-        this.DB_Update_ServerConcurrency3<TestOC2>(3000, "첫번째");
+        this.DB_Update_MultiServerConcurrency_Test(3000, "첫번째");
         this.DB_Update_ServerConcurrency(1, 0, "두번째");
     }
 
-
-    private void DB_Update_ServerConcurrency3<T>(
+    /// <summary>
+    /// 여러 개체를 찾아 업데이트 한다.
+    /// </summary>
+    /// <param name="nDelay"></param>
+    /// <param name="sStr"></param>
+    private void DB_Update_MultiServerConcurrency_Test(
         int nDelay
         , string sStr)
     {
@@ -479,7 +491,7 @@ public partial class Form1 : Form
     #endregion
 
 
-    #region 여러개 업데이트 : 공통화 함수 - TestOC2
+    #region 여러개 업데이트 : 각자 컨택스트 생성하여 처리함(순차 처리 동기) - TestOC2
     private void btnMultUpdateFunc_Click(object sender, EventArgs e)
     {
         this.DB_Update_ServerMultiConcurrency(3000, "첫번째");
@@ -491,9 +503,10 @@ public partial class Form1 : Form
 
     /// <summary>
     /// 동시성 여러개 업데이트 함수화
+    /// <para>각자 컨택스트 생성하여 처리함(순차 처리 동기)</para>
     /// </summary>
     /// <remarks>
-    /// 동시성 처리용 함수를 만들어 처리
+    /// 동시성 처리용 함수를 만들어 처리한다.
     /// </remarks>
     /// <param name="nDelay"></param>
     /// <param name="sStr"></param>
@@ -513,9 +526,8 @@ public partial class Form1 : Form
 
                 if (null != findTarget)
                 {
-                    GlobalStatic.OC_Util.SaveChanges_MultiUpdateConcurrency<TestOC2>(
-                        db1
-                        , -1
+                    GlobalStatic.OC_Util.SaveChanges_Update_MultiDbContext<TestOC2>(
+                        -1
                         , ref findTarget
                         , (TestOC2 item) =>
                         {//각 아이템에 대한 동작
@@ -535,17 +547,22 @@ public partial class Form1 : Form
     }
     #endregion
 
+    /// <summary>
+    /// 화면에 데이터를 표시한다.
+    /// </summary>
     private void ReloadDB()
     {
 
         TestOC1? findOC1 = null;
         TestOC2? findOC2 = null;
+        TestOC2? findOC2_2 = null;
         TestOC3? findOC3 = null;
 
         using (ModelsDbContext db1 = new ModelsDbContext())
         {
             findOC1 = db1.TestOC1.Where(w => w.idTestOC1 == 1).FirstOrDefault();
             findOC2 = db1.TestOC2.Where(w => w.idTestOC2 == 1).FirstOrDefault();
+            findOC2_2 = db1.TestOC2.Where(w => w.idTestOC2 == 2).FirstOrDefault();
             findOC3 = db1.TestOC3.Where(w => w.idTestOC3 == 1).FirstOrDefault();
         }
 
@@ -554,16 +571,20 @@ public partial class Form1 : Form
             this.Invoke(new Action(
                 delegate ()
                 {
-                    this.ViewUi(findOC1, findOC2, findOC3);
+                    this.ViewUi(findOC1, findOC2, findOC2_2, findOC3);
                 }));
         }
         else
         {//같은 쓰래드다.
-            this.ViewUi(findOC1, findOC2, findOC3);
+            this.ViewUi(findOC1, findOC2, findOC2_2, findOC3);
         }
     }
 
-    private void ViewUi(TestOC1? findOC1, TestOC2? findOC2, TestOC3? findOC3)
+    private void ViewUi(
+        TestOC1? findOC1
+        , TestOC2? findOC2
+        , TestOC2? findOC2_2
+        , TestOC3? findOC3)
     {
         if (null != findOC1)
         {
@@ -575,6 +596,12 @@ public partial class Form1 : Form
         {
             this.txtDb_TestOC2_Int.Text = findOC2.Int.ToString();
             this.txtDb_TestOC2_Str.Text = findOC2.Str;
+        }
+
+        if (null != findOC2_2)
+        {
+            this.txtDb_TestOC2_2_Int.Text = findOC2_2.Int.ToString();
+            this.txtDb_TestOC2_2_Str.Text = findOC2_2.Str;
         }
 
         if (null != findOC3)
