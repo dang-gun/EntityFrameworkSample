@@ -77,6 +77,22 @@ public class ModelsDbContext : DbContext
     /// </summary>
     public DbSet<Test2Model> Test2Model { get; set; }
 
+    #region 낙관적 동시성 테스트용 테이블(OptimisticConcurrency test table)
+    /// <summary>
+    /// 테스트용 테이블 - 클라이언트 관리 토큰
+    /// </summary>
+    public DbSet<TestOC1> TestOC1 { get; set; }
+    /// <summary>
+    /// 테스트용 테이블 - SQL 서버 관리 토큰
+    /// </summary>
+
+    public DbSet<TestOC2> TestOC2 { get; set; }
+    /// <summary>
+    /// 테스트용 테이블 - 관리토큰 없음
+    /// </summary>
+    public DbSet<TestOC3> TestOC3 { get; set; }
+    #endregion
+
 
     /// <summary>
     /// 데이터 넣기 동작
@@ -101,5 +117,30 @@ public class ModelsDbContext : DbContext
             idTest2Model = 1,
             idTest1Model = 1,
         });
+
+        #region 낙관적 동시성 테스트 데이터(OptimisticConcurrency test data)
+        modelBuilder.Entity<TestOC1>().HasData(
+            new TestOC1
+            {
+                idTestOC1 = 1,
+                Int = 1,
+                Str = "str 1",
+            });
+
+        modelBuilder.Entity<TestOC2>().HasData(
+            new TestOC2
+            {
+                idTestOC2 = 1,
+                Int = 2,
+                Str = "str 2",
+            });
+        modelBuilder.Entity<TestOC3>().HasData(
+            new TestOC3
+            {
+                idTestOC3 = 1,
+                Int = 3,
+                Str = "str 3",
+            });
+        #endregion
     }
 }
