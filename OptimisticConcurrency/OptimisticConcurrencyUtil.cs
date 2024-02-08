@@ -1,22 +1,18 @@
-﻿using Global.DB;
+﻿using System.Diagnostics;
+using System.Text;
+using EntityFrameworkSample.DB.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using ModelsDB;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
 
 
-namespace EfAnalyze.OptimisticConcurrency;
 
 
-/// <summary>
-/// 낙관적 동시성 공통 처리용
-/// <para>GlobalDb_OptimisticConcurrency</para>
-/// </summary>
-public static class GlobalDb_OC
+
+namespace EfTestModel;
+
+
+
+public class OptimisticConcurrencyUtil
 {
     /// <summary>
     /// 낙관적 동시성 - 여러줄 업데이트시 개체별 콜백함수
@@ -39,7 +35,7 @@ public static class GlobalDb_OC
     /// <param name="nMaxLoop">최대 반복수. 마이너스 값이면 무한반복한다.</param>
     /// <param name="callback">반복해서 동작시킬 실행식.</param>
     /// <returns>업데이트 성공 여부</returns>
-    public static bool SaveChanges_UpdateConcurrency(
+    public bool SaveChanges_UpdateConcurrency(
         ModelsDbContext db1
         , int nMaxLoop
         , Func<bool> callback)
@@ -87,7 +83,7 @@ public static class GlobalDb_OC
     /// </remarks>
     /// <param name="db1"></param>
     /// <returns></returns>
-    public static bool SaveChanges_UpdateConcurrencyCheck(ModelsDbContext db1)
+    public bool SaveChanges_UpdateConcurrencyCheck(ModelsDbContext db1)
     {
         bool bReturn = false;
 
@@ -115,14 +111,11 @@ public static class GlobalDb_OC
 
             StringBuilder sb = new StringBuilder();
             sb.Append($"SaveChanges_UpdateConcurrencyCheck Exception : \n");
-            
             TestOC2? tempItem = dataFail.Entity as TestOC2;
-            
             if(null != tempItem)
             {
                 sb.Append($"    {tempItem.idTestOC2}: {tempItem.Int}, {tempItem.Str}\n");
             }
-            
             Debug.WriteLine(sb.ToString());
         }
 
@@ -141,7 +134,7 @@ public static class GlobalDb_OC
     /// <param name="listLeft"></param>
     /// <param name="callbackItem"></param>
     /// <param name="nDelay"></param>
-    public static void SaveChanges_MultiContext<T>(
+    public void SaveChanges_MultiContext<T>(
         int nMaxLoop
         , ref List<T> listLeft
         , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem
@@ -187,7 +180,7 @@ public static class GlobalDb_OC
     /// <param name="tItem">주적중인 아이템 개체</param>
     /// <param name="nDelay">저장전 대기시간</param>
     /// <returns>업데이트 성공 여부</returns>
-    public static bool SaveChanges_UpdateConcurrency<T>(
+    public bool SaveChanges_UpdateConcurrency<T>(
         ModelsDbContext db1
         , int nMaxLoop
         , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem
@@ -232,7 +225,7 @@ public static class GlobalDb_OC
 
     #endregion
 
-    #region 낙관적 동시성 여러줄 처리
+    #region 낙관적 동시성 여러줄 처리 - 테스트 중
     /// <summary>
     /// 낙관적 동시성 여러행 적용
     /// </summary>
@@ -252,7 +245,7 @@ public static class GlobalDb_OC
     /// <param name="callbackItem">저장이 실패한 아이템을 반복해서 동작시킬 실행식.</param>
     /// <param name="nDelay">저장전 대기시간</param>
     /// <returns>업데이트 성공 여부</returns>
-    public static bool SaveChanges_MultiUpdateConcurrency<T>(
+    public bool SaveChanges_MultiUpdateConcurrency<T>(
         ModelsDbContext db1
         , int nMaxLoop
         , ref List<T> listLeft
@@ -341,7 +334,7 @@ public static class GlobalDb_OC
     /// <param name="db1"></param>
     /// <param name="listLeft">기준이 되는 리스트</param>
     /// <returns>성공하면 -1, 실패한 개체의 리스트상 인덱스</returns>
-    public static int SaveChanges_MultiUpdateConcurrencyCheck<T>(
+    public int SaveChanges_MultiUpdateConcurrencyCheck<T>(
         ModelsDbContext db1
         , ref List<T> listLeft)
     {
@@ -353,8 +346,11 @@ public static class GlobalDb_OC
             sb.Append($"SaveChanges : {listLeft.Count}, \n");
             foreach (T tData in listLeft)
             {
-                TestOC2 tempItem = tData as TestOC2;
-                sb.Append($"    {tempItem.Str}\n");
+                TestOC2? tempItem = tData as TestOC2;
+                if(null != tempItem)
+                {
+                    sb.Append($"    {tempItem.Str}\n");
+                }
             }
             Debug.WriteLine(sb.ToString());
             db1.SaveChanges();
@@ -382,11 +378,14 @@ public static class GlobalDb_OC
                 List<T> Temp = listLeft.Take(bReturn).ToList();
                 foreach (T item in Temp)
                 {
-                    var entry = db1.Entry(item);
-
-                    if (entry.State != EntityState.Detached)
+                    if(null !=  item)
                     {
-                        entry.State = EntityState.Detached;
+                        var entry = db1.Entry(item);
+
+                        if (entry.State != EntityState.Detached)
+                        {
+                            entry.State = EntityState.Detached;
+                        }
                     }
                 }
 
@@ -402,6 +401,4 @@ public static class GlobalDb_OC
     }
 
     #endregion
-
-
 }
