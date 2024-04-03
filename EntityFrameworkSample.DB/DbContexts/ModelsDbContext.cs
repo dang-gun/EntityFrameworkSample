@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using EntityFrameworkSample.DB;
+using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
 
 namespace EntityFrameworkSample.DB.Models;
 
@@ -86,6 +87,34 @@ public class ModelsDbContext : DbContext
     public DbSet<TestOC3> TestOC3 { get; set; }
     #endregion
 
+    #region ForeignKeySpeedTest
+    /// <summary>
+    /// FK 속도 테스트1 블로그
+    /// </summary>
+    public DbSet<ForeignKeyTest1_Blog> ForeignKeyTest1_Blog { get; set; }
+    /// <summary>
+    /// FK 속도 테스트1 포스트
+    /// </summary>
+    public DbSet<ForeignKeyTest1_Post> ForeignKeyTest1_Post { get; set; }
+
+    /// <summary>
+    /// FK 속도 테스트2 블로그
+    /// </summary>
+    public DbSet<ForeignKeyTest2_Blog> ForeignKeyTest2_Blog { get; set; }
+    /// <summary>
+    /// FK 속도 테스트2 포스트
+    /// </summary>
+    public DbSet<ForeignKeyTest2_Post> ForeignKeyTest2_Post { get; set; }
+
+    /// <summary>
+    /// FK 속도 테스트3 블로그
+    /// </summary>
+    public DbSet<ForeignKeyTest3_Blog> ForeignKeyTest3_Blog { get; set; }
+    /// <summary>
+    /// FK 속도 테스트3 포스트
+    /// </summary>
+    public DbSet<ForeignKeyTest3_Post> ForeignKeyTest3_Post { get; set; }
+    #endregion
 
     /// <summary>
     /// 데이터 넣기 동작
