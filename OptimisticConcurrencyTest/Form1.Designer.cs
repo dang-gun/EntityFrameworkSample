@@ -66,6 +66,7 @@
             txtDb_TestOC2_2_Str = new TextBox();
             txtDb_TestOC2_2_Int = new TextBox();
             label10 = new Label();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -119,11 +120,13 @@
             // radioMssqlUse
             // 
             radioMssqlUse.AutoSize = true;
+            radioMssqlUse.Checked = true;
             radioMssqlUse.Enabled = false;
             radioMssqlUse.Location = new Point(6, 22);
             radioMssqlUse.Name = "radioMssqlUse";
             radioMssqlUse.Size = new Size(44, 19);
             radioMssqlUse.TabIndex = 0;
+            radioMssqlUse.TabStop = true;
             radioMssqlUse.Text = "Use";
             radioMssqlUse.UseVisualStyleBackColor = true;
             // 
@@ -170,19 +173,17 @@
             // radioSqliteUse
             // 
             radioSqliteUse.AutoSize = true;
-            radioSqliteUse.Checked = true;
             radioSqliteUse.Enabled = false;
             radioSqliteUse.Location = new Point(6, 22);
             radioSqliteUse.Name = "radioSqliteUse";
             radioSqliteUse.Size = new Size(44, 19);
             radioSqliteUse.TabIndex = 1;
-            radioSqliteUse.TabStop = true;
             radioSqliteUse.Text = "Use";
             radioSqliteUse.UseVisualStyleBackColor = true;
             // 
             // btnNotConcurrency
             // 
-            btnNotConcurrency.Location = new Point(6, 109);
+            btnNotConcurrency.Location = new Point(6, 172);
             btnNotConcurrency.Name = "btnNotConcurrency";
             btnNotConcurrency.Size = new Size(154, 23);
             btnNotConcurrency.TabIndex = 1;
@@ -359,14 +360,14 @@
             groupBox6.Controls.Add(btnServerConcurrency);
             groupBox6.Location = new Point(12, 188);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(173, 139);
+            groupBox6.Size = new Size(173, 214);
             groupBox6.TabIndex = 5;
             groupBox6.TabStop = false;
             groupBox6.Text = "동시성 처리 방식";
             // 
             // btnServerConcurrency2
             // 
-            btnServerConcurrency2.Location = new Point(6, 80);
+            btnServerConcurrency2.Location = new Point(6, 143);
             btnServerConcurrency2.Name = "btnServerConcurrency2";
             btnServerConcurrency2.Size = new Size(154, 23);
             btnServerConcurrency2.TabIndex = 6;
@@ -386,6 +387,7 @@
             // 
             // groupBox7
             // 
+            groupBox7.Controls.Add(button1);
             groupBox7.Controls.Add(btnMultUpdateFunc);
             groupBox7.Controls.Add(btnMultUpdate);
             groupBox7.Location = new Point(194, 188);
@@ -451,6 +453,15 @@
             label10.TabIndex = 4;
             label10.Text = "Int : ";
             label10.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(7, 118);
+            button1.Name = "button1";
+            button1.Size = new Size(189, 66);
+            button1.TabIndex = 8;
+            button1.Text = "공통화 함수 - TestOC2\r\n각자 컨택스트를 생성하여 처리\r\n저장 실패 리스트를 뒤로 보냄";
+            button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -527,5 +538,6 @@
         private TextBox txtDb_TestOC2_2_Str;
         private TextBox txtDb_TestOC2_2_Int;
         private Label label10;
+        private Button button1;
     }
 }

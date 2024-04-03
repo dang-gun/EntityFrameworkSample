@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using EntityFrameworkSample.DB.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
+using EntityFrameworkSample.DB.Models;
 
-
-
+using OptimisticConcurrency.Global;
 
 namespace EfTestModel;
 
@@ -67,64 +67,18 @@ public class OptimisticConcurrencyUtil
                 break;
             }
 
-            bSaveSuccess = SaveChanges_UpdateConcurrencyCheck(db1);
+            bSaveSuccess = SaveChanges_UpdateConcurrencyCheck_Reload(db1);
         }//end while (false == bSaveSuccess)
 
 
         return bSaveSuccess;
     }
 
-    /// <summary>
-    /// 낙관적 동시성 저장 시도
-    /// </summary>
-    /// <remarks>
-    /// 낙관적 동시성 체크가 성공면 저장하고 true가 리턴되고
-    /// 실패하면 false가 리턴된다.
-    /// </remarks>
-    /// <param name="db1"></param>
-    /// <returns></returns>
-    public bool SaveChanges_UpdateConcurrencyCheck(ModelsDbContext db1)
-    {
-        bool bReturn = false;
-
-        try
-        {
-            db1.SaveChanges();
-            bReturn = true;
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            // Update the values of the entity that failed to save from the store
-            // 수정하려던 요소를 다시 로드 한다.
-            // 수정하려던 값이 초기화 되므로 넣으려는 값을 다시 계산해야 한다.
-            //ex.Entries.Single().Reload();
-
-            //수정하려다 실패한 개체
-            //DbUpdateConcurrencyException는 실패한 첫 개체를 준다.
-            EntityEntry dataFail = ex.Entries.Single();
-            // 수정하려던 요소를 다시 로드 한다.
-            // 수정하려던 값이 초기화 되므로 넣으려는 값을 다시 계산해야 한다.
-            dataFail.Reload();
-
-
-            //에러난 개체를 찾는다.
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"SaveChanges_UpdateConcurrencyCheck Exception : \n");
-            TestOC2? tempItem = dataFail.Entity as TestOC2;
-            if(null != tempItem)
-            {
-                sb.Append($"    {tempItem.idTestOC2}: {tempItem.Int}, {tempItem.Str}\n");
-            }
-            Debug.WriteLine(sb.ToString());
-        }
-
-        return bReturn;
-    }
+    
 
     #endregion
 
-    #region 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(순차 처리 동기)
+    #region 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(순차 처리 - 동기)
 
     /// <summary>
     /// 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(순차 처리 동기)
@@ -134,6 +88,9 @@ public class OptimisticConcurrencyUtil
     /// <para>낙관적 동시성이 실패했을대 롤백 기준이 트랙잭션 기준이라 
     /// DbContext를 따로 만들지 않으면 기존 처리된 것까지 모두 초기화 되는 문제가 있다.</para>
     /// <para>그래서 아이템 별로 DbContext를 생성하여 처리한다.</para>
+    /// <para>비동기로 처리해도 트랜젝션은 한개라 전체가 롤백된다.<br />
+    /// 동기로 처리하면 각 컨택스트가 별도의 트랙젝션 처리가 되어 하나씩 처리된다.<br />
+    /// </para>
     /// </remarks>
     /// <typeparam name="T"></typeparam>
     /// <param name="nMaxLoop"></param>
@@ -150,14 +107,6 @@ public class OptimisticConcurrencyUtil
         for (int i = 0; i < listLeft.Count; ++i)
         {
             T item = listLeft[i];
-
-            //비동기로 처리해도 트랜젝션은 한개라 전체가 롤백된다.
-            //동기로 처리하면 각 컨택스트가 별도의 트랙젝션 처리가 되어 하나씩 처리된다.
-            //비동기 처리
-            //Task.Run(() => 
-            //{
-
-            //});
 
             using (ModelsDbContext db1 = new ModelsDbContext())
             {
@@ -222,12 +171,92 @@ public class OptimisticConcurrencyUtil
 
 
             Thread.Sleep(nDelay);
-            bSaveSuccess = SaveChanges_UpdateConcurrencyCheck(db1);
+            bSaveSuccess = SaveChanges_UpdateConcurrencyCheck_Reload(db1);
         }//end while (false == bSaveSuccess)
 
 
         return bSaveSuccess;
     }
+
+    #endregion
+
+    #region 낙관적 동시성 여러줄 처리 - 각자 컨택스트 생성하여 처리함(실패 따로 처리 - 동기)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="nMaxLoop"></param>
+    /// <param name="listLeft"></param>
+    /// <param name="callbackItem"></param>
+    /// <param name="nDelay"></param>
+    public void SaveChanges_Update_MultiDbContext_FailWait<T>(
+        int nMaxLoop
+        , ref List<T> listLeft
+        , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem
+        , int nDelay)
+    {
+
+        List<T> listTarget = listLeft;
+        List<T> listFailWait;
+
+        //첫 체크가 끝났는지 여부
+        //첫 체크는 데이터를 로드할 필요가 없다. 
+        bool bFirstCheckEnd = false;
+
+        //각 개체가 저장되었는지 여부
+        bool bOC_Temp = false;
+
+        Queue<T> qTarget = new Queue<T>(listLeft);
+        
+
+        do
+        {
+            listFailWait = listTarget;
+
+            for (int i = 0; i < listFailWait.Count; ++i)
+            {
+                T item = listLeft[i];
+
+
+                using (ModelsDbContext db1 = new ModelsDbContext())
+                {
+                    if (false == bFirstCheckEnd)
+                    {//첫 체크가 끝났다.
+
+                        //검색된 내용을 다시 검색한다.
+                        db1.Update(item!);
+                    }
+
+                    //동작 재실행
+                    bool bCallReturn = callbackItem(item);
+
+                    //낙관적 동시성 저장 시도
+                    bOC_Temp = this.SaveChanges_UpdateConcurrencyCheck_NotLoad(db1);
+                    if (true == bOC_Temp)
+                    {//저장 성공
+
+                        //리스트에서 
+                        listTarget.Remove(item);
+                    }
+                }
+
+                //첫 체크를 완료했는지 여부를 체크
+                bFirstCheckEnd = true;
+            }
+        } while (0 == listTarget.Count());
+
+    }
+
+    //public bool SaveChanges_Update_MultiDbContext_FailWait_OneItem<T>(
+    //    ModelsDbContext db1
+    //    , int nMaxLoop
+    //    , MultiUpdateConcurrencyItemFuncDelegate<T> callbackItem
+    //    , T tItem
+    //    , int nDelay)
+    //{
+
+    //}
 
     #endregion
 
@@ -407,4 +436,71 @@ public class OptimisticConcurrencyUtil
     }
 
     #endregion
+
+
+    /// <summary>
+    /// 낙관적 동시성 저장 시도(실패시 동작 없음)
+    /// </summary>
+    /// <remarks>
+    /// 낙관적 동시성 체크가 성공면 저장하고 true가 리턴되고
+    /// 실패하면 false가 리턴된다.
+    /// </remarks>
+    /// <param name="db1"></param>
+    /// <returns></returns>
+    public bool SaveChanges_UpdateConcurrencyCheck_NotLoad(ModelsDbContext db1)
+    {
+        bool bReturn = false;
+
+        try
+        {
+            db1.SaveChanges();
+            bReturn = true;
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {//개체가 변경되어 저장이 실패함
+            GlobalStatic.Log(ex);
+        }
+
+        return bReturn;
+    }
+
+    /// <summary>
+    /// 낙관적 동시성 저장 시도(실패시 다시 불러옴)
+    /// </summary>
+    /// <remarks>
+    /// 낙관적 동시성 체크가 성공면 저장하고 true가 리턴되고
+    /// 실패하면 false가 리턴된다.
+    /// <para>실패시 실패한 대상을 다시 로드한다.<br /> 
+    /// 테스트를 해보면 컨택스트 자체가 롤백되는 것으로 보인다.(확인 필요)</para>
+    /// </remarks>
+    /// <param name="db1"></param>
+    /// <returns></returns>
+    public bool SaveChanges_UpdateConcurrencyCheck_Reload(ModelsDbContext db1)
+    {
+        bool bReturn = false;
+
+        try
+        {
+            db1.SaveChanges();
+            bReturn = true;
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Update the values of the entity that failed to save from the store
+            // 수정하려던 요소를 다시 로드 한다.
+            // 수정하려던 값이 초기화 되므로 넣으려는 값을 다시 계산해야 한다.
+            //ex.Entries.Single().Reload();
+
+            //수정하려다 실패한 개체
+            //DbUpdateConcurrencyException는 실패한 첫 개체를 준다.
+            EntityEntry dataFail = ex.Entries.Single();
+            // 수정하려던 요소를 다시 로드 한다.
+            // 수정하려던 값이 초기화 되므로 넣으려는 값을 다시 계산해야 한다.
+            dataFail.Reload();
+
+            GlobalStatic.Log(ex);
+        }
+
+        return bReturn;
+    }
 }
