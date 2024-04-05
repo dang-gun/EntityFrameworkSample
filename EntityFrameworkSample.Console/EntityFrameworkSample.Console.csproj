@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.20">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.34.0" />
+		<PackageReference Include="System.Console" Version="4.3.1" />
+		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFrameworkSample.DB\EntityFrameworkSample.DB.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="DGU_ConsoleAssist">
+			<HintPath>..\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+</Project>
