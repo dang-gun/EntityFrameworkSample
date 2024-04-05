@@ -71,8 +71,8 @@ internal class Program
                     foreach (AutoIncreases_Test2 item in listTest2)
                     {
                         Console.WriteLine($"자식2 : ${item.idAutoIncreases_Test1}(Parent)"
-                            + ", ${item.idAutoIncreases_Test2}(id)"
-                            + ", ${item.Name}(Name)");
+                            + $", ${item.idAutoIncreases_Test2}(id)"
+                            + $", ${item.Name}(Name)");
                     }
 
                     //소속된 자식3 추출
@@ -81,8 +81,8 @@ internal class Program
                     foreach (AutoIncreases_Test3 item in listTest3)
                     {
                         Console.WriteLine($"자식3 : ${item.idAutoIncreases_Test1}(Parent)"
-                            + ", ${item.idAutoIncreases_Test3}(id)"
-                            + ", ${item.Name}(Name)");
+                            + $", ${item.idAutoIncreases_Test3}(id)"
+                            + $", ${item.Name}(Name)");
                     }
                 }
 
@@ -111,8 +111,8 @@ internal class Program
                     foreach (AutoIncreases_Test2 item in listTest2)
                     {
                         Console.WriteLine($"자식2 : ${item.idAutoIncreases_Test1}(Parent)"
-                            + ", ${item.idAutoIncreases_Test2}(id)"
-                            + ", ${item.Name}(Name)");
+                            + $", ${item.idAutoIncreases_Test2}(id)"
+                            + $", ${item.Name}(Name)");
                     }
 
                     //소속된 자식3 추출
@@ -122,8 +122,8 @@ internal class Program
                     foreach (AutoIncreases_Test3 item in listTest3)
                     {
                         Console.WriteLine($"자식3 : ${item.idAutoIncreases_Test1}(Parent)"
-                            + ", ${item.idAutoIncreases_Test3}(id)"
-                            + ", ${item.Name}(Name)");
+                            + $", ${item.idAutoIncreases_Test3}(id)"
+                            + $", ${item.Name}(Name)");
                     }
                 }
 
