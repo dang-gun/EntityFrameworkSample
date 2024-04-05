@@ -10,44 +10,86 @@ namespace EntityFrameworkSample.Console;
 
 public class DbConsole
 {
-    public void DbSelectConsole()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="tyepsUseDb">화면에 표시할 DB를 비트 플래그로 넣어준다..</param>
+    public void DbSelectConsole(UseDbType tyepsUseDb)
     {
         ConsoleMenuAssist newCA = new ConsoleMenuAssist();
 
         //새로 메뉴 작성
         newCA = new ConsoleMenuAssist();
 
-        //DB 세팅
-        newCA.MenuList.Add(new MenuModel()
+        if (tyepsUseDb.HasFlag(UseDbType.InMemory))
         {
-            Index = 1,
-            TextFormat = "{0}. Sqlite",
-            Action = (MenuModel menuThis) =>
+            newCA.MenuList.Add(new MenuModel()
             {
-                GlobalDb.DBType = UseDbType.SQLite;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
+                Index = 0,
+                TextFormat = "{0}. Memory DB",
+                Action = (MenuModel menuThis) =>
+                {
+                    GlobalDb.DBType = UseDbType.InMemory;
+                    return false;
+                }
+            });
+        }
+
+        if (tyepsUseDb.HasFlag(UseDbType.SQLite))
         {
-            Index = 2,
-            TextFormat = "{0}. MSSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
-            Action = (MenuModel menuThis) =>
+            newCA.MenuList.Add(new MenuModel()
             {
-                GlobalDb.DBType = UseDbType.MSSQL;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
+                Index = 1,
+                TextFormat = "{0}. SQLite",
+                Action = (MenuModel menuThis) =>
+                {
+                    GlobalDb.DBType = UseDbType.SQLite;
+                    return false;
+                }
+            });
+        }
+
+        if (tyepsUseDb.HasFlag(UseDbType.MSSQL))
         {
-            Index = 3,
-            TextFormat = "{0}. Memory DB",
-            Action = (MenuModel menuThis) =>
+            newCA.MenuList.Add(new MenuModel()
             {
-                GlobalDb.DBType = UseDbType.InMemory;
-                return false;
-            }
-        });
+                Index = 2,
+                TextFormat = "{0}. MSSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
+                Action = (MenuModel menuThis) =>
+                {
+                    GlobalDb.DBType = UseDbType.MSSQL;
+                    return false;
+                }
+            });
+        }
+
+        if (tyepsUseDb.HasFlag(UseDbType.PostgreSQL))
+        {
+            newCA.MenuList.Add(new MenuModel()
+            {
+                Index = 3,
+                TextFormat = "{0}. PostgreSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
+                Action = (MenuModel menuThis) =>
+                {
+                    GlobalDb.DBType = UseDbType.PostgreSQL;
+                    return false;
+                }
+            });
+        }
+
+        if (tyepsUseDb.HasFlag(UseDbType.MariaDB))
+        {
+            newCA.MenuList.Add(new MenuModel()
+            {
+                Index = 4,
+                TextFormat = "{0}. MariaDB (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
+                Action = (MenuModel menuThis) =>
+                {
+                    GlobalDb.DBType = UseDbType.MariaDB;
+                    return false;
+                }
+            });
+        }
 
         newCA.MenuList.Add(new MenuModel());
         newCA.QuestionMessage = $"Select DB Type : ";
@@ -61,33 +103,23 @@ public class DbConsole
         System.Console.WriteLine("DB Setting....");
 
         //db 마이그레이션 적용
+        //DB연결 문자열이 없으면 기본값을 사용
         switch (GlobalDb.DBType)
         {
-            case UseDbType.SQLite:
-                {
-                    //GlobalDb.DBString = "Data Source=Test.db";
-                    using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
-                    {
-                        db1.Database.Migrate();
-                    }
-                }
-                break;
-            case UseDbType.MSSQL:
-                {
-                    using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
-                    {
-                        db1.Database.Migrate();
-                    }
-                }
-                break;
             case UseDbType.InMemory:
                 //InMomey는 마이그레이션 개념이 없다.
-                //GlobalDb.DBString = "TestDB";
+                using (ModelsDbContext db1 = new ModelsDbContext(true))
+                {
+                    //DBString 재설정
+                }
                 break;
 
             default://기본
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContext db1 = new ModelsDbContext(true))
                 {
+                    //DBString 재설정
+
+                    //마이그레이션
                     db1.Database.Migrate();
                 }
                 break;
