@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EntityFrameworkSample.DB.Models;
 
 /// <summary>
-/// FK키가 자동으로 증가되는 오류 재연용1
+/// FK키가 자동으로 증가되는 오류가 없음
 /// </summary>
 public class AutoIncreases_Test2
 {

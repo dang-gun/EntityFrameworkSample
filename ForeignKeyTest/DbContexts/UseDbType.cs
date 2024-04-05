@@ -4,6 +4,7 @@ namespace EntityFrameworkSample.DB;
 /// <summary>
 /// 사용하는 DB 타입
 /// </summary>
+[Flags]
 public enum UseDbType
 {
     /// <summary>
@@ -14,25 +15,25 @@ public enum UseDbType
     /// <summary>
     /// In Memory
     /// </summary>
-    InMemory,
+    InMemory = 1 << 0,
 
     /// <summary>
     /// SQLite
     /// </summary>
-    SQLite,
+    SQLite = 1 << 1,
 
     /// <summary>
     /// MS SQL
     /// </summary>
-    MSSQL,
+    MSSQL = 1 << 2,
 
     /// <summary>
     /// Postgre SQL
     /// </summary>
-    PostgreSQL,
+    PostgreSQL = 1 << 3,
 
     /// <summary>
     /// Maria DB
     /// </summary>
-    MariaDB,
+    MariaDB = 1 << 4,
 }

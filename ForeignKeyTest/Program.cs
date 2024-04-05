@@ -5,6 +5,7 @@ using DGU_ConsoleAssist;
 
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models;
+using EntityFrameworkSample.Console;
 
 
 namespace ForeignKeyTest;
@@ -25,89 +26,11 @@ internal class Program
         //.NET 콘솔 지원
         //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
         ConsoleMenuAssist newCA = new ConsoleMenuAssist();
-
-        #region 사용 DB 세팅
-        //새로 메뉴 작성
-        newCA = new ConsoleMenuAssist();
-
-        //DB 세팅
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 1,
-            TextFormat = "{0}. Sqlite",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.SQLite;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 2,
-            TextFormat = "{0}. MSSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.MSSQL;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 3,
-            TextFormat = "{0}. Memory DB",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.InMemory;
-                return false;
-            }
-        });
-
-        newCA.MenuList.Add(new MenuModel());
-        newCA.QuestionMessage = $"Select DB Type : ";
-        //메뉴 표시
-        newCA.ShowKeyWait(false);
-
-
-        //선택된 DB 표시
-        Console.WriteLine($"Use Database '{GlobalDb.DBType.ToString()}'");
-        Console.WriteLine("");
-        Console.WriteLine("DB Setting....");
-
-        //db 마이그레이션 적용
-        //DB연결 문자열이 없으면 기본값을 사용
-        switch (GlobalDb.DBType)
-        {
-            case UseDbType.InMemory:
-                //InMomey는 마이그레이션 개념이 없다.
-                using (ModelsDbContext db1 = new ModelsDbContext(true))
-                {
-                    //DBString 재설정
-                }
-                break;
-
-            default://기본
-                using (ModelsDbContext db1 = new ModelsDbContext(true))
-                {
-                    //DBString 재설정
-
-                    //마이그레이션
-                    db1.Database.Migrate();
-                }
-                break;
-        }
-
-        Console.WriteLine("DB Setting complete");
-        Console.WriteLine("");
-        #endregion
-
-        newCA.MenuEnd = new MenuModel()
-        {
-            Index = 999,
-            MatchString = "Exit",
-            TextFormat = "{0}. [{1}] Exit",
-        };
-
-
+        DbConsole consoleMenuDb = new DbConsole();
+        consoleMenuDb.DbSelectConsole(
+            UseDbType.InMemory
+            | UseDbType.SQLite
+            | UseDbType.MSSQL);
 
 
         //새로 메뉴 작성
