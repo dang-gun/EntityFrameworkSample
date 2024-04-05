@@ -5,6 +5,7 @@ using DGU_ConsoleAssist;
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models;
 using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
+using EntityFrameworkSample.Console;
 
 
 namespace ForeignKeySpeedTest;
@@ -22,8 +23,9 @@ internal class Program
 
         //.NET 콘솔 지원
         //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
-        ConsoleMenuAssist newCA = new ConsoleMenuAssist();
+        ConsoleMenuAssist newCA;
 
+        (new DbConsole()).DbSelectConsole();
 
         #region 사용 DB 세팅
         //새로 메뉴 작성
@@ -128,6 +130,7 @@ internal class Program
                 break;
             case UseDbType.InMemory:
                 //InMomey는 마이그레이션 개념이 없다.
+                GlobalDb.DBString = "TestDB";
                 break;
 
             default://기본
@@ -141,23 +144,6 @@ internal class Program
         Console.WriteLine("DB Setting complete");
         Console.WriteLine("");
         #endregion
-
-        newCA.MenuEnd = new MenuModel()
-        {
-            Index = 999,
-            MatchString = "Exit",
-            TextFormat = "{0}. [{1}] Exit",
-        };
-
-
-
-        //새로 메뉴 작성
-        newCA = new ConsoleMenuAssist();
-        newCA.WelcomeMessage = $"{Environment.NewLine}"
-            + $"{Environment.NewLine}"
-            + $"테스트 메뉴를 선택해 주세요. {Environment.NewLine}"
-            + $"데이터가 없다면 데이터부터 생성해야 합니다. {Environment.NewLine}"
-            + $"--------------------------------------------";
 
 
         //새로 메뉴 작성

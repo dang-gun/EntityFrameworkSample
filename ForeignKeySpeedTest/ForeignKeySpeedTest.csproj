@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -17,12 +17,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.34.0" />
-		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\EntityFrameworkSample.Console\EntityFrameworkSample.Console.csproj" />
 	  <ProjectReference Include="..\EntityFrameworkSample.DB\EntityFrameworkSample.DB.csproj" />
 	</ItemGroup>
 
@@ -30,5 +28,9 @@
 		<Reference Include="DGU_ConsoleAssist">
 			<HintPath>..\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
 		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ModelsDB\" />
 	</ItemGroup>
 </Project>
