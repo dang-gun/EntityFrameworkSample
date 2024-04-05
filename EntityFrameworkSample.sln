@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkSample.DB", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptimisticConcurrencyTest", "OptimisticConcurrencyTest\OptimisticConcurrencyTest.csproj", "{040D9221-87B4-45DB-9471-80A0782A3F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForeignKeySpeedTest", "ForeignKeySpeedTest\ForeignKeySpeedTest.csproj", "{F212B64D-7C78-49FE-8316-89C0F01DF2EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForeignKeySpeedTest", "ForeignKeySpeedTest\ForeignKeySpeedTest.csproj", "{F212B64D-7C78-49FE-8316-89C0F01DF2EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkSample.Console", "EntityFrameworkSample.Console\EntityFrameworkSample.Console.csproj", "{EA982E02-3151-4379-8BC2-C15DCDDC4D93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,12 +103,17 @@ Global
 		{F212B64D-7C78-49FE-8316-89C0F01DF2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F212B64D-7C78-49FE-8316-89C0F01DF2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F212B64D-7C78-49FE-8316-89C0F01DF2EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA982E02-3151-4379-8BC2-C15DCDDC4D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA982E02-3151-4379-8BC2-C15DCDDC4D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA982E02-3151-4379-8BC2-C15DCDDC4D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA982E02-3151-4379-8BC2-C15DCDDC4D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5FD144A5-3815-43FA-8403-0575D8802F0D} = {0A552CB6-479C-4BC4-AA4C-ED8DB82AA4F8}
+		{EA982E02-3151-4379-8BC2-C15DCDDC4D93} = {0A552CB6-479C-4BC4-AA4C-ED8DB82AA4F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7445D9C9-FD5E-4947-8027-D7FF2633FB97}
