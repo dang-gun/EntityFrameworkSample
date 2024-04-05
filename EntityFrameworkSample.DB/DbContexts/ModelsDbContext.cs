@@ -2,6 +2,7 @@
 
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
+using EntityFrameworkSample.DB.MultiMigrations;
 
 namespace EntityFrameworkSample.DB.Models;
 
@@ -19,11 +20,52 @@ public class ModelsDbContext : DbContext
 	{
 	}
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="options"></param>
-	public ModelsDbContext(DbContextOptions<ModelsDbContext> options)
+    /// <summary>
+    /// GlobalDb.DBType을 기준으로 GlobalDb.DBString을 다시 불러 저장한다.
+    /// </summary>
+    /// <remarks>
+    /// DB정보를 다시 불러와야 할 상황에서만 사용하는 것이 좋다.
+    /// </remarks>
+    /// <param name="bDbStringLoad"></param>
+    public ModelsDbContext(bool bDbStringLoad)
+    {
+        if (true == bDbStringLoad)
+        {
+            DbContextDefaultInfoInterface newDbInfo
+                = new DbContextDefaultInfo_Temp();
+
+            switch (GlobalDb.DBType)
+            {
+                case UseDbType.SQLite:
+                    newDbInfo = new DbContextDefaultInfo_InMemory();
+                    break;
+
+                case UseDbType.MSSQL:
+                    newDbInfo = new DbContextDefaultInfo_Mssql();
+                    break;
+
+                case UseDbType.PostgreSQL:
+                    newDbInfo = new DbContextDefaultInfo_Postgresql();
+                    break;
+
+                case UseDbType.MariaDB:
+                    newDbInfo = new DbContextDefaultInfo_Mariadb();
+                    break;
+
+                case UseDbType.InMemory:
+                    newDbInfo = new DbContextDefaultInfo_InMemory();
+                    break;
+            }//end switch
+
+            GlobalDb.DBString = newDbInfo.DBString;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="options"></param>
+    public ModelsDbContext(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
         //Console.WriteLine($"ModelsDbContext : {GlobalDb.DBString}");
