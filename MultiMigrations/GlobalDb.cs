@@ -77,4 +77,59 @@ public static class GlobalDb
 
         return sReturn;
     }
+
+    /// <summary>
+    /// 지정된 타입으로 DB GlobalDb.DBString정보를 불러온다.
+    /// </summary>
+    /// <param name="typeDb"></param>
+    /// <param name="bDbStringEmpty">GlobalDb.DBString값을 강제로 비울지 여부</param>
+    public static void DbStringLoad(
+        UseDbType typeDb
+        , bool bDbStringEmpty = false)
+    {
+        if(true == bDbStringEmpty)
+        {
+            GlobalDb.DBString = string.Empty;
+        }
+
+        switch(typeDb)
+        {
+            case UseDbType.InMemory:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_InMemory());
+                break;
+            case UseDbType.SQLite:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_Sqlite());
+                break;
+            case UseDbType.MSSQL:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_Mssql());
+                break;
+            case UseDbType.PostgreSQL:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_Postgresql());
+                break;
+            case UseDbType.MariaDB:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_Mariadb());
+                break;
+
+            case UseDbType.None:
+                GlobalDb.DbStringLoad(new DbContextDefaultInfo_InMemory());
+                break;
+        }
+    }
+
+    /// <summary>
+    /// DbContextDefaultInfoInterface를 전달받아 DB정보를 갱신한다.
+    /// </summary>
+    /// <param name="dbContextDefaultInfo"></param>
+    public static void DbStringLoad(DbContextDefaultInfoInterface dbContextDefaultInfo)
+    {
+        GlobalDb.DBType = dbContextDefaultInfo.DBType;
+
+        if (string.Empty == GlobalDb.DBString)
+        {//DB 연결 문자열 정보가 없거나
+
+            //DB 연결정보를 다시 불러온다.
+            GlobalDb.DBString = dbContextDefaultInfo.DBString;
+        }
+    }
+        
 }

@@ -24,18 +24,7 @@ public class ModelsDbContext_Mariadb : ModelsDbContext
 	public ModelsDbContext_Mariadb(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-
-        if (UseDbType.MariaDB != GlobalDb.DBType 
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Mariadb newDbInfo = new DbContextDefaultInfo_Mariadb();
-			GlobalDb.DBString = newDbInfo.DBString;
-		}
-
-        GlobalDb.DBType = UseDbType.MariaDB;
+        GlobalDb.DbStringLoad(UseDbType.MariaDB);
     }
 
     /// <summary>

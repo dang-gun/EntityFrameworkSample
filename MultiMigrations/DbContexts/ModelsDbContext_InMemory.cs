@@ -22,13 +22,7 @@ public class ModelsDbContext_InMemory : ModelsDbContext
 	public ModelsDbContext_InMemory(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-		GlobalDb.DBType = UseDbType.InMemory;
-
-        if (string.Empty == GlobalDb.DBString)
-        {
-            DbContextDefaultInfo_InMemory newDbInfo = new DbContextDefaultInfo_InMemory();
-            GlobalDb.DBString = newDbInfo.DBString;
-        }
+        GlobalDb.DbStringLoad(UseDbType.InMemory);
     }
 	/// <summary>
 	/// 

@@ -11,5 +11,4 @@ public class DbContextDefaultInfo_InMemory : DbContextDefaultInfoInterface
     public UseDbType DBType { get; set; } = UseDbType.InMemory;
     /// <inheritdoc />
     public string DBString { get; set; } = "TestDb";
-
 }

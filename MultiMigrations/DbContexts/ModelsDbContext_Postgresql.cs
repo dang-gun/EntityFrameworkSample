@@ -24,19 +24,7 @@ public class ModelsDbContext_Postgresql : ModelsDbContext
 	public ModelsDbContext_Postgresql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-
-
-        if (UseDbType.PostgreSQL != GlobalDb.DBType 
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Postgresql newDbInfo = new DbContextDefaultInfo_Postgresql();
-			GlobalDb.DBString = newDbInfo.DBString;
-		}
-
-        GlobalDb.DBType = UseDbType.PostgreSQL;
+        GlobalDb.DbStringLoad(UseDbType.PostgreSQL);
 
         //https://duongnt.com/datetime-net6-postgresql/
         //https://stackoverflow.com/questions/69961449/net6-and-datetime-problem-cannot-write-datetime-with-kind-utc-to-postgresql-ty
