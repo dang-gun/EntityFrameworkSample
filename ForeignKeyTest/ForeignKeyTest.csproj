@@ -24,6 +24,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\EntityFrameworkSample.Console\EntityFrameworkSample.Console.csproj" />
+	  <ProjectReference Include="..\EntityFrameworkSample.DB\EntityFrameworkSample.DB.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Reference Include="DGU_ConsoleAssist">
 	    <HintPath>..\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
 	  </Reference>

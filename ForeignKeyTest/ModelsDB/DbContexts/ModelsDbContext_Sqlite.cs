@@ -14,7 +14,7 @@ namespace EntityFrameworkSample.DB.Models;
 /// Update-Database -Context ModelsDbContext_Sqlite -Migration 0
 /// Update-Database -Context ModelsDbContext_Sqlite
 /// </remarks>
-public class ModelsDbContext_Sqlite : ModelsDbContext
+public class ModelsDbContext_Sqlite : ModelsDbContextTable
 {
 	/// <summary>
 	/// 
@@ -23,26 +23,13 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 	public ModelsDbContext_Sqlite(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-        if (UseDbType.SQLite != GlobalDb.DBType
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Sqlite newDbInfo = new DbContextDefaultInfo_Sqlite();
-			GlobalDb.DBString = newDbInfo.DBString;
-        }
-
-        GlobalDb.DBType = UseDbType.SQLite;
+		GlobalDb.DbStringReload(UseDbType.SQLite, true);
     }
 
     /// <summary>
     /// GlobalDb.DBString에 설정된 정보로 컨택스트 생성
-    /// </summary>
-    /// <remarks>
-    /// 약간의 성능이라도 높이기 위해 GlobalDb.DBString의 무결성 검사를 하지 않는다.
-    /// <para>이 생성자를 호출하기 전에 GlobalDb.DBString에 정확한 연결문자를 넣어야 한다.</para>
-    /// </remarks>
+    /// <para>사용은 ModelsDbContextTable로 한다.</para>
+	/// </summary>
     public ModelsDbContext_Sqlite()
 	{
 	}

@@ -14,7 +14,7 @@ namespace EntityFrameworkSample.DB.Models;
 /// Update-Database -Context ModelsDbContext_Mssql
 /// Update-Database -Context ModelsDbContext_Mssql -Migration 0
 ///</remarks>
-public class ModelsDbContext_Mssql : ModelsDbContext
+public class ModelsDbContext_Mssql : ModelsDbContextTable
 {
 	/// <summary>
 	/// ef 명령을 직접 사용하면 여기로 들어와 진다.
@@ -23,17 +23,8 @@ public class ModelsDbContext_Mssql : ModelsDbContext
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-        if (UseDbType.MSSQL != GlobalDb.DBType 
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Mssql newDbInfo = new DbContextDefaultInfo_Mssql();
-			GlobalDb.DBString = newDbInfo.DBString;
-		}
-
-        GlobalDb.DBType = UseDbType.MSSQL;
+        GlobalDb.DbStringReload(UseDbType.MSSQL, true);
+        //System.Console.WriteLine($"MariaDB DbContext : {GlobalDb.DBString}");
     }
 
     /// <summary>
@@ -46,8 +37,6 @@ public class ModelsDbContext_Mssql : ModelsDbContext
     public ModelsDbContext_Mssql()
 	{
 	}
-
-	
 }
 
 /// <summary>

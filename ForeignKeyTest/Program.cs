@@ -6,6 +6,7 @@ using DGU_ConsoleAssist;
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models;
 using EntityFrameworkSample.Console;
+using ForeignKeyTest.TableModels;
 
 
 namespace ForeignKeyTest;
@@ -26,11 +27,53 @@ internal class Program
         //.NET 콘솔 지원
         //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
         ConsoleMenuAssist newCA = new ConsoleMenuAssist();
+
+        //db 선택 받기
         DbConsole consoleMenuDb = new DbConsole();
         consoleMenuDb.DbSelectConsole(
             UseDbType.InMemory
             | UseDbType.SQLite
             | UseDbType.MSSQL);
+
+        #region 마이그레이션
+        //마이그레이션
+        //마이그레이션은 마이그레이션을 생성할때 사용한 DbContext를 사용해야 재대로 동작하므로
+        //라이브러리화를 할 수 없다.
+        System.Console.WriteLine("DB Setting....");
+
+        //DB 정보가 없으면 기본 정보 불러오기
+        GlobalDb.DbStringReload(true);
+
+
+        //db 마이그레이션 적용
+        //DB연결 문자열이 없으면 기본값을 사용
+        switch (GlobalDb.DBType)
+        {
+            case UseDbType.SQLite:
+                using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
+                {
+                    //마이그레이션
+                    db1.Database.Migrate();
+                }
+                break;
+
+            case UseDbType.MSSQL:
+                using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
+                {
+                    //마이그레이션
+                    db1.Database.Migrate();
+                }
+                break;
+
+            case UseDbType.InMemory://InMomey는 마이그레이션 개념이 없다.
+            default:
+                //동작 없음
+                break;
+        }
+        #endregion
+
+        System.Console.WriteLine("DB Setting complete");
+        System.Console.WriteLine("");
 
 
         //새로 메뉴 작성
@@ -52,7 +95,7 @@ internal class Program
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine(" --- --- --- --- --- --- ---");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -100,7 +143,7 @@ internal class Program
             Action = (MenuModel menuThis) =>
             {
                 Console.WriteLine(" --- --- --- --- --- --- ---");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -145,7 +188,7 @@ internal class Program
                 Console.WriteLine("");
                 Console.WriteLine("DB Data adding....");
 
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     for(int i = 0; i < 10; ++i)
                     {

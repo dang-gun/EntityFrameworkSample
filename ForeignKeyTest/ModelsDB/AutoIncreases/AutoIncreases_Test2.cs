@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EntityFrameworkSample.DB.Models;
+namespace ForeignKeyTest.TableModels;
 
 /// <summary>
 /// FK키가 자동으로 증가되는 오류가 없음

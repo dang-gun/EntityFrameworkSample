@@ -11,7 +11,7 @@ namespace EntityFrameworkSample.DB.Models;
 /// <remarks>
 /// InMomey는 마이그레이션 개념이 없다.
 /// </remarks>
-public class ModelsDbContext_InMemory : ModelsDbContext
+public class ModelsDbContext_InMemory : ModelsDbContextTable
 {
 	/// <summary>
 	/// 
@@ -20,7 +20,7 @@ public class ModelsDbContext_InMemory : ModelsDbContext
 	public ModelsDbContext_InMemory(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-        GlobalDb.DBType = UseDbType.InMemory;
+		GlobalDb.DBType = UseDbType.InMemory;
 
         if (string.Empty == GlobalDb.DBString)
         {
@@ -28,14 +28,12 @@ public class ModelsDbContext_InMemory : ModelsDbContext
             GlobalDb.DBString = newDbInfo.DBString;
         }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public ModelsDbContext_InMemory()
+	/// <summary>
+	/// 
+	/// </summary>
+	public ModelsDbContext_InMemory()
 	{
 	}
-
 }
 
 /// <summary>
