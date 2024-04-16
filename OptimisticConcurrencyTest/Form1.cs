@@ -6,6 +6,7 @@ using OptimisticConcurrency.Global;
 
 using EntityFrameworkSample.DB.Models;
 using EntityFrameworkSample.DB;
+using OptimisticConcurrencyTest.TableModels;
 
 namespace OptimisticConcurrencyTest;
 
@@ -83,14 +84,6 @@ public partial class Form1 : Form
                     db1.Database.Migrate();
                 }
                 break;
-
-            default://기본
-                using (ModelsDbContext db1 = new ModelsDbContext())
-                {
-                    //db1.Database.EnsureCreated();
-                    db1.Database.Migrate();
-                }
-                break;
         }
     }
 
@@ -129,7 +122,7 @@ public partial class Form1 : Form
             //수정할 개체
             TestOC1? findTarget = null;
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 //저장이 실패했는지 여부
                 bool bSave = true;
@@ -219,7 +212,7 @@ public partial class Form1 : Form
             //수정할 개체
             TestOC2? findTarget = null;
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 //저장이 실패했는지 여부
                 bool bSave = true;
@@ -304,7 +297,7 @@ public partial class Form1 : Form
         {
             TestOC2? findTarget = null;
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 findTarget = db1.TestOC2.Where(w => w.idTestOC2 == idTestOC2).FirstOrDefault();
 
@@ -359,7 +352,7 @@ public partial class Form1 : Form
         {
             TestOC3? findTarget = null;
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 findTarget = db1.TestOC3.Where(w => w.idTestOC3 == 1).FirstOrDefault();
 
@@ -409,7 +402,7 @@ public partial class Form1 : Form
 
             Log($"DB_Update_ServerConcurrency3 call - sStr:{sStr}");
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 //저장이 실패했는지 여부
                 bool bSave = true;
@@ -519,7 +512,7 @@ public partial class Form1 : Form
         {
             List<TestOC2> findTarget;
 
-            using (ModelsDbContext db1 = new ModelsDbContext())
+            using (ModelsDbContextTable db1 = new ModelsDbContextTable())
             {
                 //대상 리스트
                 findTarget = db1.TestOC2.ToList();
@@ -558,7 +551,7 @@ public partial class Form1 : Form
         TestOC2? findOC2_2 = null;
         TestOC3? findOC3 = null;
 
-        using (ModelsDbContext db1 = new ModelsDbContext())
+        using (ModelsDbContextTable db1 = new ModelsDbContextTable())
         {
             findOC1 = db1.TestOC1.Where(w => w.idTestOC1 == 1).FirstOrDefault();
             findOC2 = db1.TestOC2.Where(w => w.idTestOC2 == 1).FirstOrDefault();

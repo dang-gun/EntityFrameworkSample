@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using EntityFrameworkSample.DB;
-using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
 using EntityFrameworkSample.DB.MultiMigrations;
 
 namespace EntityFrameworkSample.DB.Models;
@@ -19,47 +17,6 @@ public class ModelsDbContext : DbContext
 	public ModelsDbContext()
 	{
 	}
-
-    /// <summary>
-    /// GlobalDb.DBType을 기준으로 GlobalDb.DBString을 다시 불러 저장한다.
-    /// </summary>
-    /// <remarks>
-    /// DB정보를 다시 불러와야 할 상황에서만 사용하는 것이 좋다.
-    /// </remarks>
-    /// <param name="bDbStringLoad"></param>
-    public ModelsDbContext(bool bDbStringLoad)
-    {
-        if (true == bDbStringLoad)
-        {
-            DbContextDefaultInfoInterface newDbInfo
-                = new DbContextDefaultInfo_Temp();
-
-            switch (GlobalDb.DBType)
-            {
-                case UseDbType.SQLite:
-                    newDbInfo = new DbContextDefaultInfo_InMemory();
-                    break;
-
-                case UseDbType.MSSQL:
-                    newDbInfo = new DbContextDefaultInfo_Mssql();
-                    break;
-
-                case UseDbType.PostgreSQL:
-                    newDbInfo = new DbContextDefaultInfo_Postgresql();
-                    break;
-
-                case UseDbType.MariaDB:
-                    newDbInfo = new DbContextDefaultInfo_Mariadb();
-                    break;
-
-                case UseDbType.InMemory:
-                    newDbInfo = new DbContextDefaultInfo_InMemory();
-                    break;
-            }//end switch
-
-            GlobalDb.DBString = newDbInfo.DBString;
-        }
-    }
 
     /// <summary>
     /// 
@@ -110,91 +67,4 @@ public class ModelsDbContext : DbContext
 	}
 
 
-    //Test1Model, Test2Model는 'MultiMigrations'에서 따로 관리되므로
-    //여기서는 추가하면 안된다.
-
-    #region 낙관적 동시성 테스트용 테이블(OptimisticConcurrency test table)
-    /// <summary>
-    /// 테스트용 테이블 - 클라이언트 관리 토큰
-    /// </summary>
-    public DbSet<TestOC1> TestOC1 { get; set; }
-    /// <summary>
-    /// 테스트용 테이블 - SQL 서버 관리 토큰
-    /// </summary>
-
-    public DbSet<TestOC2> TestOC2 { get; set; }
-    /// <summary>
-    /// 테스트용 테이블 - 관리토큰 없음
-    /// </summary>
-    public DbSet<TestOC3> TestOC3 { get; set; }
-    #endregion
-
-    #region ForeignKeySpeedTest
-    /// <summary>
-    /// FK 속도 테스트1 블로그
-    /// </summary>
-    public DbSet<ForeignKeyTest1_Blog> ForeignKeyTest1_Blog { get; set; }
-    /// <summary>
-    /// FK 속도 테스트1 포스트
-    /// </summary>
-    public DbSet<ForeignKeyTest1_Post> ForeignKeyTest1_Post { get; set; }
-
-    /// <summary>
-    /// FK 속도 테스트2 블로그
-    /// </summary>
-    public DbSet<ForeignKeyTest2_Blog> ForeignKeyTest2_Blog { get; set; }
-    /// <summary>
-    /// FK 속도 테스트2 포스트
-    /// </summary>
-    public DbSet<ForeignKeyTest2_Post> ForeignKeyTest2_Post { get; set; }
-
-    /// <summary>
-    /// FK 속도 테스트3 블로그
-    /// </summary>
-    public DbSet<ForeignKeyTest3_Blog> ForeignKeyTest3_Blog { get; set; }
-    /// <summary>
-    /// FK 속도 테스트3 포스트
-    /// </summary>
-    public DbSet<ForeignKeyTest3_Post> ForeignKeyTest3_Post { get; set; }
-    #endregion
-
-    /// <summary>
-    /// 데이터 넣기 동작
-    /// </summary>
-    /// <param name="modelBuilder"></param>
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-        #region 낙관적 동시성 테스트 데이터(OptimisticConcurrency test data)
-        modelBuilder.Entity<TestOC1>().HasData(
-            new TestOC1
-            {
-                idTestOC1 = 1,
-                Int = 1,
-                Str = "str 1",
-            });
-
-        modelBuilder.Entity<TestOC2>().HasData(
-            new TestOC2
-            {
-                idTestOC2 = 1,
-                Int = 2,
-                Str = "str 2",
-            });
-        modelBuilder.Entity<TestOC2>().HasData(
-            new TestOC2
-            {
-                idTestOC2 = 2,
-                Int = 22,
-                Str = "str 22",
-            });
-
-        modelBuilder.Entity<TestOC3>().HasData(
-            new TestOC3
-            {
-                idTestOC3 = 1,
-                Int = 3,
-                Str = "str 3",
-            });
-        #endregion
-    }
 }

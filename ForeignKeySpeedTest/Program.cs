@@ -4,8 +4,8 @@ using DGU_ConsoleAssist;
 
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models;
-using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
 using EntityFrameworkSample.Console;
+using ForeignKeySpeedTest.TableModels;
 
 
 namespace ForeignKeySpeedTest;
@@ -25,125 +25,65 @@ internal class Program
         //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
         ConsoleMenuAssist newCA;
 
-        (new DbConsole()).DbSelectConsole();
+        //db 선택 받기
+        DbConsole consoleMenuDb = new DbConsole();
+        consoleMenuDb.DbSelectConsole(UseDbType.All);
 
-        #region 사용 DB 세팅
-        //새로 메뉴 작성
-        newCA = new ConsoleMenuAssist();
+        #region 마이그레이션
+        //마이그레이션
+        //마이그레이션은 마이그레이션을 생성할때 사용한 DbContext를 사용해야 재대로 동작하므로
+        //라이브러리화를 할 수 없다.
+        System.Console.WriteLine("DB Setting....");
 
-        //DB 세팅
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 1,
-            TextFormat = "{0}. Sqlite",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.SQLite;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 2,
-            TextFormat = "{0}. MSSQL (SettingInfo_gitignore.json 파일이 있어야 에러가 나지 않습니다.)",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.MSSQL;
-                return false;
-            }
-        });
-        newCA.MenuList.Add(new MenuModel()
-        {
-            Index = 3,
-            TextFormat = "{0}. Memory DB",
-            Action = (MenuModel menuThis) =>
-            {
-                GlobalDb.DBType = UseDbType.InMemory;
-                Console.WriteLine($"Use Database '${UseDbType.SQLite.ToString()}'");
-                return false;
-            }
-        });
+        //DB 정보가 없으면 기본 정보 불러오기
+        GlobalDb.DbStringReload(true);
 
-        newCA.MenuList.Add(new MenuModel());
-        newCA.QuestionMessage = $"Select DB Type : ";
-        //메뉴 표시
-        newCA.ShowKeyWait(false);
-
-
-        //선택된 DB 표시
-        Console.WriteLine($"Use Database '{GlobalDb.DBType.ToString()}'");
-        Console.WriteLine("");
-        Console.WriteLine("DB Setting....");
 
         //db 마이그레이션 적용
+        //DB연결 문자열이 없으면 기본값을 사용
         switch (GlobalDb.DBType)
         {
             case UseDbType.SQLite:
+                using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
                 {
-                    GlobalDb.DBString = "Data Source=Test.db";
-                    using (ModelsDbContext_Sqlite db1 = new ModelsDbContext_Sqlite())
-                    {
-                        db1.Database.Migrate();
-                    }
-                }
-                break;
-            case UseDbType.MSSQL:
-                {
-                    List<Tuple<int, string>> listSettingInfoTitle
-                        = new List<Tuple<int, string>>();
-                    listSettingInfoTitle.Add(new Tuple<int, string>(1, "\"ConnectionString_Mssql\""));
-
-                    string[] sSettingInfo = File.ReadAllLines("SettingInfo_gitignore.json");
-                    //불러온 데이터 공백제거
-                    sSettingInfo = sSettingInfo.Select(s => s.Trim()).ToArray();
-
-                    for (int i = 0; i < listSettingInfoTitle.Count; ++i)
-                    {
-                        Tuple<int, string> item = listSettingInfoTitle[i];
-
-                        //설정 검색
-                        string? findSI
-                            = sSettingInfo
-                                .Where(w => w.Length >= item.Item2.Length
-                                            && w.Substring(0, item.Item2.Length) == item.Item2)
-                                .FirstOrDefault();
-
-                        if (null != findSI)
-                        {//검색 성공
-
-                            if (1 == item.Item1)
-                            {
-                                //콘론으로 자르고
-                                string[] sCut = findSI.Split(":");
-                                //앞뒤 큰따옴표 제거
-                                GlobalDb.DBString = sCut[1].Substring(2, sCut[1].Length - 4);
-                                break;
-                            }
-                        }
-                    }//end for i
-
-                    using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
-                    {
-                        db1.Database.Migrate();
-                    }
-                }
-                break;
-            case UseDbType.InMemory:
-                //InMomey는 마이그레이션 개념이 없다.
-                GlobalDb.DBString = "TestDB";
-                break;
-
-            default://기본
-                using (ModelsDbContext db1 = new ModelsDbContext())
-                {
+                    //마이그레이션
                     db1.Database.Migrate();
                 }
                 break;
-        }
 
-        Console.WriteLine("DB Setting complete");
-        Console.WriteLine("");
+            case UseDbType.MSSQL:
+                using (ModelsDbContext_Mssql db1 = new ModelsDbContext_Mssql())
+                {
+                    //마이그레이션
+                    db1.Database.Migrate();
+                }
+                break;
+
+            case UseDbType.PostgreSQL:
+                using (ModelsDbContext_Postgresql db1 = new ModelsDbContext_Postgresql())
+                {
+                    //마이그레이션
+                    db1.Database.Migrate();
+                }
+                break;
+
+            case UseDbType.MariaDB:
+                using (ModelsDbContext_Mariadb db1 = new ModelsDbContext_Mariadb())
+                {
+                    //마이그레이션
+                    db1.Database.Migrate();
+                }
+                break;
+
+            case UseDbType.InMemory://InMomey는 마이그레이션 개념이 없다.
+            default:
+                //동작 없음
+                break;
+        }
         #endregion
+
+        System.Console.WriteLine("DB Setting complete");
+        System.Console.WriteLine("");
 
 
         //새로 메뉴 작성
@@ -164,7 +104,7 @@ internal class Program
             TextFormat = "{0}. 기본 검색",
             Action = (MenuModel menuThis) =>
             {
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -190,7 +130,7 @@ internal class Program
 
                 }
 
-                using (ModelsDbContext db2 = new ModelsDbContext())
+                using (ModelsDbContextTable db2 = new ModelsDbContextTable())
                 {
                     Console.WriteLine("");
 
@@ -227,7 +167,7 @@ internal class Program
             TextFormat = "{0}. 인쿨루드 생략 가능한 경우",
             Action = (MenuModel menuThis) =>
             {
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
 
                     dtNow = DateTime.Now;
@@ -251,7 +191,7 @@ internal class Program
 
                 Console.WriteLine("");
 
-                using (ModelsDbContext db2 = new ModelsDbContext())
+                using (ModelsDbContextTable db2 = new ModelsDbContextTable())
                 {
                     ForeignKeyTest1_Post find1Post
                         = db2.ForeignKeyTest1_Post
@@ -269,7 +209,7 @@ internal class Program
 
                 Console.WriteLine("");
 
-                using (ModelsDbContext db3 = new ModelsDbContext())
+                using (ModelsDbContextTable db3 = new ModelsDbContextTable())
                 {
 
                     dtNow = DateTime.Now;
@@ -302,7 +242,7 @@ internal class Program
             TextFormat = "{0}. FK에 연결된 검색 테스트",
             Action = (MenuModel menuThis) =>
             {
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     ForeignKeyTest1_Blog iqTO = db1.ForeignKeyTest1_Blog.Include(x => x.Posts).First();
 
@@ -340,7 +280,7 @@ internal class Program
 
                 Console.WriteLine("****** select list ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -352,7 +292,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -368,7 +308,7 @@ internal class Program
                 Console.WriteLine(" ");
                 Console.WriteLine("****** select take(non Include) child ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -387,7 +327,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -420,7 +360,7 @@ internal class Program
             {
                 Console.WriteLine("****** select take child ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -443,7 +383,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -478,7 +418,7 @@ internal class Program
             {
                 Console.WriteLine("****** select where child ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -501,7 +441,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -536,7 +476,7 @@ internal class Program
             {
                 Console.WriteLine("****** select where child 30 ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -559,7 +499,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -594,7 +534,7 @@ internal class Program
             {
                 Console.WriteLine("****** select child list ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -622,7 +562,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -663,7 +603,7 @@ internal class Program
             {
                 Console.WriteLine("****** item to parent list ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -681,7 +621,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -711,7 +651,7 @@ internal class Program
             {
                 Console.WriteLine("****** item to parent list ******");
                 Console.WriteLine(" start select fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -729,7 +669,7 @@ internal class Program
                 }
 
                 Console.WriteLine(" start select non fk list --------------");
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
                     dtNow = DateTime.Now;
 
@@ -764,7 +704,7 @@ internal class Program
 
                 Db_DataAdd();
 
-                using (ModelsDbContext db1 = new ModelsDbContext())
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
                 {
 
                     //블로그는 순차 생성
@@ -824,7 +764,7 @@ internal class Program
     {
         Random rand = new Random();
 
-        using (ModelsDbContext db1 = new ModelsDbContext())
+        using (ModelsDbContextTable db1 = new ModelsDbContextTable())
         {
             Console.WriteLine("DB data add start1");
 
@@ -843,7 +783,7 @@ internal class Program
             db1.SaveChanges();
         }
 
-        using (ModelsDbContext db2 = new ModelsDbContext())
+        using (ModelsDbContextTable db2 = new ModelsDbContextTable())
         {
             Console.WriteLine("DB data add start1-1 : FK child");
             Db_DataAdd_FK1_10(rand);
@@ -864,7 +804,7 @@ internal class Program
     /// </summary>
     static void Db_DataAdd_FK1_10(Random rand)
     {
-        using (ModelsDbContext db1 = new ModelsDbContext())
+        using (ModelsDbContextTable db1 = new ModelsDbContextTable())
         {
             for (int i = 0; i < 10; ++i)
             {
@@ -904,7 +844,7 @@ internal class Program
         int nCount
         , Random rand)
     {
-        using (ModelsDbContext db1 = new ModelsDbContext())
+        using (ModelsDbContextTable db1 = new ModelsDbContextTable())
         {
             Console.WriteLine("DB data add start2-" + nCount);
             for (int i = 1; i < 100000; ++i)
@@ -923,7 +863,7 @@ internal class Program
     /// <param name="db1"></param>
     static void Db_DataAdd_One(
         Random rand
-        , ModelsDbContext db1)
+        , ModelsDbContextTable db1)
     {
         int Int = rand.Next(0, 100000);
         string Str = Guid.NewGuid().ToString();

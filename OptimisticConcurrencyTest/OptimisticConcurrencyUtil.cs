@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using EntityFrameworkSample.DB.Models;
 
 using OptimisticConcurrency.Global;
+using OptimisticConcurrencyTest.TableModels;
 
 namespace EfTestModel;
 

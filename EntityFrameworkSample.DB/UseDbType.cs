@@ -36,4 +36,9 @@ public enum UseDbType
     /// Maria DB
     /// </summary>
     MariaDB = 1 << 4,
+
+    /// <summary>
+    /// 전체 사용
+    /// </summary>
+    All = int.MaxValue,
 }

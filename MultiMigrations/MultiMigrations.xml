@@ -576,5 +576,18 @@
             <param name="typeUseDb"></param>
             <returns></returns>
         </member>
+        <member name="M:Global.DB.GlobalDb.DbStringLoad(Global.DB.UseDbType,System.Boolean)">
+            <summary>
+            지정된 타입으로 DB GlobalDb.DBString정보를 불러온다.
+            </summary>
+            <param name="typeDb"></param>
+            <param name="bDbStringEmpty">GlobalDb.DBString값을 강제로 비울지 여부</param>
+        </member>
+        <member name="M:Global.DB.GlobalDb.DbStringLoad(ModelsDB.MultiMigrations.DbContextDefaultInfoInterface)">
+            <summary>
+            DbContextDefaultInfoInterface를 전달받아 DB정보를 갱신한다.
+            </summary>
+            <param name="dbContextDefaultInfo"></param>
+        </member>
     </members>
 </doc>

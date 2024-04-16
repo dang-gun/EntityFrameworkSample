@@ -29,8 +29,52 @@ public static class GlobalDb
     /// </remarks>
     public static char DbArrayDiv = '▒';
 
+
 	static GlobalDb()
 	{
+    }
+
+    /// <summary>
+    /// GlobalDb.DBType을 기준으로 GlobalDb.DBString을 다시 불러 저장한다.
+    /// </summary>
+    /// <remarks>
+    /// DB정보를 다시 불러와야 할 상황에서만 사용하는 것이 좋다.
+    /// </remarks>
+    /// <param name="bOnlyEmpty">GlobalDb.DBString가 비었을때만 다시 불러올지 여부</param>
+    public static void DbStringReload(bool bOnlyEmpty)
+    {
+        if(string.Empty == GlobalDb.DBString
+            || false == bOnlyEmpty)
+        {
+            DbContextDefaultInfoInterface newDbInfo
+                = new DbContextDefaultInfo_Temp();
+
+            switch (GlobalDb.DBType)
+            {
+                case UseDbType.SQLite:
+                    newDbInfo = new DbContextDefaultInfo_Sqlite();
+                    break;
+
+                case UseDbType.MSSQL:
+                    newDbInfo = new DbContextDefaultInfo_Mssql();
+                    break;
+
+                case UseDbType.PostgreSQL:
+                    newDbInfo = new DbContextDefaultInfo_Postgresql();
+                    break;
+
+                case UseDbType.MariaDB:
+                    newDbInfo = new DbContextDefaultInfo_Mariadb();
+                    break;
+
+                case UseDbType.InMemory:
+                    newDbInfo = new DbContextDefaultInfo_InMemory();
+                    break;
+            }//end switch
+
+            GlobalDb.DBString = newDbInfo.DBString;
+        }
+        
     }
 
     /// <summary>
@@ -62,7 +106,7 @@ public static class GlobalDb
         //Console.WriteLine($"DbStringLoad : {sPath}");
 
         //한번쓰고 버려지는 개체라 필요할대 생성해서 사용한다.
-        sReturn = (new DbStringFileLoad()).DbStringLoad( sPath , typeUseDb );
+        sReturn = (new DbStringFileLoad()).DbStringLoad(sPath , typeUseDb );
 
         return sReturn;
     }

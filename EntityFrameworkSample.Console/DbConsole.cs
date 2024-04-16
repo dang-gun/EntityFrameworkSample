@@ -4,14 +4,15 @@ using DGU_ConsoleAssist;
 
 using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.Models;
-using EntityFrameworkSample.DB.Models.ForeignKeySpeedTest;
+
 
 namespace EntityFrameworkSample.Console;
 
 public class DbConsole
 {
     /// <summary>
-    /// 
+    /// DB 선택 메뉴를 표시하고 선택한 DB를 저장한다.
+    /// <para>마이그레이션은 각자 해야 한다.</para>
     /// </summary>
     /// <param name="tyepsUseDb">화면에 표시할 DB를 비트 플래그로 넣어준다..</param>
     public void DbSelectConsole(UseDbType tyepsUseDb)
@@ -100,32 +101,6 @@ public class DbConsole
         //선택된 DB 표시
         System.Console.WriteLine($"Use Database '{GlobalDb.DBType.ToString()}'");
         System.Console.WriteLine("");
-        System.Console.WriteLine("DB Setting....");
 
-        //db 마이그레이션 적용
-        //DB연결 문자열이 없으면 기본값을 사용
-        switch (GlobalDb.DBType)
-        {
-            case UseDbType.InMemory:
-                //InMomey는 마이그레이션 개념이 없다.
-                using (ModelsDbContext db1 = new ModelsDbContext(true))
-                {
-                    //DBString 재설정
-                }
-                break;
-
-            default://기본
-                using (ModelsDbContext db1 = new ModelsDbContext(true))
-                {
-                    //DBString 재설정
-
-                    //마이그레이션
-                    db1.Database.Migrate();
-                }
-                break;
-        }
-
-        System.Console.WriteLine("DB Setting complete");
-        System.Console.WriteLine("");
     }
 }

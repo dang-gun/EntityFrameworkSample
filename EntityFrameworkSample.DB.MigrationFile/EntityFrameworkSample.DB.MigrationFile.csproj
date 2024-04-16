@@ -5,6 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>EntityFrameworkSample.DB.MigrationFile.Program</StartupObject>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -17,6 +18,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.8" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -25,8 +29,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="DGU_ConsoleAssist">
-			<HintPath>..\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
-		</Reference>
+	  <Reference Include="DGU_ConsoleAssist">
+	    <HintPath>..\..\DotNetSamples\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
+	
 </Project>
