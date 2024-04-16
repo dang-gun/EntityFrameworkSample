@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 
 using EntityFrameworkSample.DB.MultiMigrations;
+using System.Diagnostics;
 
 namespace EntityFrameworkSample.DB.Models;
 
@@ -24,18 +25,8 @@ public class ModelsDbContext_Mariadb : ModelsDbContextTable
 	public ModelsDbContext_Mariadb(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-
-        if (UseDbType.MariaDB != GlobalDb.DBType 
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Mariadb newDbInfo = new DbContextDefaultInfo_Mariadb();
-			GlobalDb.DBString = newDbInfo.DBString;
-		}
-
-        GlobalDb.DBType = UseDbType.MariaDB;
+        GlobalDb.DbStringReload(UseDbType.MariaDB, true);
+        //System.Console.WriteLine($"MariaDB DbContext : {GlobalDb.DBString}");
     }
 
     /// <summary>

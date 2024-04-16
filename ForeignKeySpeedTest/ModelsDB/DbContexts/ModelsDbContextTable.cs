@@ -32,11 +32,9 @@ public class ModelsDbContextTable : ModelsDbContext
 
     public DbSet<ForeignKeyTest1_Blog> ForeignKeyTest1_Blog { get; set; }
     public DbSet<ForeignKeyTest1_Post> ForeignKeyTest1_Post { get; set; }
-    public DbSet<ForeignKeyTest1_Select> ForeignKeyTest1_Select { get; set; }
 
     public DbSet<ForeignKeyTest2_Blog> ForeignKeyTest2_Blog { get; set; }
     public DbSet<ForeignKeyTest2_Post> ForeignKeyTest2_Post { get; set; }
-    public DbSet<ForeignKeyTest2_Select> ForeignKeyTest2_Select { get; set; }
 
     public DbSet<ForeignKeyTest3_Blog> ForeignKeyTest3_Blog { get; set; }
     public DbSet<ForeignKeyTest3_Post> ForeignKeyTest3_Post { get; set; }
