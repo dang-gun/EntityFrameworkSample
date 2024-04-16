@@ -41,5 +41,35 @@ public class ModelsDbContextTable : ModelsDbContext
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+        modelBuilder.Entity<TestOC1>().HasData(
+            new TestOC1
+            {
+                idTestOC1 = 1,
+                Int = 1,
+                Str = "str 1",
+            });
+
+        modelBuilder.Entity<TestOC2>().HasData(
+            new TestOC2
+            {
+                idTestOC2 = 1,
+                Int = 2,
+                Str = "str 2",
+            });
+        modelBuilder.Entity<TestOC2>().HasData(
+            new TestOC2
+            {
+                idTestOC2 = 2,
+                Int = 22,
+                Str = "str 22",
+            });
+
+        modelBuilder.Entity<TestOC3>().HasData(
+            new TestOC3
+            {
+                idTestOC3 = 1,
+                Int = 3,
+                Str = "str 3",
+            });
     }
 }

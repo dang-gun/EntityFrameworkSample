@@ -20,7 +20,7 @@ public partial class Form1 : Form
         string sDbString = GlobalDb.DbStringLoad(UseDbType.MSSQL);
 
         //MSSQL 정보
-        if(string.Empty != sDbString)
+        if (string.Empty != sDbString)
         {
             this.txtMssql_ConnectStriong.Text = sDbString;
         }
@@ -31,8 +31,32 @@ public partial class Form1 : Form
 
 
         //sqlite를 기본으로 사용한다.
-        this.btnMssql_Use_Click(null, null);
+        this.btnSqlite_Use_Click(null, null);
+        //this.btnMssql_Use_Click(null, null);
+
     }
+
+
+    #region SQLite
+    private void btnSqlite_Use_Click(object? sender, EventArgs? e)
+    {
+        GlobalDb.DBType = UseDbType.SQLite;
+        if (true == this.checkSqlite_UseDefult.Checked)
+        {
+            GlobalDb.DBString = string.Empty;
+        }
+        else
+        {
+            GlobalDb.DBString = this.txtSqlite_ConnectStriong.Text;
+        }
+
+        this.DbSetting();
+
+        radioMssqlUse.Checked = false;
+        radioSqliteUse.Checked = true;
+    }
+    #endregion
+
 
     #region MSSQL
     /// <summary>
@@ -43,8 +67,15 @@ public partial class Form1 : Form
     private void btnMssql_Use_Click(object? sender, EventArgs? e)
     {
         GlobalDb.DBType = UseDbType.MSSQL;
-        GlobalDb.DBString = this.txtMssql_ConnectStriong.Text;
-
+        if(true == this.checkMssql_UseDefult.Checked)
+        {
+            GlobalDb.DBString = string.Empty;
+        }
+        else
+        {
+            GlobalDb.DBString = this.txtMssql_ConnectStriong.Text;
+        }
+        
         this.DbSetting();
 
         radioMssqlUse.Checked = true;
@@ -52,21 +83,13 @@ public partial class Form1 : Form
     }
     #endregion
 
-    #region SQLite
-    private void btnSqlite_Use_Click(object? sender, EventArgs? e)
-    {
-        GlobalDb.DBType = UseDbType.SQLite;
-        GlobalDb.DBString = txtSqlite_ConnectStriong.Text;
-
-        this.DbSetting();
-
-        radioMssqlUse.Checked = false;
-        radioSqliteUse.Checked = true;
-    }
-    #endregion
-
     private void DbSetting()
     {
+        //DB 정보가 없으면 기본 정보 불러오기
+        GlobalDb.DbStringReload(true);
+
+        this.Text = $"Select DB : {GlobalDb.DBType.ToString()}";
+
         //db 마이그레이션 적용
         switch (GlobalDb.DBType)
         {
@@ -611,4 +634,5 @@ public partial class Form1 : Form
             , sMsg));
     }
 
+    
 }

@@ -23,17 +23,8 @@ public class ModelsDbContext_Mssql : ModelsDbContextTable
 	public ModelsDbContext_Mssql(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-        if (UseDbType.MSSQL != GlobalDb.DBType 
-			|| string.Empty == GlobalDb.DBString)
-        {//기존 DBType과 다르다.
-			//DB 연결 문자열 정보가 없다.
-
-            //DB 연결정보를 다시 불러온다.
-            DbContextDefaultInfo_Mssql newDbInfo = new DbContextDefaultInfo_Mssql();
-			GlobalDb.DBString = newDbInfo.DBString;
-		}
-
-        GlobalDb.DBType = UseDbType.MSSQL;
+        GlobalDb.DbStringReload(UseDbType.MSSQL, true);
+        //System.Console.WriteLine($"MariaDB DbContext : {GlobalDb.DBString}");
     }
 
     /// <summary>

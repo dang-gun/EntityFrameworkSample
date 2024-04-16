@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            checkMssql_UseDefult = new CheckBox();
             btnMssql_Use = new Button();
             txtMssql_ConnectStriong = new TextBox();
             label1 = new Label();
             radioMssqlUse = new RadioButton();
             groupBox2 = new GroupBox();
+            checkSqlite_UseDefult = new CheckBox();
             btnSqlite_Use = new Button();
             txtSqlite_ConnectStriong = new TextBox();
             label2 = new Label();
@@ -60,13 +62,17 @@
             btnServerConcurrency2 = new Button();
             btnMultUpdate = new Button();
             groupBox7 = new GroupBox();
+            button1 = new Button();
             btnMultUpdateFunc = new Button();
             groupBox8 = new GroupBox();
             label9 = new Label();
             txtDb_TestOC2_2_Str = new TextBox();
             txtDb_TestOC2_2_Int = new TextBox();
             label10 = new Label();
-            button1 = new Button();
+            tabControl1 = new TabControl();
+            tabSelectDb = new TabPage();
+            tabPage2 = new TabPage();
+            label11 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -75,20 +81,34 @@
             groupBox6.SuspendLayout();
             groupBox7.SuspendLayout();
             groupBox8.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabSelectDb.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkMssql_UseDefult);
             groupBox1.Controls.Add(btnMssql_Use);
             groupBox1.Controls.Add(txtMssql_ConnectStriong);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(radioMssqlUse);
-            groupBox1.Location = new Point(12, 9);
+            groupBox1.Location = new Point(6, 121);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(381, 86);
+            groupBox1.Size = new Size(381, 101);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "MSSQL";
+            // 
+            // checkMssql_UseDefult
+            // 
+            checkMssql_UseDefult.AutoSize = true;
+            checkMssql_UseDefult.Location = new Point(112, 47);
+            checkMssql_UseDefult.Name = "checkMssql_UseDefult";
+            checkMssql_UseDefult.Size = new Size(86, 19);
+            checkMssql_UseDefult.TabIndex = 4;
+            checkMssql_UseDefult.Text = "Use Defult ";
+            checkMssql_UseDefult.UseVisualStyleBackColor = true;
             // 
             // btnMssql_Use
             // 
@@ -102,9 +122,9 @@
             // 
             // txtMssql_ConnectStriong
             // 
-            txtMssql_ConnectStriong.Location = new Point(112, 45);
+            txtMssql_ConnectStriong.Location = new Point(6, 70);
             txtMssql_ConnectStriong.Name = "txtMssql_ConnectStriong";
-            txtMssql_ConnectStriong.Size = new Size(263, 23);
+            txtMssql_ConnectStriong.Size = new Size(369, 23);
             txtMssql_ConnectStriong.TabIndex = 2;
             txtMssql_ConnectStriong.Text = "Server=192.168.0.222;DataBase=LocalTest;UId=LocalTest_Login;pwd=asdf1234@";
             // 
@@ -132,16 +152,27 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(checkSqlite_UseDefult);
             groupBox2.Controls.Add(btnSqlite_Use);
             groupBox2.Controls.Add(txtSqlite_ConnectStriong);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(radioSqliteUse);
-            groupBox2.Location = new Point(12, 101);
+            groupBox2.Location = new Point(6, 6);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(381, 81);
+            groupBox2.Size = new Size(381, 109);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "SQLite";
+            // 
+            // checkSqlite_UseDefult
+            // 
+            checkSqlite_UseDefult.AutoSize = true;
+            checkSqlite_UseDefult.Location = new Point(110, 47);
+            checkSqlite_UseDefult.Name = "checkSqlite_UseDefult";
+            checkSqlite_UseDefult.Size = new Size(86, 19);
+            checkSqlite_UseDefult.TabIndex = 5;
+            checkSqlite_UseDefult.Text = "Use Defult ";
+            checkSqlite_UseDefult.UseVisualStyleBackColor = true;
             // 
             // btnSqlite_Use
             // 
@@ -155,9 +186,9 @@
             // 
             // txtSqlite_ConnectStriong
             // 
-            txtSqlite_ConnectStriong.Location = new Point(110, 45);
+            txtSqlite_ConnectStriong.Location = new Point(6, 70);
             txtSqlite_ConnectStriong.Name = "txtSqlite_ConnectStriong";
-            txtSqlite_ConnectStriong.Size = new Size(265, 23);
+            txtSqlite_ConnectStriong.Size = new Size(367, 23);
             txtSqlite_ConnectStriong.TabIndex = 4;
             txtSqlite_ConnectStriong.Text = "Data Source=Test.db";
             // 
@@ -197,7 +228,7 @@
             groupBox3.Controls.Add(txtDb_TestOC1_Str);
             groupBox3.Controls.Add(txtDb_TestOC1_Int);
             groupBox3.Controls.Add(label3);
-            groupBox3.Location = new Point(12, 432);
+            groupBox3.Location = new Point(6, 319);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(123, 72);
             groupBox3.TabIndex = 2;
@@ -244,7 +275,7 @@
             groupBox4.Controls.Add(txtDb_TestOC2_Str);
             groupBox4.Controls.Add(txtDb_TestOC2_Int);
             groupBox4.Controls.Add(label6);
-            groupBox4.Location = new Point(141, 432);
+            groupBox4.Location = new Point(135, 319);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(123, 72);
             groupBox4.TabIndex = 2;
@@ -291,7 +322,7 @@
             groupBox5.Controls.Add(txtDb_TestOC3_Str);
             groupBox5.Controls.Add(txtDb_TestOC3_Int);
             groupBox5.Controls.Add(label8);
-            groupBox5.Location = new Point(270, 432);
+            groupBox5.Location = new Point(264, 319);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(123, 72);
             groupBox5.TabIndex = 2;
@@ -334,7 +365,7 @@
             // 
             // btnServerConcurrency
             // 
-            btnServerConcurrency.Location = new Point(6, 51);
+            btnServerConcurrency.Location = new Point(6, 89);
             btnServerConcurrency.Name = "btnServerConcurrency";
             btnServerConcurrency.Size = new Size(154, 23);
             btnServerConcurrency.TabIndex = 3;
@@ -344,7 +375,7 @@
             // 
             // btnApplicationConcurrency
             // 
-            btnApplicationConcurrency.Location = new Point(6, 22);
+            btnApplicationConcurrency.Location = new Point(6, 60);
             btnApplicationConcurrency.Name = "btnApplicationConcurrency";
             btnApplicationConcurrency.Size = new Size(154, 23);
             btnApplicationConcurrency.TabIndex = 4;
@@ -354,11 +385,12 @@
             // 
             // groupBox6
             // 
+            groupBox6.Controls.Add(label11);
             groupBox6.Controls.Add(btnApplicationConcurrency);
             groupBox6.Controls.Add(btnServerConcurrency2);
             groupBox6.Controls.Add(btnNotConcurrency);
             groupBox6.Controls.Add(btnServerConcurrency);
-            groupBox6.Location = new Point(12, 188);
+            groupBox6.Location = new Point(6, 6);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(173, 214);
             groupBox6.TabIndex = 5;
@@ -390,12 +422,21 @@
             groupBox7.Controls.Add(button1);
             groupBox7.Controls.Add(btnMultUpdateFunc);
             groupBox7.Controls.Add(btnMultUpdate);
-            groupBox7.Location = new Point(194, 188);
+            groupBox7.Location = new Point(188, 6);
             groupBox7.Name = "groupBox7";
             groupBox7.Size = new Size(202, 214);
             groupBox7.TabIndex = 7;
             groupBox7.TabStop = false;
             groupBox7.Text = "여러개 업데이트";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(7, 118);
+            button1.Name = "button1";
+            button1.Size = new Size(189, 66);
+            button1.TabIndex = 8;
+            button1.Text = "공통화 함수 - TestOC2\r\n각자 컨택스트를 생성하여 처리\r\n저장 실패 리스트를 뒤로 보냄";
+            button1.UseVisualStyleBackColor = true;
             // 
             // btnMultUpdateFunc
             // 
@@ -413,7 +454,7 @@
             groupBox8.Controls.Add(txtDb_TestOC2_2_Str);
             groupBox8.Controls.Add(txtDb_TestOC2_2_Int);
             groupBox8.Controls.Add(label10);
-            groupBox8.Location = new Point(141, 510);
+            groupBox8.Location = new Point(135, 397);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(123, 72);
             groupBox8.TabIndex = 2;
@@ -454,28 +495,58 @@
             label10.Text = "Int : ";
             label10.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // button1
+            // tabControl1
             // 
-            button1.Location = new Point(7, 118);
-            button1.Name = "button1";
-            button1.Size = new Size(189, 66);
-            button1.TabIndex = 8;
-            button1.Text = "공통화 함수 - TestOC2\r\n각자 컨택스트를 생성하여 처리\r\n저장 실패 리스트를 뒤로 보냄";
-            button1.UseVisualStyleBackColor = true;
+            tabControl1.Controls.Add(tabSelectDb);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(2, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(403, 505);
+            tabControl1.TabIndex = 8;
+            // 
+            // tabSelectDb
+            // 
+            tabSelectDb.Controls.Add(groupBox1);
+            tabSelectDb.Controls.Add(groupBox2);
+            tabSelectDb.Location = new Point(4, 24);
+            tabSelectDb.Name = "tabSelectDb";
+            tabSelectDb.Padding = new Padding(3);
+            tabSelectDb.Size = new Size(395, 477);
+            tabSelectDb.TabIndex = 0;
+            tabSelectDb.Text = "Select DB";
+            tabSelectDb.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(groupBox6);
+            tabPage2.Controls.Add(groupBox5);
+            tabPage2.Controls.Add(groupBox7);
+            tabPage2.Controls.Add(groupBox8);
+            tabPage2.Controls.Add(groupBox3);
+            tabPage2.Controls.Add(groupBox4);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(395, 477);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "테스트 기능";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            label11.Location = new Point(6, 19);
+            label11.Name = "label11";
+            label11.Size = new Size(154, 38);
+            label11.TabIndex = 7;
+            label11.Text = "첫번째 업데이트 시도가 \r\n3초뒤에 시도됨";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(406, 590);
-            Controls.Add(groupBox7);
-            Controls.Add(groupBox6);
-            Controls.Add(groupBox5);
-            Controls.Add(groupBox8);
-            Controls.Add(groupBox4);
-            Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
+            ClientSize = new Size(408, 512);
+            Controls.Add(tabControl1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -495,6 +566,9 @@
             groupBox7.ResumeLayout(false);
             groupBox8.ResumeLayout(false);
             groupBox8.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabSelectDb.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -539,5 +613,11 @@
         private TextBox txtDb_TestOC2_2_Int;
         private Label label10;
         private Button button1;
+        private TabControl tabControl1;
+        private TabPage tabSelectDb;
+        private TabPage tabPage2;
+        private CheckBox checkMssql_UseDefult;
+        private CheckBox checkSqlite_UseDefult;
+        private Label label11;
     }
 }
