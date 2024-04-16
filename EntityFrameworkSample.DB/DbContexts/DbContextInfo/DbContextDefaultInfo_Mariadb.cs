@@ -15,7 +15,7 @@ public class DbContextDefaultInfo_Mariadb : DbContextDefaultInfoInterface
     /// </summary>
     public DbContextDefaultInfo_Mariadb()
     {
-        this.DbStringLoad("SettingInfo_gitignore.json");
+        this.DbStringLoad(null);
     }
 
     /// <summary>
@@ -31,8 +31,15 @@ public class DbContextDefaultInfo_Mariadb : DbContextDefaultInfoInterface
     /// 지정된 경로의 파일에서 정보를 찾아 'DBString'을 넣어준다. 
     /// </summary>
     /// <param name="sPath"></param>
-    public void DbStringLoad(string sPath)
+    public void DbStringLoad(string? sPath)
     {
-        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.MariaDB);
+        if (string.IsNullOrEmpty(sPath))
+        {//경로가 비어 있다.
+            this.DBString = GlobalDb.DbStringLoad(UseDbType.MariaDB);
+        }
+        else
+        {//경로가 있다.
+            this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.MariaDB);
+        }
     }
 }

@@ -19,6 +19,13 @@ internal class Program
     {
         System.Console.WriteLine("Hello, World!");
 
+        GlobalDb.DbStringReload(UseDbType.MariaDB, true);
+        using (ModelsDbContext_Mariadb db1 = new ModelsDbContext_Mariadb())
+        {
+            TestTable temp = db1.TestTable.First();
+        }
+
+
         //.NET 콘솔 지원
         //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
         ConsoleMenuAssist newCA = new ConsoleMenuAssist();

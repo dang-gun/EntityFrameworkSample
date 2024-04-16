@@ -22,11 +22,11 @@ public class DbStringFileLoad
     {
         string sReturn = string.Empty;
 
-
         //Console.WriteLine($"DbStringLoad : {sPath}");
-
         if (true == File.Exists(sPath))
         {
+
+            //Console.WriteLine($"file exists true : {sPath}");
 
             //파일에서 찾을 내용 넣기
             string sJson = File.ReadAllText(sPath);

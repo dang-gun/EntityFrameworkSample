@@ -35,6 +35,19 @@ public static class GlobalDb
     }
 
     /// <summary>
+    /// 지정한 UseDbType를 기준으로 GlobalDb.DBString을 다시 불러 저장한다.
+    /// </summary>
+    /// <param name="typeUseDb">사용할 DB 타입</param>
+    /// <param name="bOnlyEmpty">GlobalDb.DBString가 비었을때만 다시 불러올지 여부</param>
+    public static void DbStringReload(
+        UseDbType typeUseDb
+        , bool bOnlyEmpty)
+    {
+        GlobalDb.DBType = typeUseDb;
+        GlobalDb.DbStringReload(bOnlyEmpty);
+    }
+
+    /// <summary>
     /// GlobalDb.DBType을 기준으로 GlobalDb.DBString을 다시 불러 저장한다.
     /// </summary>
     /// <remarks>
@@ -79,14 +92,30 @@ public static class GlobalDb
 
     /// <summary>
     /// 루트에 있는 'SettingInfo_gitignore.json'파일을 읽어 지정된 타입의 DbString을 리턴한다.
+    /// <para>실행 위치를 기준으로 절대 경로를 만들어 'SettingInfo_gitignore.json'파일을 찾는다.</para>
     /// </summary>
     /// <param name="typeUseDb"></param>
     /// <returns></returns>
     public static string DbStringLoad(
         UseDbType typeUseDb)
     {
+        string sFullPath = string.Empty;
+
+        string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        string? directoryPath = Path.GetDirectoryName(path);
+
+        //시스템 경로라 null리는 없지만...혹시나 해서 이렇게 작성함
+        if(null == directoryPath)
+        {
+            sFullPath = Path.Combine("SettingInfo_gitignore.json");
+        }
+        else
+        {
+            sFullPath = Path.Combine(directoryPath, "SettingInfo_gitignore.json");
+        }
+
         return GlobalDb.DbStringLoad(
-            Path.Combine("SettingInfo_gitignore.json")
+            sFullPath
             , typeUseDb);
     }
 

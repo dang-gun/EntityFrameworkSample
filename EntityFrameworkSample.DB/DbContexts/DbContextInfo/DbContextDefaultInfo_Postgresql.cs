@@ -15,7 +15,7 @@ public class DbContextDefaultInfo_Postgresql : DbContextDefaultInfoInterface
     /// </summary>
     public DbContextDefaultInfo_Postgresql()
     {
-        this.DbStringLoad("SettingInfo_gitignore.json");
+        this.DbStringLoad(null);
     }
 
     /// <summary>
@@ -28,11 +28,18 @@ public class DbContextDefaultInfo_Postgresql : DbContextDefaultInfoInterface
     }
 
     /// <summary>
-    /// 지정된 경로의 파일에서 MSSQL의 연결 정보를 찾아 'DBString'을 넣어준다.
+    /// 지정된 경로의 파일에서 정보를 찾아 'DBString'을 넣어준다. 
     /// </summary>
     /// <param name="sPath"></param>
-    public void DbStringLoad(string sPath)
+    public void DbStringLoad(string? sPath)
     {
-        this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.PostgreSQL);
+        if (string.IsNullOrEmpty(sPath))
+        {//경로가 비어 있다.
+            this.DBString = GlobalDb.DbStringLoad(UseDbType.PostgreSQL);
+        }
+        else
+        {//경로가 있다.
+            this.DBString = GlobalDb.DbStringLoad(sPath, UseDbType.PostgreSQL);
+        }
     }
 }
