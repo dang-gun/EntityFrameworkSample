@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EfTest.Models;
 
-namespace ModelsDB;
+namespace ListField.TableModels;
 
 public class EfList_Test2
 {

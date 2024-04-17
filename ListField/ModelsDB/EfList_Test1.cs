@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModelsDB;
+namespace ListField.TableModels;
 
 public class EfList_Test1
 {

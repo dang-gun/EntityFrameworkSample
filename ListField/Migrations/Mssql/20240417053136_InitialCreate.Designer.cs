@@ -10,26 +10,30 @@ using ModelsDB;
 
 namespace ListField.Migrations.Mssql
 {
-    [DbContext(typeof(DbModel_MssqlContext))]
-    [Migration("20230117093906_EfList_Test2_Edit001")]
-    partial class EfList_Test2_Edit001
+    [DbContext(typeof(ModelsDbContext_Mssql))]
+    [Migration("20240417053136_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.13")
+                .HasAnnotation("ProductVersion", "6.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ModelsDB.EfList_Test2", b =>
+            modelBuilder.Entity("ListField.TableModels.EfList_Test2", b =>
                 {
                     b.Property<int>("idEfList_Test2")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idEfList_Test2"), 1L, 1);
+
+                    b.Property<string>("ListJson1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ListString1")
                         .IsRequired()
@@ -47,8 +51,23 @@ namespace ListField.Migrations.Mssql
                         new
                         {
                             idEfList_Test2 = 1,
-                            ListString1 = "a,b,c",
-                            ListString2 = "a,b,c"
+                            ListJson1 = "[{\"id\":1,\"Name\":\"test1\",\"Age\":11}]",
+                            ListString1 = "a11,b11,c11",
+                            ListString2 = "a12,b12,c12"
+                        },
+                        new
+                        {
+                            idEfList_Test2 = 2,
+                            ListJson1 = "[{\"id\":1,\"Name\":\"test2\",\"Age\":12}]",
+                            ListString1 = "a21,b21,c21",
+                            ListString2 = "a22,b22,c22"
+                        },
+                        new
+                        {
+                            idEfList_Test2 = 3,
+                            ListJson1 = "[{\"id\":3,\"Name\":\"test3\",\"Age\":13}]",
+                            ListString1 = "a31,b31,c31",
+                            ListString2 = "a32,b32,c32"
                         });
                 });
 #pragma warning restore 612, 618

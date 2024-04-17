@@ -65,7 +65,7 @@ MSSQL과 같이 중요한 정보가 필요한 DB엔진의 경우 정보를 별�
 ## 소속 프로젝트 자세한 설명
 
 
-### 프로젝트 시작 관련(Project Start Related)
+### 프로젝트 시작 관련(Project Start Related) - 필수 구성 요소를 참조하지 않음
 
 #### CoreCodeFirst
 [[.NET Core 2] EF(Entity Framework) 코어(Core) 코드 퍼스트(Code First)](https://blog.danggun.net/7682)
@@ -78,6 +78,21 @@ MSSQL과 같이 중요한 정보가 필요한 DB엔진의 경우 정보를 별�
 <br />
 
 #### SqliteEF_CCF
+#### CCF_Mssql
 
 <br />
 <br />
+
+### 다중 마이그레이션 관련(Multi Migrations Related) - 필수 구성 요소를 참조하지 않음
+
+#### MultiMigrations
+다중 마이그레이션시 원본이 되는 라이브러리 프로젝트
+
+#### MultiMigrations_Test
+'MultiMigrations'를 참조하여 구현한 윈폼 프로젝트
+
+#### MultiMigrations_Test_Aspnet
+'MultiMigrations'를 참조하여 구현한 ASP.NET Core 프로젝트
+
+#### MultiMigrationsSample
+다중 마이그레이션을 한 프로젝트에 적용한 윈폼 프로젝트

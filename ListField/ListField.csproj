@@ -18,5 +18,10 @@
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EntityFrameworkSample.Console\EntityFrameworkSample.Console.csproj" />
+	  <ProjectReference Include="..\EntityFrameworkSample.DB\EntityFrameworkSample.DB.csproj" />
+	</ItemGroup>
 	
 </Project>
