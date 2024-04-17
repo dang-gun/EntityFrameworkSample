@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-using EntityFrameworkSample.DB.MultiMigrations;
 
 namespace EntityFrameworkSample.DB.Models;
 

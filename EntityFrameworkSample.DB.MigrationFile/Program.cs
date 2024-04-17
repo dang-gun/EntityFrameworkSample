@@ -19,10 +19,6 @@ internal class Program
     {
         System.Console.WriteLine("Hello, World!");
 
-        //.NET 콘솔 지원
-        //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
-        ConsoleMenuAssist newCA = new ConsoleMenuAssist();
-
         //db 선택 받기
         DbConsole consoleMenuDb = new DbConsole();
         consoleMenuDb.DbSelectConsole(UseDbType.All);
@@ -83,18 +79,53 @@ internal class Program
         System.Console.WriteLine("DB Setting complete");
         System.Console.WriteLine("");
 
+        //새로 메뉴 작성
+        //https://github.com/dang-gun/DGUtility_DotNet/tree/main/DGU_ConsoleAssist
+        ConsoleMenuAssist newCA = new ConsoleMenuAssist();
 
-        System.Console.WriteLine("Test select start!");
-        List<TestTable> listTemp = new List<TestTable>();
-        using (ModelsDbContextTable db1 = new ModelsDbContextTable())
-        {
-            listTemp = db1.TestTable.ToList();
-        }
+        newCA.WelcomeMessage = $"{Environment.NewLine}"
+            + $"테스트를 시작할까요?"
+            + $"--------------------------------------------";
 
-        for (int i = 0; i < listTemp.Count; ++i)
+        newCA.MenuList.Add(new MenuModel()
         {
-            TestTable item = listTemp[i];
-            System.Console.WriteLine($"[{i}] id:{item.idTestTable}, Int:{item.Int}, Str:{item.Str}");
-        }
+            Index = 1,
+            MatchString = "y",
+            TextFormat = "{0}. 예(yes)",
+            Action = (MenuModel menuThis) =>
+            {
+                System.Console.WriteLine(" --- --- --- --- --- --- ---");
+
+                System.Console.WriteLine("Test select start!");
+                List<TestTable> listTemp = new List<TestTable>();
+                using (ModelsDbContextTable db1 = new ModelsDbContextTable())
+                {
+                    listTemp = db1.TestTable.ToList();
+                }
+
+                for (int i = 0; i < listTemp.Count; ++i)
+                {
+                    TestTable item = listTemp[i];
+                    System.Console.WriteLine($"[{i}] id:{item.idTestTable}, Int:{item.Int}, Str:{item.Str}");
+                }
+
+                System.Console.WriteLine(" --- --- --- --- --- --- ---");
+                return true;
+            }
+        });
+
+        newCA.MenuEnd = new MenuModel()
+        {
+            Index = 999,
+            MatchString = "Exit",
+            TextFormat = "{0}. [{1}] Exit",
+        };
+
+        newCA.QuestionMessage = $"--------------------------------------------{Environment.NewLine}"
+            + $"Select Command : ";
+
+        //메뉴 표시
+        newCA.ShowKeyWait(false);
+
     }
 }
