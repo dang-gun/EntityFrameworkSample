@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using EntityFrameworkSample.DB.MigrationFile.TableModels;
+using EntityFrameworkSample.DB.Models;
+using ModelsDB.TableModels;
 
-namespace EntityFrameworkSample.DB.Models;
+namespace ModelsDB;
 
 /// <summary>
 /// 공통 컨택스트

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-using EntityFrameworkSample.DB.MultiMigrations;
+using EntityFrameworkSample.DB.Models;
+using EntityFrameworkSample.DB;
 
-namespace EntityFrameworkSample.DB.Models;
+namespace ModelsDB;
 
 /// <summary>
 /// mssql전용 컨텍스트

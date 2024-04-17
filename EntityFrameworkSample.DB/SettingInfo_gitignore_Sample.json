@@ -1,0 +1,15 @@
+﻿//깃에는 올리면 안되는 정보
+[
+  {
+    "DBTypeString": "MSSQL",
+    "DBString": "[DB 연결 문자열]"
+  },
+  {
+    "DBTypeString": "PostgreSQL",
+    "DBString": "[DB 연결 문자열]"
+  },
+  {
+    "DBTypeString": "Mariadb",
+    "DBString": "[DB 연결 문자열]"
+  }
+]

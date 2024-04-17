@@ -21,6 +21,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="SettingInfo_gitignore_Sample.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
 		<None Update="SettingInfo_gitignore.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

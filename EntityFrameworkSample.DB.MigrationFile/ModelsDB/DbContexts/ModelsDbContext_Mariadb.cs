@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore.Design;
 
 using EntityFrameworkSample.DB.MultiMigrations;
 using System.Diagnostics;
+using EntityFrameworkSample.DB;
+using EntityFrameworkSample.DB.Models;
 
-namespace EntityFrameworkSample.DB.Models;
+namespace ModelsDB;
 
 /// <summary>
 /// Mariadb전용 컨텍스트

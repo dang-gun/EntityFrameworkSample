@@ -2,9 +2,9 @@
 
 using DGU_ConsoleAssist;
 using EntityFrameworkSample.Console;
-using EntityFrameworkSample.DB.MigrationFile.TableModels;
-using EntityFrameworkSample.DB.Models;
 using Microsoft.EntityFrameworkCore;
+using ModelsDB;
+using ModelsDB.TableModels;
 
 
 namespace EntityFrameworkSample.DB.MigrationFile;

@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
+using EntityFrameworkSample.DB;
 using EntityFrameworkSample.DB.MultiMigrations;
+using EntityFrameworkSample.DB.Models;
 
-namespace EntityFrameworkSample.DB.Models;
+
+namespace ModelsDB;
 
 /// <summary>
 /// InMomey전용 컨텍스트

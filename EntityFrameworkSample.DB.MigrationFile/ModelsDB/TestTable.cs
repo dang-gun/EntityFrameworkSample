@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace EntityFrameworkSample.DB.MigrationFile.TableModels;
+namespace ModelsDB.TableModels;
 
 /// <summary>
 /// MigrationFile 테스트 전용
