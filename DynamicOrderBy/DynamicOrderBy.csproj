@@ -15,4 +15,15 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EntityFrameworkSample.Console\EntityFrameworkSample.Console.csproj" />
+	  <ProjectReference Include="..\EntityFrameworkSample.DB\EntityFrameworkSample.DB.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="DGU_ConsoleAssist">
+			<HintPath>..\..\DotNetSamples\OutLibrary\DGU_ConsoleAssist\LibDebug\DGU_ConsoleAssist.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

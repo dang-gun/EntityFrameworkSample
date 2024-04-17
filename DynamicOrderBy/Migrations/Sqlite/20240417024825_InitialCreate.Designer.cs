@@ -11,7 +11,7 @@ using ModelsDB;
 namespace DynamicOrderBy.Migrations.Sqlite
 {
     [DbContext(typeof(ModelsDbContext_Sqlite))]
-    [Migration("20230719060813_InitialCreate")]
+    [Migration("20240417024825_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace DynamicOrderBy.Migrations.Sqlite
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.20");
 
-            modelBuilder.Entity("ModelsDB.TestOrderBy", b =>
+            modelBuilder.Entity("DynamicOrderBy.TableModels.TestOrderBy", b =>
                 {
                     b.Property<int>("idTestOrderBy")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace DynamicOrderBy.Migrations.Sqlite
                     b.ToTable("TestOrderBy");
                 });
 
-            modelBuilder.Entity("ModelsDB.TestOrderBy_Big", b =>
+            modelBuilder.Entity("DynamicOrderBy.TableModels.TestOrderBy_Big", b =>
                 {
                     b.Property<int>("idTestOrderBy")
                         .ValueGeneratedOnAdd()

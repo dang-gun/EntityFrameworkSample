@@ -1,6 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+
+using EntityFrameworkSample.DB.Models;
+using EntityFrameworkSample.DB;
 
 namespace ModelsDB;
 
@@ -8,12 +10,12 @@ namespace ModelsDB;
 /// Sqlite전용 컨텍스트
 /// </summary>
 /// <remarks>
-/// Add-Migration InitialCreate -Context ModelsDB.ModelsDbContext_Sqlite -OutputDir Migrations/Sqlite
-/// Remove-Migration -Context ModelsDB.ModelsDbContext_Sqlite
+/// Add-Migration InitialCreate -Context ModelsDbContext_Sqlite -OutputDir Migrations/Sqlite
+/// Remove-Migration -Context ModelsDbContext_Sqlite
 /// Update-Database -Context ModelsDbContext_Sqlite -Migration 0
 /// Update-Database -Context ModelsDbContext_Sqlite
 /// </remarks>
-public class ModelsDbContext_Sqlite : ModelsDbContext
+public class ModelsDbContext_Sqlite : ModelsDbContextTable
 {
 	/// <summary>
 	/// 
@@ -22,11 +24,14 @@ public class ModelsDbContext_Sqlite : ModelsDbContext
 	public ModelsDbContext_Sqlite(DbContextOptions<ModelsDbContext> options)
 		: base(options)
 	{
-	}
-	/// <summary>
-	/// 
+		GlobalDb.DbStringReload(UseDbType.SQLite, true);
+    }
+
+    /// <summary>
+    /// GlobalDb.DBString에 설정된 정보로 컨택스트 생성
+    /// <para>사용은 ModelsDbContextTable로 한다.</para>
 	/// </summary>
-	public ModelsDbContext_Sqlite()
+    public ModelsDbContext_Sqlite()
 	{
 	}
 }
