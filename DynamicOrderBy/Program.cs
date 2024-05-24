@@ -7,7 +7,7 @@ using EntityFrameworkSample.Console;
 using EntityFrameworkSample.DB;
 
 using ModelsDB;
-using EntityFrameworkSample.DB.Models;
+
 using DynamicOrderBy.TableModels;
 
 
